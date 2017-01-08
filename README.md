@@ -1,1 +1,2 @@
-# timeSheet
+# timetrax
+GPS based time tracker
