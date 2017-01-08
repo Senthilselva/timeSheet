@@ -1,8 +1,8 @@
 //import react 
 import React from "react";
-import {Col, Card, Row, Input} from "react-materialize";
+import {Col, Card, Row, Input, Button} from "react-materialize";
 
-class Search extends React.Component {
+class Login extends React.Component {
 	constructor(props) {
     super(props);
     }
@@ -10,16 +10,18 @@ class Search extends React.Component {
 //render- function
 	render() {
     	return (
-    	<Row>	    	
-  			<Col m={6}>
-    			<Card className='blue-grey darken-1' textClassName='white-text' title='Card title' actions={[<a href='#'>This is a link</a>]}>
-    				<Row>
-    					<Input placeholder="Placeholder" s={6} label="First Name" />
-    					<Input s={6} label="Last Name" />
-    					<Input type="password" label="password" s={12} />
-    					<Input type="email" label="Email" s={12} />
-					</Row>
-    			</Card>
+    	<Row>
+    		<Col m={4}></Col>	    	
+  			<Col m={4}>
+    			<Card className='white' textClassName='black-text' title='Login' actions={[<a href='#'>Change Password</a>]}>
+    				<form id="loginUser" class="create-form" action="/user/login" method="POST">
+    					<Row textClassName='white-text'>
+    						<Input type="email" label="Email" s={12} />
+    						<Input type="password" label="Password" s={12} />
+    						<Button type = "submit"> Login </Button>
+						</Row>
+    				</form>
+				</Card> 
 			</Col>
 		</Row>
     	);
@@ -29,4 +31,4 @@ class Search extends React.Component {
 
 
 // Export the componen back for use in other files
-export default Search;
+export default Login;

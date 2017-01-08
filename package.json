@@ -1,8 +1,8 @@
 {
   "name": "timetrax",
   "version": "1.0.0",
-  "description": "Final Project - MERN",
-  "author": "Gracie, Senthil, Zeynep",
+  "description": "My part of the Final Project - MERN",
+  "author": "Senthil",
   "license": "ISC",
   "homepage": "https://github.com/gudiaz/timetrax.git#readme",
   "main": "server.js",

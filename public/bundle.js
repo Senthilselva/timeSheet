@@ -20345,42 +20345,49 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //import react 
 	
 	
-	var Search = function (_React$Component) {
-	  _inherits(Search, _React$Component);
+	var Login = function (_React$Component) {
+	  _inherits(Login, _React$Component);
 	
-	  function Search(props) {
-	    _classCallCheck(this, Search);
+	  function Login(props) {
+	    _classCallCheck(this, Login);
 	
-	    return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+	    return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 	  }
 	
 	  //render- function
 	
 	
-	  _createClass(Search, [{
+	  _createClass(Login, [{
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _reactMaterialize.Row,
 	        null,
+	        _react2.default.createElement(_reactMaterialize.Col, { m: 4 }),
 	        _react2.default.createElement(
 	          _reactMaterialize.Col,
-	          { m: 6 },
+	          { m: 4 },
 	          _react2.default.createElement(
 	            _reactMaterialize.Card,
-	            { className: "blue-grey darken-1", textClassName: "white-text", title: "Card title", actions: [_react2.default.createElement(
+	            { className: "white", textClassName: "black-text", title: "Login", actions: [_react2.default.createElement(
 	                "a",
 	                { href: "#" },
-	                "This is a link"
+	                "Change Password"
 	              )] },
 	            _react2.default.createElement(
-	              _reactMaterialize.Row,
-	              null,
-	              _react2.default.createElement(_reactMaterialize.Input, { placeholder: "Placeholder", s: 6, label: "First Name" }),
-	              _react2.default.createElement(_reactMaterialize.Input, { s: 6, label: "Last Name" }),
-	              _react2.default.createElement(_reactMaterialize.Input, { s: 12, label: "disabled", defaultValue: "I am not editable", disabled: true }),
-	              _react2.default.createElement(_reactMaterialize.Input, { type: "password", label: "password", s: 12 }),
-	              _react2.default.createElement(_reactMaterialize.Input, { type: "email", label: "Email", s: 12 })
+	              "form",
+	              { id: "loginUser", "class": "create-form", action: "/user/login", method: "POST" },
+	              _react2.default.createElement(
+	                _reactMaterialize.Row,
+	                { textClassName: "white-text" },
+	                _react2.default.createElement(_reactMaterialize.Input, { type: "email", label: "Email", s: 12 }),
+	                _react2.default.createElement(_reactMaterialize.Input, { type: "password", label: "Password", s: 12 }),
+	                _react2.default.createElement(
+	                  _reactMaterialize.Button,
+	                  { type: "submit" },
+	                  " Login "
+	                )
+	              )
 	            )
 	          )
 	        )
@@ -20389,14 +20396,14 @@
 	
 	  }]);
 	
-	  return Search;
+	  return Login;
 	}(_react2.default.Component); //React.Component
 	
 	
 	// Export the componen back for use in other files
 	
 	
-	exports.default = Search;
+	exports.default = Login;
 
 /***/ },
 /* 161 */
