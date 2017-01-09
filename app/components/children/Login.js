@@ -39,7 +39,7 @@ class Login extends React.Component {
     	<Row>
     		<Col m={4}></Col>	    	
   			<Col m={4}>
-    			<Card className='white' textClassName='black-text' title='Login' actions={[<a href='#'>Change Password</a>]}>
+    			<Card className='white' textClassName='black-text' title='Login' actions={[<a href='/register'>Change Password</a>]}>
     				<form onSubmit={this._handleSubmit}>
     					<Row>
     						<Input type="email" 

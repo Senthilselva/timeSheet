@@ -3,9 +3,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Include the Main Component
-import Main from "./components/Main";
+import Routes from "./config/Routes";
 
 // This code here allows us to render our main component (in this case "Main")
 ReactDOM.render(
-	<Main/>, document.getElementById("app")
+	Routes, document.getElementById("app")
 );

@@ -6,7 +6,7 @@ module.exports = function(passport) {
   
   passport.use('local', new LocalStrategy(
     function(username, password, done) {
-      //console.log("hahahahaha" + username +"  "+password);
+      console.log("local Strategy" + username +"  "+password);
       models.User.findOne({
         where: {
           'username': username

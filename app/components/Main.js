@@ -1,7 +1,8 @@
 import React from "react";
 
 // Import sub-components
-import Login  from "./children/Login";
+// import Login  from "./children/Login";
+// import Register  from "./children/Register";
 
 
 // Helper Function
@@ -10,27 +11,26 @@ import Login  from "./children/Login";
 
 //define class
 class Main extends React.Component {
+
 constructor(props) {
 	super(props);
-//we will need this to check if logged in
-    // this.state = {
-    // 	isDatabaseChanged:false
-    // };
-
-    // this.databaseChanged = this.databaseChanged.bind(this);
-
 }
-
-	// databaseChanged() {
-	// 	var isChange = -(this.state.isDatabaseChanged);
-	// 	this.setState({ isDatabaseChanged : isChange });
-	// }
 
  render() {
     return (
+    <div>
+      <p>
+          <a href="#/login">Login</a>
+          <a href="#/register">Register</a>
+      </p>
+
       <div>
-        <Login />
+
+          {/* This code will dump the correct Child Component */}
+          {this.props.children}
+
       </div>
+    </div>
     );
   }
 }

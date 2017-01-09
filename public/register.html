@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Create An Employee</title>
+
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+</head>
+
+<body>
+
+<!-- BEGINNING OF SCREEN 2 -->
+<div class="container">
+
+    <!-- <div class="row" id="row6"></div>
+
+    <div class="row" id="row7">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-sx-1" id="left"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-sx-10" id="header"></div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-sx-1" id="right"></div>
+    </div>
+    <div class="row" id="row8"></div>
+     -->
+    <div class="row" id="row9">
+        <div class="col m6 col s12">
+                <form id="createEmployee" class="create-form" action="/employee/create" method="POST">
+                      <fieldset>
+                          <legend>Create a new account:</legend>
+                              First Name:<br>
+                              <input type="text" name="firstName" id="firstname">
+                              <br><br>
+                              Last Name:<br>
+                              <input type="text" name="lastName" id="lastname">
+                              <br><br>
+                              E-Mail Address:<br>
+                              <input type="text" name="email" id="email">
+                              <br><br>
+                              Password:<br>
+                              <input type="text" name="password" id="password">
+                              <br><br>
+                              Address:<br>
+                              <input type="text" name="address" id="address">
+                              <br><br><br>
+                              <input type="submit" value="Create Account" id="created">
+                      </fieldset>
+                </form>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6" id="photo1"></div> -->
+    </div>
+</div>
+<!-- END OF SCREEN 2 -->
+
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#created").on("click",function(){
+     alert("hahahahahahaha");
+  })
+}
+</script>
+</html>
