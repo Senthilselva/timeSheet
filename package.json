@@ -1,8 +1,8 @@
 {
   "name": "timetrax",
   "version": "1.0.0",
-  "description": "My part of the Final Project - MERN",
-  "author": "Senthil",
+  "description": "Final Project - MERN",
+  "author": "Gracie, Senthil, Zeynep",
   "license": "ISC",
   "homepage": "https://github.com/gudiaz/timetrax.git#readme",
   "main": "server.js",
@@ -36,6 +36,7 @@
     "cookie-parser": "~1.3.5",
     "express": "^4.14.0",
     "express-session": "~1.11.3",
+    "material-ui": "^0.16.6",
     "method-override": "^2.3.6",
     "mysql": "^2.12.0",
     "passport": "~0.3.0",

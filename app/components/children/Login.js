@@ -2,10 +2,36 @@
 import React from "react";
 import {Col, Card, Row, Input, Button} from "react-materialize";
 
+// Helper Functicon
+import helpers from "../utils/Helpers";
+
 class Login extends React.Component {
 	constructor(props) {
     super(props);
+
+    this.state = {
+      email: "",
+      password:""
+    };
+     this._handleChange = this._handleChange.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
     }
+
+    _handleSubmit(event) {
+        event.preventDefault();
+        console.log("CLICK");
+        console.log(this.state.email + "  "+this.state.password);
+        helpers._checkLogin(this.state.email,this.state.password)
+    }
+
+    _handleChange(event) {
+        var newState = {};
+        console.log(event.target.id +"   "+event.target.value);
+        newState[event.target.id] = event.target.value;
+        this.setState(newState);
+        
+    }
+
 
 //render- function
 	render() {
@@ -14,10 +40,27 @@ class Login extends React.Component {
     		<Col m={4}></Col>	    	
   			<Col m={4}>
     			<Card className='white' textClassName='black-text' title='Login' actions={[<a href='#'>Change Password</a>]}>
-    				<form id="loginUser" class="create-form" action="/user/login" method="POST">
-    					<Row textClassName='white-text'>
-    						<Input type="email" label="Email" s={12} />
-    						<Input type="password" label="Password" s={12} />
+    				<form onSubmit={this._handleSubmit}>
+    					<Row>
+    						<Input type="email" 
+                            label="Email" 
+                            s={12} 
+                            id="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this._handleChange}
+                            required 
+                            />
+
+    						<Input type="password" 
+                            label="Password"
+                            id="password" 
+                            s={12} 
+                            name="password"
+                            value={this.state.password}
+                            onChange={this._handleChange}
+                            />
+
     						<Button type = "submit"> Login </Button>
 						</Row>
     				</form>
