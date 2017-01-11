@@ -1,6 +1,4 @@
-//import react 
 import React from "react";
-import {Col, Card, Row, Input, Button} from "react-materialize";
 
 //auth function
 import Auth  from "./Auth";
@@ -8,7 +6,7 @@ import Auth  from "./Auth";
 // Helper Functicon
 import helpers from "../utils/Helpers";
 
-class Login extends React.Component {
+class Logout extends React.Component {
 	constructor(props) {
     super(props);
 
@@ -24,13 +22,9 @@ class Login extends React.Component {
         event.preventDefault();
         console.log("CLICK");
         console.log(this.state.email + "  "+this.state.password);
-        helpers._checkLogin(this.state.email,this.state.password)
-        .then(function(userData,err){
-            console.log("handle submit"+userData)
-            Auth._setToken(userData)
-            console.log(err)
-        })
-        
+        var userData = helpers._checkLogin(this.state.email,this.state.password);
+        Auth._setToken(userData)
+        console.log(userData)
     }
 
     _handleChange(event) {

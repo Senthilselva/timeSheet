@@ -4,6 +4,7 @@ import { Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 import  Main from "../components/Main";
 import  Login from "../components/children/Login";
+//import  Logout from "../components/children/Logout";
 import  Register  from "../components/children/Register";
 
 // Export the Routes
@@ -16,7 +17,7 @@ module.exports = (
       <Route path="register" component={ Register } />
 
       {/* If user selects any other path... we get the Info Route */}
-      { /* <IndexRoute component={ Main } />
+      {/* <IndexRoute component={ Main } />
          */}
     </Route>
   </Router>

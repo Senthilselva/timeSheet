@@ -10,26 +10,21 @@ var setupPassport = require('../config/passport'),
     flash = require('connect-flash');
 
 router.post('/create', function(req,res) {
-	console.log("inside create");
-	var firstName = req.body.firstName;
-	var lastName = req.body.lastName;
-	var userName = req.body.email;
-	var address = req.body.address;
-	var password =req.body.password;
-	console.log(firstName)
-	var salt = bcrypt.genSaltSync(10);
-  	var hashedPassword = bcrypt.hashSync(password, salt);
-console.log("here" + salt)
+  console.log("inside create");
+ 	console.log(JSON.stringify(req.body));
 
-  	var newEmployee = {
-  		firstName : firstName,
-  		lastName : lastName,
-  		userName : userName,
-  		salt : salt,
-  		password : hashedPassword
-  	}
-  	console.log(JSON.stringify(newEmployee))
-  	models.Employee.create(newEmployee).then(function(){
+  var newUser = req.body
+ 	var salt = bcrypt.genSaltSync(10);
+  var hashedPassword = bcrypt.hashSync(newUser.password, salt);
+  console.log("here" + salt)
+
+  newUser.salt = salt;
+  newUser.password= hashedPassword;
+
+  console.log(JSON.stringify(req.body));
+
+
+  	models.User.create(newUser).then(function(){
   		console.log("Employee Created")
   		res.send("Employee Created")
   	}).catch(function(error) {

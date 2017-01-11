@@ -12,7 +12,8 @@ module.exports = function(passport) {
           'username': username
         }
       }).then(function (user) {
-        //console.log(employee.password)
+        console.log(user.password)
+        console.log(password)
         if (user == null) {
           return done(null, false, { message: 'Incorrect credentials.' })
         }
@@ -20,9 +21,10 @@ module.exports = function(passport) {
         var hashedPassword = bcrypt.hashSync(password, user.salt)
         
         if (user.password === hashedPassword) {
+          console.log("found user")
           return done(null, user)
         }
-        
+        console.log("wrong password")
         return done(null, false, { message: 'Incorrect credentials.' })
       })
     }
