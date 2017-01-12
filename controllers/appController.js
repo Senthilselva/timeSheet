@@ -17,8 +17,8 @@ router.get('/', function(req, res) {
     res.sendFile(__dirname + "/../public/index.html");
 });
 
-router.get('/register',function(req,res){
-	res.sendFile(__dirname + "/../public/register.html")
-})
+// router.get('/register',function(req,res){
+// 	res.sendFile(__dirname + "/../public/register.html")
+// })
 
 module.exports = router;

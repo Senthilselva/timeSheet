@@ -36,10 +36,10 @@ router.post('/create', function(req,res) {
 });
 
 router.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/register' , failureFlash: true}),
+  passport.authenticate('local', { passReqToCallback : true } ),
   // passport.authenticate('local', { failureRedirect: '/register' , failureFlash: true}),
   function(req, res) {
-    console.log(JSON.stringify(req.user));
+    console.log(JSON.stringify("user contoller" + req.user));
     //console.log(JSON.stringify(res))
     res.json(req.user);
   });

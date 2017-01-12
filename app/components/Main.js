@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router'
 // Import sub-components
  import Auth  from "./children/Auth";
 // import Register  from "./children/Register";
@@ -18,8 +18,20 @@ constructor(props) {
     loggedIn : Auth._loggedIn()
   }
   this._handleClick = this._handleClick.bind(this);
+  this._setLogin = this._setLogin.bind(this);
+  this._updateAuth = this._updateAuth.bind(this);
 }
 
+  _updateAuth(loggedIn) {
+    this.setState({
+      loggedIn 
+    })
+  }
+
+  componentWillMount() {
+    Auth._onChange = this._updateAuth
+    Auth._login()
+  }
 
   _handleClick(event) {
     console.log(this.state.loggedIn);
@@ -28,29 +40,29 @@ constructor(props) {
     //this.setState(loggedIn,false);
   }
 
+  _setLogin(newLog){
+    console.log(newLog);
+  }
+
  render() {
     return (
-    <div>
-      <p>
-            {this.state.loggedIn ? (
-              <div>
-              <a href="#" onClick={this._handleClick}>Logout</a>
-              <h1> { this.state.loggedIn.userName } </h1>
-              </div>
-            ) : (
-              <a href="#/login">Login</a>
-            )}
-          
-          <a href="#/register">Register</a>
-      </p>
 
       <div>
-
-          {/* This code will dump the correct Child Component */}
-          {this.props.children}
-
+        <ul>
+          <li>
+            {this.state.loggedIn ? (
+              <Link to="logout">Log out</Link>
+            ) : (
+              <Link to="login">Sign in</Link>
+            )}
+          </li>
+          <li><Link to="register">Register</Link></li>
+          <li><Link to="home">Home</Link></li>
+          <li><Link to="dashboard">Dashboard</Link> (authenticated)</li>
+        </ul>
+        {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
       </div>
-    </div>
+      
     );
   }
 }
