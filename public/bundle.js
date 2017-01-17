@@ -35480,18 +35480,25 @@
 	
 		_getOneSchedule: function _getOneSchedule(id) {
 			console.log("_getOneSchedule  " + id);
-			_axios2.default.get("/schedule/schedule/" + id).then(function (newSchedule) {
-				console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
-				var newTimeSheet = {};
-				newTimeSheet.JobId = newSchedule.data.JobId;
-				newTimeSheet.UserId = newSchedule.data.UserId;
-				newTimeSheet.clockIn = Date.now();
-				_axios2.default.post("/timesheet/create", newTimeSheet).then(function (newdata) {
-					console.log("newSchedule :" + JSON.stringify(newSchedule));
-					//console.log("New Data :"+ JSON.stringify(newdata));
-					return newSchedule.data;
-				});
-			});
+			return _axios2.default.get("/schedule/schedule/" + id);
+			// .then(function(newSchedule){
+			// 	console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
+			// 	var newTimeSheet = {};
+			// 	newTimeSheet.JobId= newSchedule.data.JobId;
+			// 	newTimeSheet.UserId= newSchedule.data.UserId;
+			// 	newTimeSheet.clockIn = Date.now();
+			// 	axios.post("/timesheet/create", newTimeSheet)
+			// 		.then(function(newdata){
+			// 			console.log("newSchedule :"+ JSON.stringify(newSchedule));
+			// 			//console.log("New Data :"+ JSON.stringify(newdata));
+			// 			return newSchedule.data;
+			// 		})
+			// })
+		},
+	
+		_createTimecard: function _createTimecard(newTimeSheet) {
+			console.log("_createTimecard" + JSON.stringify(newTimeSheet));
+			return _axios2.default.post("/timesheet/create", newTimeSheet);
 		}
 	
 	};
@@ -45114,7 +45121,9 @@
 				job: "",
 				city: "",
 				toDate: Date.now(),
-				time: Date.now()
+				originalStartTime: Date.now(),
+				yourStartTime: Date.now(),
+				isUpdated: false
 			};
 			return _this;
 		}
@@ -45124,16 +45133,27 @@
 			value: function componentWillMount() {
 				console.log("componentWillMount");
 				//var vTimecard = Helpers._getOneSchedule(this.props.clockInId);
-				_Helpers2.default._getOneSchedule(this.props.clockInId).then(function (vTimecard) {
-					console.log("back from helper in componentWillMount " + JSON.stringify(vTimecard));
-					this.setState({ name: vTimecard.firstname });
-					this.setState({ job: vTimecard.jobname });
-					this.setState({ city: vTimecard.city });
-					this.setState({ todate: vTimecard.startDate });
-					this.setState({ time: vTimecard.startTime });
+				_Helpers2.default._getOneSchedule(this.props.clockInId).then(function (newSchedule) {
+					console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
+					var newTimeSheet = {};
+					newTimeSheet.JobId = newSchedule.data.JobId;
+					newTimeSheet.UserId = newSchedule.data.UserId;
+					newTimeSheet.clockIn = Date.now();
+					_Helpers2.default._createTimecard(newTimeSheet).then(function (newdata) {
+						console.log("newSchedule :" + JSON.stringify(newSchedule));
+						console.log("New Data :" + JSON.stringify(newdata));
+						var vTimecard = newSchedule.data;
+						console.log("back from helper in componentWillMount " + JSON.stringify(vTimecard));
+						this.setState({ name: vTimecard.firstname });
+						this.setState({ job: vTimecard.jobname });
+						this.setState({ city: vTimecard.jobcity });
+						this.setState({ todate: vTimecard.startDate });
+						this.setState({ time: vTimecard.startTime });
+						this.setState({ yourStartTime: Date.now() });
+					}.bind(this));
 	
 					console.log(this.state.city);
-				});
+				}.bind(this));
 			} //componentWillMount	
 	
 		}, {
@@ -45153,6 +45173,26 @@
 						" ",
 						this.props.clockInId,
 						" "
+					),
+					_react2.default.createElement(
+						"p",
+						null,
+						" Name: ",
+						this.state.name,
+						" "
+					),
+					_react2.default.createElement(
+						"p",
+						null,
+						" Job: ",
+						this.state.job,
+						" "
+					),
+					_react2.default.createElement(
+						"p",
+						null,
+						" Started At: ",
+						this.state.yourStartTime
 					)
 				);
 			}

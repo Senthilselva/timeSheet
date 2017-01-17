@@ -27,21 +27,26 @@ const helpers = {
 
 	_getOneSchedule: (id) => {
 		console.log("_getOneSchedule  " + id);
-		axios.get("/schedule/schedule/"+id )
-			.then(function(newSchedule){
-				console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
-				var newTimeSheet = {};
-				newTimeSheet.JobId= newSchedule.data.JobId;
-				newTimeSheet.UserId= newSchedule.data.UserId;
-				newTimeSheet.clockIn = Date.now();
-				axios.post("/timesheet/create", newTimeSheet)
-					.then(function(newdata){
-						console.log("newSchedule :"+ JSON.stringify(newSchedule));
-						//console.log("New Data :"+ JSON.stringify(newdata));
-						return newSchedule.data;
-					})
-			})
-	} 
+		return axios.get("/schedule/schedule/"+id );
+			// .then(function(newSchedule){
+			// 	console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
+			// 	var newTimeSheet = {};
+			// 	newTimeSheet.JobId= newSchedule.data.JobId;
+			// 	newTimeSheet.UserId= newSchedule.data.UserId;
+			// 	newTimeSheet.clockIn = Date.now();
+			// 	axios.post("/timesheet/create", newTimeSheet)
+			// 		.then(function(newdata){
+			// 			console.log("newSchedule :"+ JSON.stringify(newSchedule));
+			// 			//console.log("New Data :"+ JSON.stringify(newdata));
+			// 			return newSchedule.data;
+			// 		})
+			// })
+	}, 
+
+	_createTimecard: (newTimeSheet) => {
+		console.log("_createTimecard" + JSON.stringify(newTimeSheet));
+		return axios.post("/timesheet/create", newTimeSheet);
+	}
 
 }
 
