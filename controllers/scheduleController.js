@@ -51,14 +51,22 @@ router.get('/schedule/:scheduleId', function(req,res) {
   vSchId = req.params.scheduleId;
 
   models.Schedule.findOne({
+    include: [
+        { 
+          model : models.User
+        },
+        {
+          model:  models.Job 
+        }
+      ],
     where: {
       'id' : vSchId
     }
   }).then(function(data){
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    //console.log(data);
-    console.log(data.id)
-    console.log(data.startDate)
+    //console.log(data.Job);
+    //console.log(data.id)
+    //console.log(data.startDate)
     var vSchedule = {};
     vSchedule.id = data.id;
     vSchedule.startDate =data.startDate;
@@ -66,7 +74,10 @@ router.get('/schedule/:scheduleId', function(req,res) {
     vSchedule.endTime = data.endTime;
     vSchedule.JobId = data.JobId;
     vSchedule.UserId = data.UserId;
-    console.log(JSON.stringify(vSchedule));
+    vSchedule.jobname =data.Job.name;
+    vSchedule.jobcity =data.Job.city;
+    vSchedule.firstname = data.User.firstname;
+    console.log("sent new schedule "+JSON.stringify(vSchedule));
 
 
     res.json(vSchedule);

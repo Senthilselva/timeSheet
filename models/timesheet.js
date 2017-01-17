@@ -6,17 +6,17 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true    
     },
-    Date: {
+    clockedInDate: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: false
     },
     clockedIn: {
       type: DataTypes.TIME,
-      allowNull: false,
+      allowNull: false
     },
     clockedOut: {
       type: DataTypes.TIME,
-      allowNull: false,
+      allowNull: true,
     }
   },
   {

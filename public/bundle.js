@@ -374,15 +374,8 @@
   \**********************************/
 /***/ function(module, exports) {
 
-	/*
-	object-assign
-	(c) Sindre Sorhus
-	@license MIT
-	*/
-	
 	'use strict';
 	/* eslint-disable no-unused-vars */
-	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
 	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 	
@@ -403,7 +396,7 @@
 			// Detect buggy property enumeration order in older V8 versions.
 	
 			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+			var test1 = new String('abc');  // eslint-disable-line
 			test1[5] = 'de';
 			if (Object.getOwnPropertyNames(test1)[0] === '5') {
 				return false;
@@ -432,7 +425,7 @@
 			}
 	
 			return true;
-		} catch (err) {
+		} catch (e) {
 			// We don't expect any of the above to throw, but better to be safe.
 			return false;
 		}
@@ -452,8 +445,8 @@
 				}
 			}
 	
-			if (getOwnPropertySymbols) {
-				symbols = getOwnPropertySymbols(from);
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
 				for (var i = 0; i < symbols.length; i++) {
 					if (propIsEnumerable.call(from, symbols[i])) {
 						to[symbols[i]] = from[symbols[i]];
@@ -25563,11 +25556,11 @@
 		return value;
 	}
 	
-	function keysSorter(input) {
+	function sorter(input) {
 		if (Array.isArray(input)) {
 			return input.sort();
 		} else if (typeof input === 'object') {
-			return keysSorter(Object.keys(input)).sort(function (a, b) {
+			return sorter(Object.keys(input)).sort(function (a, b) {
 				return Number(a) - Number(b);
 			}).map(function (key) {
 				return input[key];
@@ -25615,12 +25608,10 @@
 		});
 	
 		return Object.keys(ret).sort().reduce(function (result, key) {
-			var val = ret[key];
-			if (Boolean(val) && typeof val === 'object' && !Array.isArray(val)) {
-				// Sort object keys, not values
-				result[key] = keysSorter(val);
+			if (Boolean(ret[key]) && typeof ret[key] === 'object') {
+				result[key] = sorter(ret[key]);
 			} else {
-				result[key] = val;
+				result[key] = ret[key];
 			}
 	
 			return result;
@@ -32734,10 +32725,9 @@
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
 	exports.default = function (muiTheme) {
-	  var isClient = typeof navigator !== 'undefined';
 	  var userAgent = muiTheme.userAgent;
 	
-	  if (userAgent === undefined && isClient) {
+	  if (userAgent === undefined && typeof navigator !== 'undefined') {
 	    userAgent = navigator.userAgent;
 	  }
 	
@@ -32747,24 +32737,26 @@
 	    hasWarnedAboutUserAgent = true;
 	  }
 	
+	  var isServer = typeof window === 'undefined';
+	
 	  if (userAgent === false) {
 	    // Disabled autoprefixer
 	    return null;
 	  } else if (userAgent === 'all' || userAgent === undefined) {
 	    // Prefix for all user agent
 	    return function (style) {
-	      var isFlex = ['flex', 'inline-flex'].indexOf(style.display) !== -1;
+	      var isFlex = false;
+	
+	      if (isServer) {
+	        isFlex = ['flex', 'inline-flex'].indexOf(style.display) !== -1;
+	      }
+	
 	      var stylePrefixed = _inlineStylePrefixer2.default.prefixAll(style);
 	
+	      // We can't apply this join with react-dom:
+	      // #https://github.com/facebook/react/issues/6467
 	      if (isFlex) {
-	        var display = stylePrefixed.display;
-	        if (isClient) {
-	          // We can't apply this join with react-dom:
-	          // #https://github.com/facebook/react/issues/6467
-	          stylePrefixed.display = display[display.length - 1];
-	        } else {
-	          stylePrefixed.display = display.join('; display: ');
-	        }
+	        stylePrefixed.display = stylePrefixed.display.join('; display: ');
 	      }
 	
 	      return stylePrefixed;
@@ -35489,13 +35481,15 @@
 		_getOneSchedule: function _getOneSchedule(id) {
 			console.log("_getOneSchedule  " + id);
 			_axios2.default.get("/schedule/schedule/" + id).then(function (newSchedule) {
-				console.log(JSON.stringify(newSchedule));
+				console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
 				var newTimeSheet = {};
 				newTimeSheet.JobId = newSchedule.data.JobId;
 				newTimeSheet.UserId = newSchedule.data.UserId;
+				newTimeSheet.clockIn = Date.now();
 				_axios2.default.post("/timesheet/create", newTimeSheet).then(function (newdata) {
 					console.log("newSchedule :" + JSON.stringify(newSchedule));
-					console.log("New Data :" + JSON.stringify(newdata));
+					//console.log("New Data :"+ JSON.stringify(newdata));
+					return newSchedule.data;
 				});
 			});
 		}
@@ -42004,6 +41998,7 @@
 	      minWidth: fullWidth ? '100%' : button.minWidth
 	    },
 	    button: {
+	      position: 'relative',
 	      height: buttonHeight,
 	      lineHeight: buttonHeight + 'px',
 	      width: '100%',
@@ -43009,7 +43004,13 @@
 	        outline: 'none',
 	        fontSize: 'inherit',
 	        fontWeight: 'inherit',
-	        position: 'relative', // This is needed so that ripples do not bleed past border radius.
+	        /**
+	         * This is needed so that ripples do not bleed
+	         * past border radius.
+	         * See: http://stackoverflow.com/questions/17298739/
+	         * css-overflow-hidden-not-working-in-chrome-when-parent-has-border-radius-and-chil
+	         */
+	        transform: disableTouchRipple && disableFocusRipple ? null : 'translate(0, 0)',
 	        verticalAlign: href ? 'middle' : null
 	      }, style);
 	
@@ -43066,6 +43067,12 @@
 	  onKeyDown: function onKeyDown() {},
 	  onKeyUp: function onKeyUp() {},
 	  onKeyboardFocus: function onKeyboardFocus() {},
+	  onMouseDown: function onMouseDown() {},
+	  onMouseEnter: function onMouseEnter() {},
+	  onMouseLeave: function onMouseLeave() {},
+	  onMouseUp: function onMouseUp() {},
+	  onTouchEnd: function onTouchEnd() {},
+	  onTouchStart: function onTouchStart() {},
 	  onTouchTap: function onTouchTap() {},
 	  tabIndex: 0,
 	  type: 'button'
@@ -43091,6 +43098,12 @@
 	  onKeyDown: _react.PropTypes.func,
 	  onKeyUp: _react.PropTypes.func,
 	  onKeyboardFocus: _react.PropTypes.func,
+	  onMouseDown: _react.PropTypes.func,
+	  onMouseEnter: _react.PropTypes.func,
+	  onMouseLeave: _react.PropTypes.func,
+	  onMouseUp: _react.PropTypes.func,
+	  onTouchEnd: _react.PropTypes.func,
+	  onTouchStart: _react.PropTypes.func,
 	  onTouchTap: _react.PropTypes.func,
 	  style: _react.PropTypes.object,
 	  tabIndex: _react.PropTypes.number,
@@ -45094,18 +45107,33 @@
 		function Timecard(props) {
 			_classCallCheck(this, Timecard);
 	
-			return _possibleConstructorReturn(this, (Timecard.__proto__ || Object.getPrototypeOf(Timecard)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (Timecard.__proto__ || Object.getPrototypeOf(Timecard)).call(this, props));
+	
+			_this.state = {
+				name: "",
+				job: "",
+				city: "",
+				toDate: Date.now(),
+				time: Date.now()
+			};
+			return _this;
 		}
 	
 		_createClass(Timecard, [{
 			key: "componentWillMount",
 			value: function componentWillMount() {
 				console.log("componentWillMount");
-				_Helpers2.default._getOneSchedule(this.props.clockInId);
-				// .then(function(userData,err){
-				// 	console.log(JSON.stringify(userData))
-				//  	//this.setState({scheduleTables:userData.data});
-				// }.bind(this));
+				//var vTimecard = Helpers._getOneSchedule(this.props.clockInId);
+				_Helpers2.default._getOneSchedule(this.props.clockInId).then(function (vTimecard) {
+					console.log("back from helper in componentWillMount " + JSON.stringify(vTimecard));
+					this.setState({ name: vTimecard.firstname });
+					this.setState({ job: vTimecard.jobname });
+					this.setState({ city: vTimecard.city });
+					this.setState({ todate: vTimecard.startDate });
+					this.setState({ time: vTimecard.startTime });
+	
+					console.log(this.state.city);
+				});
 			} //componentWillMount	
 	
 		}, {
