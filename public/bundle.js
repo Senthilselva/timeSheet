@@ -35481,24 +35481,18 @@
 		_getOneSchedule: function _getOneSchedule(id) {
 			console.log("_getOneSchedule  " + id);
 			return _axios2.default.get("/schedule/schedule/" + id);
-			// .then(function(newSchedule){
-			// 	console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
-			// 	var newTimeSheet = {};
-			// 	newTimeSheet.JobId= newSchedule.data.JobId;
-			// 	newTimeSheet.UserId= newSchedule.data.UserId;
-			// 	newTimeSheet.clockIn = Date.now();
-			// 	axios.post("/timesheet/create", newTimeSheet)
-			// 		.then(function(newdata){
-			// 			console.log("newSchedule :"+ JSON.stringify(newSchedule));
-			// 			//console.log("New Data :"+ JSON.stringify(newdata));
-			// 			return newSchedule.data;
-			// 		})
-			// })
 		},
 	
 		_createTimecard: function _createTimecard(newTimeSheet) {
 			console.log("_createTimecard" + JSON.stringify(newTimeSheet));
 			return _axios2.default.post("/timesheet/create", newTimeSheet);
+		},
+	
+		_updateTimecard: function _updateTimecard(uId, jId, time) {
+			console.log("_updateTimecard " + uId + " " + jId + " " + time);
+			return _axios2.default.post("/timesheet/update", { userId: uId,
+				jobId: jId,
+				clockOut: time });
 		}
 	
 	};
@@ -45122,34 +45116,53 @@
 				city: "",
 				toDate: Date.now(),
 				originalStartTime: Date.now(),
+				endTime: Date.now(),
 				yourStartTime: Date.now(),
-				isUpdated: false
+				jobId: 0,
+				userId: 0
 			};
+			_this._onClockOut = _this._onClockOut.bind(_this);
 			return _this;
 		}
 	
 		_createClass(Timecard, [{
+			key: "_onClockOut",
+			value: function _onClockOut() {
+				console.log("_onClockOut");
+				console.log("User Id " + this.state.userId);
+				console.log("Job Id " + this.state.jobId);
+				this.setState({ endTime: Date.now() });
+				console.log("endTime " + this.state.endTime);
+				_Helpers2.default._updateTimecard(this.state.userId, this.state.jobId, this.state.endTime).then(function (data, err) {
+					console.log(JSON.stringify(data));
+				});
+			}
+		}, {
 			key: "componentWillMount",
 			value: function componentWillMount() {
 				console.log("componentWillMount");
 				//var vTimecard = Helpers._getOneSchedule(this.props.clockInId);
 				_Helpers2.default._getOneSchedule(this.props.clockInId).then(function (newSchedule) {
-					console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
+					//console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
 					var newTimeSheet = {};
 					newTimeSheet.JobId = newSchedule.data.JobId;
 					newTimeSheet.UserId = newSchedule.data.UserId;
+	
 					newTimeSheet.clockIn = Date.now();
 					_Helpers2.default._createTimecard(newTimeSheet).then(function (newdata) {
-						console.log("newSchedule :" + JSON.stringify(newSchedule));
-						console.log("New Data :" + JSON.stringify(newdata));
+						//console.log("newSchedule :"+ JSON.stringify(newSchedule));
+						//console.log("New Data :"+ JSON.stringify(newdata));
 						var vTimecard = newSchedule.data;
-						console.log("back from helper in componentWillMount " + JSON.stringify(vTimecard));
+						//console.log("back from helper in componentWillMount "+ JSON.stringify(vTimecard))
 						this.setState({ name: vTimecard.firstname });
 						this.setState({ job: vTimecard.jobname });
 						this.setState({ city: vTimecard.jobcity });
 						this.setState({ todate: vTimecard.startDate });
 						this.setState({ time: vTimecard.startTime });
 						this.setState({ yourStartTime: Date.now() });
+						this.setState({ jobId: vTimecard.JobId });
+						this.setState({ userId: vTimecard.UserId });
+						console.log("after set state in componentWillMount " + JSON.stringify(vTimecard));
 					}.bind(this));
 	
 					console.log(this.state.city);
@@ -45159,6 +45172,7 @@
 		}, {
 			key: "render",
 			value: function render() {
+	
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -45193,6 +45207,11 @@
 						null,
 						" Started At: ",
 						this.state.yourStartTime
+					),
+					_react2.default.createElement(
+						"button",
+						{ type: "button", onClick: this._onClockOut },
+						"Clock-out"
 					)
 				);
 			}

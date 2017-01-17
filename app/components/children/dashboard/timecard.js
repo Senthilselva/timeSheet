@@ -12,33 +12,52 @@ class Timecard extends React.Component {
 			city: "",
 			toDate: Date.now(),
 			originalStartTime: Date.now(),
+			endTime:Date.now(),
 			yourStartTime:Date.now(),
-			isUpdated: false
+			jobId:0,
+			userId:0
 		};
+		this._onClockOut = this._onClockOut.bind(this);
 	}
 
+	_onClockOut(){
+		console.log("_onClockOut");
+		console.log("User Id "+ this.state.userId)
+		console.log("Job Id "+ this.state.jobId)
+		this.setState({endTime : Date.now()})
+		console.log("endTime "+ this.state.endTime)
+		Helpers._updateTimecard(this.state.userId,this.state.jobId,this.state.endTime)
+		.then(function(data,err){
+			console.log(JSON.stringify(data));
+		})
+	}
 	componentWillMount() {
 		console.log("componentWillMount");
 		//var vTimecard = Helpers._getOneSchedule(this.props.clockInId);
 		Helpers._getOneSchedule(this.props.clockInId)
 			.then(function(newSchedule){
-				console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
+				//console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
 			 	var newTimeSheet = {};
 			 	newTimeSheet.JobId= newSchedule.data.JobId;
 			 	newTimeSheet.UserId= newSchedule.data.UserId;
+			 	
 				newTimeSheet.clockIn = Date.now();
 				Helpers._createTimecard(newTimeSheet)
 					.then(function(newdata){
-						console.log("newSchedule :"+ JSON.stringify(newSchedule));
-						console.log("New Data :"+ JSON.stringify(newdata));
+						//console.log("newSchedule :"+ JSON.stringify(newSchedule));
+						//console.log("New Data :"+ JSON.stringify(newdata));
 						var vTimecard = newSchedule.data;
-						console.log("back from helper in componentWillMount "+ JSON.stringify(vTimecard))
+						//console.log("back from helper in componentWillMount "+ JSON.stringify(vTimecard))
 						this.setState({ name : vTimecard.firstname });
 						this.setState({ job : vTimecard.jobname });
 						this.setState({ city : vTimecard.jobcity });
 						this.setState({ todate : vTimecard.startDate });
 						this.setState({ time : vTimecard.startTime });
 						this.setState({ yourStartTime : Date.now()})
+						this.setState({jobId : vTimecard.JobId});
+			 		 	this.setState({userId : vTimecard.UserId});
+						console.log("after set state in componentWillMount "+ JSON.stringify(vTimecard))
+
 
 			 		}.bind(this));
 			
@@ -48,6 +67,7 @@ class Timecard extends React.Component {
 	}//componentWillMount	
 
 	render() {
+	
 		return(
 		<div>
 			<h1> Timsheets </h1>
@@ -55,6 +75,8 @@ class Timecard extends React.Component {
 			<p> Name: {this.state.name} </p>
 			<p> Job: {this.state.job} </p>
 			<p> Started At: {this.state.yourStartTime}</p>
+			<button type="button" onClick={this._onClockOut}>Clock-out</button>
+        
 		</div>
 		);
 	}
