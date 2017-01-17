@@ -46,4 +46,31 @@ router.get('/user/:userName', function(req,res) {
 
 });
 
+router.get('/schedule/:scheduleId', function(req,res) {
+  console.log("Schedule : with it: "+ req.params.scheduleId)
+  vSchId = req.params.scheduleId;
+
+  models.Schedule.findOne({
+    where: {
+      'id' : vSchId
+    }
+  }).then(function(data){
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    //console.log(data);
+    console.log(data.id)
+    console.log(data.startDate)
+    var vSchedule = {};
+    vSchedule.id = data.id;
+    vSchedule.startDate =data.startDate;
+    vSchedule.startTime = data.startTime;
+    vSchedule.endTime = data.endTime;
+    vSchedule.JobId = data.JobId;
+    vSchedule.UserId = data.UserId;
+    console.log(JSON.stringify(vSchedule));
+
+
+    res.json(vSchedule);
+  })
+});
+
 module.exports = router;

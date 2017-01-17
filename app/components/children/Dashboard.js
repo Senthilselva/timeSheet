@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
             {this.state.clockInId == 0 ? (
             <Scheduletable _getScheduleClockInId = {this._getScheduleClockInId} /> 
             ) : (
-            <Timecard scheduleClockInId = {this.state.clockInId}/>
+            <Timecard clockInId = {this.state.clockInId}/>
             ) }
       		</div>
     )
