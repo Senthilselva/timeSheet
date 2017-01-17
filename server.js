@@ -28,6 +28,7 @@ var debug = require('debug')('express-example');
 // Our model controllers (rather than routes)
 var routes = require('./controllers/appController');
 var user_controller = require('./controllers/userController');
+var schedule_controller = require('./controllers/scheduleController');
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + '/public'));
@@ -49,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/user', user_controller);
+app.use('/schedule', schedule_controller);
 app.use(flash());
 
 // we bring in the models we exported with index.js

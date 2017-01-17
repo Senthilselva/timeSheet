@@ -14,7 +14,7 @@ module.exports = {
          .then(function(userData,err){
             if(!err){
             	console.log("handle submit"+userData)
-            	this._setToken(userData)
+            	this._setToken(userData,password)
             	if (cb) cb(true)
         		this._onChange(true)
       		} else {
@@ -34,7 +34,9 @@ module.exports = {
 	_setToken(userData){
 		console.log("_setToken"+ JSON.stringify(userData));
 		localStorage.token = Math.random().toString(36).substring(7);
-		localStorage.setItem("userName",userData.data.username);
+    localStorage.setItem("userName",userData.data.username);
+    localStorage.setItem("firstName",userData.data.firstname);
+		localStorage.setItem("lastName",userData.data.lastname);
 		console.log("userName"+userData.data.username);
 		console.log(localStorage);
 	},
@@ -47,9 +49,12 @@ module.exports = {
   	},
 
   	_getToken() {
-    	return localStorage.token
+    	return localStorage.token;
   	},
 
+    _getData() {
+      return localStorage;
+    },
   	_onChange() {}
 	
 }

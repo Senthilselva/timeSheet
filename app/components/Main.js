@@ -53,12 +53,12 @@ constructor(props) {
             {this.state.loggedIn ? (
               <Link to="logout">Log out</Link>
             ) : (
-              <Link to="login">Sign in</Link>
+              <Link to="/login">Sign in</Link>
             )}
           </li>
-          <li><Link to="register">Register</Link></li>
-          <li><Link to="home">Home</Link></li>
-          <li><Link to="dashboard">Dashboard</Link> (authenticated)</li>
+          <li><Link to="/register">Register</Link></li>
+          <li><Link to="/home">Home</Link></li>
+          <li><Link to="/dashboard">Dashboard</Link> (authenticated)</li>
         </ul>
         {this.props.children || <p>You are {!this.state.loggedIn && 'not'} logged in.</p>}
       </div>

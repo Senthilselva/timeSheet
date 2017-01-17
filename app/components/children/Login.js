@@ -33,35 +33,10 @@ class Login extends React.Component {
             this.props.router.replace('/dashboard');
         }
 
-        // const { location } = this.props
-
-        // if (location.state && location.state.nextPathname) {
-        //   //this.props.router.replace(location.state.nextPathname)
-        //     this.props.router.replace('/dashboard');
-        // } else {
-        //   this.props.router.replace('/')
-        // }
       })
         
     }
-//*******************Changed 0n 1/11/17 
-// *******few changed from 
-// *********https://github.com/ReactTraining/react-router/blob/master/examples/auth-flow
-        // event.preventDefault();
-        // console.log("CLICK");
-        // //console.log(this);
-        // //console.log(this.props);
-        // console.log(this.props.route);
-        // console.log(this.state.email + "  "+this.state.password);
-        // helpers._checkLogin(this.state.email,this.state.password)
-        // .then(function(userData,err){
-        //     console.log("handle submit"+userData)
-        //     Auth._setToken(userData)
-        //     console.log(err)
-        //     // this.props._setLog("akakakakaka")
-        //})
-        
-    //}
+
 
     _handleChange(event) {
         var newState = {};

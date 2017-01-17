@@ -17,7 +17,14 @@ const helpers = {
 	    console.log("create user"+JSON.stringify(userInfo));
 
 	    return axios.post("/user/create", userInfo);
-	  }
+	},
+
+	_getSchedule: () => {
+		var vEmail =localStorage.getItem('userName');
+		console.log("get Schedule"+vEmail);
+		var user = { username : vEmail };
+		return axios.get("/schedule/user/"+vEmail );
+	}
 
 }
 
