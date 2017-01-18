@@ -35493,6 +35493,12 @@
 			return _axios2.default.post("/timesheet/update", { userId: uId,
 				jobId: jId,
 				clockOut: time });
+		},
+	
+		_getTimeSheets: function _getTimeSheets() {
+			console.log("_getTimeSheets ");
+			var userName = localStorage.userName;
+			console.log("userName" + userName);
 		}
 	
 	};
@@ -45134,6 +45140,7 @@
 				console.log("Job Id " + this.state.jobId);
 				var timeNow = Date.now();
 				this.setState({ endTime: timeNow });
+	
 				//alert("time Now "+ timeNow )
 				//alert("endTime "+ this.state.endTime);
 			}
@@ -45142,10 +45149,12 @@
 			value: function componentDidUpdate() {
 				console.log("componentDidUpdate  " + this.state.endTime);
 				if (this.state.endTime != null) {
-					_Helpers2.default._updateTimecard(this.state.userId, this.state.jobId, this.state.endTime).then(function (data, err) {
-						console.log(JSON.stringify(data));
-						this.setState({ isClockOut: true });
-					}.bind(this));
+					_Helpers2.default._updateTimecard(this.state.userId, this.state.jobId, this.state.endTime).then(function (data) {
+						console.log("data after update ");
+						// console.log("data after update "+JSON.stringify(data));
+						//this.setState({ isClockOut:true })
+						_Helpers2.default._getTimeSheets();
+					}); //.bind(this))
 				}
 			}
 		}, {
@@ -45173,6 +45182,7 @@
 						this.setState({ yourStartTime: Date.now() });
 						this.setState({ jobId: vTimecard.JobId });
 						this.setState({ userId: vTimecard.UserId });
+						this.setState({ endTime: null });
 						console.log("after set state in componentWillMount " + JSON.stringify(vTimecard));
 					}.bind(this));
 	

@@ -67,10 +67,9 @@ class Timecard extends React.Component {
 						this.setState({ city : vTimecard.jobcity });
 						this.setState({ todate : vTimecard.startDate });
 						this.setState({ time : vTimecard.startTime });
+						this.setState({ yourStartTime : Date.now()})
 						this.setState({jobId : vTimecard.JobId});
 			 		 	this.setState({userId : vTimecard.UserId});
-			 		 	
-						this.setState({ yourStartTime : Date.now()})
 			 		 	this.setState({endTime : null})
 						console.log("after set state in componentWillMount "+ JSON.stringify(vTimecard))
 

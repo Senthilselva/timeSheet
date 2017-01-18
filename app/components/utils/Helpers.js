@@ -11,7 +11,7 @@ const helpers = {
 
 	    return axios.post("/user/login", { username: email,
 	                                      password: password });
-	  },
+	},
 
 	_createUser: (userInfo) => {
 	    console.log("create user"+JSON.stringify(userInfo));
@@ -40,7 +40,13 @@ const helpers = {
 		return axios.post("/timesheet/update", 
 			{ userId:uId,
 			  jobId:jId,
-			  clockOut:time })
+			  clockOut:time });
+	},
+
+	_getTimeSheets:()=> {
+		console.log("_getTimeSheets ")
+		var userName = localStorage.userName;
+		console.log("userName" + userName)
 	}
 
 }
