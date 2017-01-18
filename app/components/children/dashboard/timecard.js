@@ -12,10 +12,11 @@ class Timecard extends React.Component {
 			city: "",
 			toDate: Date.now(),
 			originalStartTime: Date.now(),
-			endTime:Date.now(),
+			endTime:null,
 			yourStartTime:Date.now(),
 			jobId:0,
-			userId:0
+			userId:0,
+			isClockOut : false
 		};
 		this._onClockOut = this._onClockOut.bind(this);
 	}
@@ -24,12 +25,23 @@ class Timecard extends React.Component {
 		console.log("_onClockOut");
 		console.log("User Id "+ this.state.userId)
 		console.log("Job Id "+ this.state.jobId)
-		this.setState({endTime : Date.now()})
-		console.log("endTime "+ this.state.endTime)
-		Helpers._updateTimecard(this.state.userId,this.state.jobId,this.state.endTime)
-		.then(function(data,err){
-			console.log(JSON.stringify(data));
-		})
+		var timeNow=Date.now();
+		this.setState({ endTime : timeNow });
+		//alert("time Now "+ timeNow )
+		//alert("endTime "+ this.state.endTime);
+		
+	}
+
+	componentDidUpdate(){
+		console.log("componentDidUpdate  "+this.state.endTime)
+		if(this.state.endTime != null ) {
+			Helpers._updateTimecard(this.state.userId,this.state.jobId,this.state.endTime)
+			.then(function(data,err){
+				console.log(JSON.stringify(data));
+				this.setState({ isClockOut:true })
+
+			}.bind(this))
+		}
 	}
 	componentWillMount() {
 		console.log("componentWillMount");
@@ -69,14 +81,20 @@ class Timecard extends React.Component {
 	render() {
 	
 		return(
+		
 		<div>
 			<h1> Timsheets </h1>
-			<p> { this.props.clockInId } </p>
-			<p> Name: {this.state.name} </p>
-			<p> Job: {this.state.job} </p>
-			<p> Started At: {this.state.yourStartTime}</p>
-			<button type="button" onClick={this._onClockOut}>Clock-out</button>
-        
+			
+				<p> { this.props.clockInId } </p>
+				<p> Name: {this.state.name} </p>
+				<p> Job: {this.state.job} </p>
+				
+				<p> Started At: {this.state.yourStartTime}</p>
+				<button type="button" onClick={this._onClockOut}>Clock-out</button>
+				
+				<p> You worked from {this.state.yourStartTime} 
+					to {this.state.endTime} </p>
+		
 		</div>
 		);
 	}

@@ -45116,10 +45116,11 @@
 				city: "",
 				toDate: Date.now(),
 				originalStartTime: Date.now(),
-				endTime: Date.now(),
+				endTime: null,
 				yourStartTime: Date.now(),
 				jobId: 0,
-				userId: 0
+				userId: 0,
+				isClockOut: false
 			};
 			_this._onClockOut = _this._onClockOut.bind(_this);
 			return _this;
@@ -45131,11 +45132,21 @@
 				console.log("_onClockOut");
 				console.log("User Id " + this.state.userId);
 				console.log("Job Id " + this.state.jobId);
-				this.setState({ endTime: Date.now() });
-				console.log("endTime " + this.state.endTime);
-				_Helpers2.default._updateTimecard(this.state.userId, this.state.jobId, this.state.endTime).then(function (data, err) {
-					console.log(JSON.stringify(data));
-				});
+				var timeNow = Date.now();
+				this.setState({ endTime: timeNow });
+				//alert("time Now "+ timeNow )
+				//alert("endTime "+ this.state.endTime);
+			}
+		}, {
+			key: "componentDidUpdate",
+			value: function componentDidUpdate() {
+				console.log("componentDidUpdate  " + this.state.endTime);
+				if (this.state.endTime != null) {
+					_Helpers2.default._updateTimecard(this.state.userId, this.state.jobId, this.state.endTime).then(function (data, err) {
+						console.log(JSON.stringify(data));
+						this.setState({ isClockOut: true });
+					}.bind(this));
+				}
 			}
 		}, {
 			key: "componentWillMount",
@@ -45212,6 +45223,15 @@
 						"button",
 						{ type: "button", onClick: this._onClockOut },
 						"Clock-out"
+					),
+					_react2.default.createElement(
+						"p",
+						null,
+						" You worked from ",
+						this.state.yourStartTime,
+						"to ",
+						this.state.endTime,
+						" "
 					)
 				);
 			}
