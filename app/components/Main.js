@@ -107,8 +107,11 @@ class Main extends Component {
                    open={this.state.open}
                    onRequestChange={(open) => this.setState({open})}
                    >
-
-
+             {this.state.loggedIn ? (
+             <Link to="logout"><MenuItem onTouchTap={this.handleClose}>SignOut</MenuItem></Link>
+             ) : (
+             <Link to="login"><MenuItem onTouchTap={this.handleClose}>SignIn</MenuItem></Link>      
+             )}
              <Link to="dashboard"><MenuItem onTouchTap={this.handleClose}>Dashboard</MenuItem></Link>
              <Link to="schedule"><MenuItem onTouchTap={this.handleClose}>Schedule</MenuItem></Link>
              <Link to="timesheet"><MenuItem onTouchTap={this.handleClose}>Time Sheets</MenuItem></Link>

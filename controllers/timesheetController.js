@@ -45,4 +45,45 @@ router.post("/update", function(req,res){
 
   });
 
+router.get('/user/:userName', function(req,res) {
+  console.log("inside user Timesheets");
+  console.log(JSON.stringify(req.params));
+  //console.log(req);
+
+    models.Timesheet.findAll(
+
+      { include: [
+        { 
+          model : models.User,
+          where: { username: req.params.userName} 
+        },
+        {
+          model:  models.Job 
+        }
+      ]
+    }).then(function(data){
+    var jobList = [];
+    // console.log(JSON.stringify(data[0]));
+
+    for(var i=0; i< data.length; i++){
+    // console.log(data[i].startDate+" "+ 
+    //             data[i].startDate+" "+
+    //             data[i].Job.name);
+    var job = {};
+    job.id = data[i].id;
+    job.clockedInDate = moment(data[i].clockedInDate).format('L');
+    job.clockIn = data[i].clockedIn;
+    job.clockOut = data[i].clockedOut;
+    job.jobName = data[i].Job.name;
+    
+    console.log(job);
+
+    jobList.push(job)
+  }
+     res.json(jobList)
+  })
+
+});
+
+
 module.exports = router;

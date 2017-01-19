@@ -22085,15 +22085,7 @@
 	
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 	
-	var _Scheduletable = __webpack_require__(/*! ../components/children/dashboard/Scheduletable */ 681);
-	
-	var _Scheduletable2 = _interopRequireDefault(_Scheduletable);
-	
-	var _Timecard = __webpack_require__(/*! ../components/children/dashboard/Timecard */ 682);
-	
-	var _Timecard2 = _interopRequireDefault(_Timecard);
-	
-	var _Timesheet = __webpack_require__(/*! ../components/children/dashboard/Timesheet */ 683);
+	var _Timesheet = __webpack_require__(/*! ../components/children/Timesheet */ 683);
 	
 	var _Timesheet2 = _interopRequireDefault(_Timesheet);
 	
@@ -22126,20 +22118,12 @@
 	    _react2.default.createElement(
 	      _reactRouter.Route,
 	      { path: '/', component: _Main2.default },
-	      _react2.default.createElement(_reactRouter.Route, { path: 'login', component: _Login2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'logout', component: _Logout2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'register', component: _Register2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _Home2.default }),
-	      _react2.default.createElement(
-	        _reactRouter.Route,
-	        { path: 'dashboard', component: _Dashboard2.default, onEnter: requireAuth },
-	        _react2.default.createElement(_reactRouter.Route, { path: 'timecard', component: _Timecard2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'timesheet', component: _Timesheet2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'schedule', component: _Scheduletable2.default })
-	      ),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'timecard', component: _Timecard2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'timesheet', component: _Timesheet2.default }),
-	      _react2.default.createElement(_reactRouter.Route, { path: 'schedule', component: _Scheduletable2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/logout', component: _Logout2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/home', component: _Home2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/dashboard', component: _Dashboard2.default, onEnter: requireAuth }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/timesheet', component: _Timesheet2.default, onEnter: requireAuth }),
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
 	    )
 	  )
@@ -35457,6 +35441,23 @@
 	              return _this4.setState({ open: open });
 	            }
 	          },
+	          this.state.loggedIn ? _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: 'logout' },
+	            _react2.default.createElement(
+	              _materialUi.MenuItem,
+	              { onTouchTap: this.handleClose },
+	              'SignOut'
+	            )
+	          ) : _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: 'login' },
+	            _react2.default.createElement(
+	              _materialUi.MenuItem,
+	              { onTouchTap: this.handleClose },
+	              'SignIn'
+	            )
+	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: 'dashboard' },
@@ -68917,6 +68918,7 @@
 			return _axios2.default.post("/user/create", userInfo);
 		},
 	
+		//gets all the schedule for the user the user is got from localStorage
 		_getSchedule: function _getSchedule() {
 			var vEmail = localStorage.getItem('userName');
 			console.log("get Schedule" + vEmail);
@@ -68939,6 +68941,15 @@
 			console.log("_updateTimecard " + cardId + " " + time);
 			return _axios2.default.post("/timesheet/update", { cardId: cardId,
 				clockOut: time });
+		},
+	
+		//gets all the finished jobs for the user the user is got from localStorage
+		_getTimeSheets: function _getTimeSheets() {
+			var vEmail = localStorage.getItem('userName');
+			console.log("get Schedule" + vEmail);
+	
+			//calling the controller and returing the value
+			return _axios2.default.get("/timesheet/user/" + vEmail);
 		}
 	
 	};
@@ -75669,9 +75680,9 @@
 
 /***/ },
 /* 683 */
-/*!********************************************************!*\
-  !*** ./app/components/children/dashboard/Timesheet.js ***!
-  \********************************************************/
+/*!**********************************************!*\
+  !*** ./app/components/children/Timesheet.js ***!
+  \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75686,9 +75697,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Helpers = __webpack_require__(/*! ../../utils/Helpers.js */ 612);
+	var _Helpers = __webpack_require__(/*! ../utils/Helpers.js */ 612);
 	
 	var _Helpers2 = _interopRequireDefault(_Helpers);
+	
+	var _Auth = __webpack_require__(/*! ./Auth */ 611);
+	
+	var _Auth2 = _interopRequireDefault(_Auth);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -75707,13 +75722,30 @@
 		function Timesheet(props) {
 			_classCallCheck(this, Timesheet);
 	
-			return _possibleConstructorReturn(this, (Timesheet.__proto__ || Object.getPrototypeOf(Timesheet)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (Timesheet.__proto__ || Object.getPrototypeOf(Timesheet)).call(this, props));
+	
+			_this.state = {
+				timeSheets: [],
+				userData: _Auth2.default._getData()
+			};
+			return _this;
 		}
 	
 		_createClass(Timesheet, [{
+			key: "componentWillMount",
+			value: function componentWillMount() {
+				console.log("componentWillMount");
+				_Helpers2.default._getTimeSheets().then(function (userData, err) {
+					this.setState({ timeSheets: userData.data });
+				}.bind(this));
+			} //componentWillMount
+	
+	
+		}, {
 			key: "render",
 			value: function render() {
-	
+				console.log(this.state.timeSheets);
+				var that = this;
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -75721,6 +75753,67 @@
 						"p",
 						null,
 						" Timseheets "
+					),
+					_react2.default.createElement(
+						"p",
+						null,
+						this.state.userData.firstName,
+						" ",
+						this.state.userData.lastName
+					),
+					_react2.default.createElement(
+						"table",
+						null,
+						_react2.default.createElement(
+							"tr",
+							null,
+							_react2.default.createElement(
+								"th",
+								null,
+								"Client"
+							),
+							_react2.default.createElement(
+								"th",
+								null,
+								"Date"
+							),
+							_react2.default.createElement(
+								"th",
+								null,
+								"Start Time"
+							),
+							_react2.default.createElement(
+								"th",
+								null,
+								"End Time"
+							)
+						),
+						this.state.timeSheets.map(function (id, i) {
+							return _react2.default.createElement(
+								"tr",
+								{ key: i },
+								_react2.default.createElement(
+									"td",
+									null,
+									id.jobName
+								),
+								_react2.default.createElement(
+									"td",
+									null,
+									id.clockedInDate
+								),
+								_react2.default.createElement(
+									"td",
+									null,
+									id.clockIn
+								),
+								_react2.default.createElement(
+									"td",
+									null,
+									id.clockOut
+								)
+							);
+						})
 					)
 				);
 			}
