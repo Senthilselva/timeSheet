@@ -58,7 +58,7 @@ class Timecard extends React.Component {
 						//console.log("back from helper in componentWillMount "
 						//	+ JSON.stringify(this.state.timeCard));
 						this.setState({timeCard : newSchedule.data});
-						this.setState({ cardId : newdata.data.id})
+						this.setState({ cardId : newdata.data.id});
 						this.setState({ yourStartTime : Date.now()});
 						
 						console.log("Card Id "+ this.state.cardId)
@@ -77,14 +77,13 @@ class Timecard extends React.Component {
 			<p> { this.props.clockInId } </p>
 			<p> Name: {this.state.timeCard.firstname} </p>
 			<p> Job: {this.state.timeCard.jobname} </p>
-			<p> Started At: {this.state.yourStartTime}</p>
+			<p> Started On: {moment(this.state.yourStartTime).format('L')}</p>
+			<p> Started On: {moment(this.state.yourStartTime).format('LT')}</p>
 			{this.state.yourEndTime == null ? (
               <button type="button" onClick={this._onClockOut}>Clock-out</button>
             ) : (
               <p> logged out at {this.state.yourEndTime} </p>
             )}
-			
-        
 		</div>
 		);
 	}

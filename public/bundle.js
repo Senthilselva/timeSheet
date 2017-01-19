@@ -22081,11 +22081,11 @@
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _Dashboard = __webpack_require__(/*! ../components/children/Dashboard */ 680);
+	var _Dashboard = __webpack_require__(/*! ../components/children/Dashboard */ 681);
 	
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 	
-	var _Timesheet = __webpack_require__(/*! ../components/children/Timesheet */ 683);
+	var _Timesheet = __webpack_require__(/*! ../components/children/Timesheet */ 684);
 	
 	var _Timesheet2 = _interopRequireDefault(_Timesheet);
 	
@@ -75200,9 +75200,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Auth = __webpack_require__(/*! ./Auth */ 611);
+	var _Homecard = __webpack_require__(/*! ./home/Homecard */ 680);
 	
-	var _Auth2 = _interopRequireDefault(_Auth);
+	var _Homecard2 = _interopRequireDefault(_Homecard);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -75212,7 +75212,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	//auth function
-	
 	
 	var Home = function (_React$Component) {
 	    _inherits(Home, _React$Component);
@@ -75228,9 +75227,14 @@
 	        value: function render() {
 	
 	            return _react2.default.createElement(
-	                "h3",
+	                "div",
 	                null,
-	                " Welcome Time Trax!! "
+	                _react2.default.createElement(
+	                    "h3",
+	                    null,
+	                    " Welcome Time Trax!! "
+	                ),
+	                _react2.default.createElement(_Homecard2.default, null)
 	            );
 	        }
 	    }]);
@@ -75245,6 +75249,57 @@
 
 /***/ },
 /* 680 */
+/*!**************************************************!*\
+  !*** ./app/components/children/home/Homecard.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Card = __webpack_require__(/*! material-ui/Card */ 475);
+	
+	var _FlatButton = __webpack_require__(/*! material-ui/FlatButton */ 501);
+	
+	var _FlatButton2 = _interopRequireDefault(_FlatButton);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var HomeCard = function HomeCard() {
+	  return _react2.default.createElement(
+	    _Card.Card,
+	    null,
+	    _react2.default.createElement(_Card.CardHeader, {
+	      title: 'Time Trax',
+	      subtitle: 'Time sheet management system'
+	    }),
+	    _react2.default.createElement(
+	      _Card.CardMedia,
+	      {
+	        overlay: _react2.default.createElement(_Card.CardTitle, { title: 'Overlay title', subtitle: 'Overlay subtitle' })
+	      },
+	      _react2.default.createElement('img', { src: '/assects/images/poolpic.jpg' })
+	    ),
+	    _react2.default.createElement(_Card.CardTitle, { title: 'Card title', subtitle: 'Card subtitle' }),
+	    _react2.default.createElement(
+	      _Card.CardText,
+	      null,
+	      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.'
+	    )
+	  );
+	};
+	
+	exports.default = HomeCard;
+
+/***/ },
+/* 681 */
 /*!**********************************************!*\
   !*** ./app/components/children/Dashboard.js ***!
   \**********************************************/
@@ -75262,11 +75317,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Scheduletable = __webpack_require__(/*! ./dashboard/Scheduletable.js */ 681);
+	var _Scheduletable = __webpack_require__(/*! ./dashboard/Scheduletable.js */ 682);
 	
 	var _Scheduletable2 = _interopRequireDefault(_Scheduletable);
 	
-	var _Timecard = __webpack_require__(/*! ./dashboard/Timecard.js */ 682);
+	var _Timecard = __webpack_require__(/*! ./dashboard/Timecard.js */ 683);
 	
 	var _Timecard2 = _interopRequireDefault(_Timecard);
 	
@@ -75342,7 +75397,7 @@
 	exports.default = Dashboard;
 
 /***/ },
-/* 681 */
+/* 682 */
 /*!************************************************************!*\
   !*** ./app/components/children/dashboard/Scheduletable.js ***!
   \************************************************************/
@@ -75516,7 +75571,7 @@
 	exports.default = ScheduleTable;
 
 /***/ },
-/* 682 */
+/* 683 */
 /*!*******************************************************!*\
   !*** ./app/components/children/dashboard/Timecard.js ***!
   \*******************************************************/
@@ -75655,8 +75710,14 @@
 					_react2.default.createElement(
 						"p",
 						null,
-						" Started At: ",
-						this.state.yourStartTime
+						" Started On: ",
+						moment(this.state.yourStartTime).format('L')
+					),
+					_react2.default.createElement(
+						"p",
+						null,
+						" Started On: ",
+						moment(this.state.yourStartTime).format('LT')
 					),
 					this.state.yourEndTime == null ? _react2.default.createElement(
 						"button",
@@ -75679,7 +75740,7 @@
 	exports.default = Timecard;
 
 /***/ },
-/* 683 */
+/* 684 */
 /*!**********************************************!*\
   !*** ./app/components/children/Timesheet.js ***!
   \**********************************************/

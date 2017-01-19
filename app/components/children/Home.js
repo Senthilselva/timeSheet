@@ -1,6 +1,9 @@
 import React from "react";
 //auth function
-import Auth  from "./Auth";
+
+import Homecard  from "./home/Homecard";
+
+
 
 
 class Home extends React.Component {
@@ -10,7 +13,11 @@ class Home extends React.Component {
 
     render() {
 
-    	return ( <h3> Welcome Time Trax!! </h3>);
+    	return ( <div>
+    				<h3> Welcome Time Trax!! </h3>
+    				<Homecard />
+    			</div>
+    			);
 
   	}
 }
