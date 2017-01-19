@@ -30,7 +30,7 @@ componentWillMount() {
 }//componentWillMount
 
 _onClockIn(event) {
-  console.log("on Clock In  " + JSON.stringify(event.target.value));
+  console.log("on Clock In   " + JSON.stringify(event.target.value));
   this.props._getScheduleClockInId(event.target.value);
 }
 

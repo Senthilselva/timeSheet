@@ -1,7 +1,7 @@
 // Include the axios package for performing HTTP requests ( based alternative to request)
 import axios from "axios";
 
-
+//This files make calls the controller
 const helpers = {
 
 	_checkLogin: (email, password) => {
@@ -11,7 +11,7 @@ const helpers = {
 
 	    return axios.post("/user/login", { username: email,
 	                                      password: password });
-	},
+	  },
 
 	_createUser: (userInfo) => {
 	    console.log("create user"+JSON.stringify(userInfo));
@@ -30,23 +30,18 @@ const helpers = {
 		return axios.get("/schedule/schedule/"+id );
 	}, 
 
+	 //to enter the data into the timesheet table
+	 //calls timesheet controller
 	_createTimecard: (newTimeSheet) => {
 		console.log("_createTimecard" + JSON.stringify(newTimeSheet));
 		return axios.post("/timesheet/create", newTimeSheet);
 	},
 
-	_updateTimecard:(uId, jId, time) => {
-		console.log("_updateTimecard "+uId+" "+jId+ " "+ time)
+	_updateTimecard:(cardId, time) => {
+		console.log("_updateTimecard "+cardId+ " "+ time)
 		return axios.post("/timesheet/update", 
-			{ userId:uId,
-			  jobId:jId,
-			  clockOut:time });
-	},
-
-	_getTimeSheets:()=> {
-		console.log("_getTimeSheets ")
-		var userName = localStorage.userName;
-		console.log("userName" + userName)
+			{ cardId:cardId,
+			  clockOut:time })
 	}
 
 }

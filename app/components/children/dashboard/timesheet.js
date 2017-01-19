@@ -1,22 +1,20 @@
 import React from "react";
 
-//auth function
-import Auth  from "./Auth";
+//import helper file
+import Helpers from '../../utils/Helpers.js';
 
-class Timecard extends React.Component {
+class Timesheet extends React.Component {
 	constructor(props) {
 		super(props);
-	};
-}
+	}
 
-render() {
-	return(
-		<div>
-			<h1> Timsheets </h1>
-			<p> { this.props.scheduleClockInId } </p>
-		<div>
-	);
+	render() {
+	
+		return(
+			<div>
+				<p> Timseheets </p>
+        	</div>
+		);
+	}
 }
-
-}
-export default Timecard;
+export default Timesheet;

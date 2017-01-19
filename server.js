@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser'); // for working with cookies
 var bodyParser = require('body-parser');
@@ -30,7 +30,6 @@ var routes = require('./controllers/appController');
 var user_controller = require('./controllers/userController');
 var schedule_controller = require('./controllers/scheduleController');
 var timesheet_controller = require('./controllers/timesheetController');
-
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + '/public'));
 
@@ -64,8 +63,9 @@ app.set('port', process.env.PORT || 3000);
 // (thus creating the apropos tables)
 models.sequelize.sync().then(function () {
 	// set our app to listen to the port we set above
-  var server = app.listen(app.get('port'), function() {
+});
+
+ var server = app.listen(app.get('port'), function() {
   	// then save a log of the listening to our debugger.
     console.log('Express server listening on port ' + server.address().port);
   });
-});

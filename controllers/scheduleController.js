@@ -7,9 +7,9 @@ var moment =require('moment')
 router.get('/user/:userName', function(req,res) {
   console.log("inside user Schedule");
   console.log(JSON.stringify(req.params));
- 	//console.log(req);
+  //console.log(req);
 
-  	models.Schedule.findAll(
+    models.Schedule.findAll(
 
       { include: [
         { 

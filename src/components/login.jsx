@@ -1,27 +1,20 @@
-//import react 
-import React from "react";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router'
+import Auth  from "../utils/auth.js";
+import helpers from "../utils/helpers.js";
 import {Col, Card, Row, Input, Button} from "react-materialize";
-import { withRouter } from 'react-router';
 
-//auth function
-import Auth  from "./Auth";
-
-// Helper Functicon
-import helpers from "../utils/Helpers";
-
-//const Login = withRouter(
-
-class Login extends React.Component {
+class Login extends Component {
 	constructor(props) {
-    super(props);
+        super(props);
 
-    this.state = {
-      email: "",
-      password:"",
-      error: false
-    };
-     this._handleChange = this._handleChange.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
+        this.state = {
+          email: "",
+          password:"",
+          error: false
+        };
+        this._handleChange = this._handleChange.bind(this);
+        this._handleSubmit = this._handleSubmit.bind(this);
     }
 
     _handleSubmit(event) {
@@ -35,24 +28,21 @@ class Login extends React.Component {
         else {
             this.props.router.replace('/dashboard');
         }
-
-      })
-        
+      })  
     }
-
 
     _handleChange(event) {
         var newState = {};
-        console.log(event.target.id +"   "+event.target.value);
+        console.log(event.target.id + "   " + event.target.value);
         newState[event.target.id] = event.target.value;
         this.setState(newState);
-        
     }
 
+    _handleRedirect() {
+        browserHistory.push('/');
+    }
 
-//render- function
 	render() {
-        console.log("in Login");
     	return (
     	<Row>
     		<Col m={4}></Col>	    	
@@ -89,10 +79,7 @@ class Login extends React.Component {
 			</Col>
 		</Row>
     	);
-	}//render
+	}
+}
 
-}//React.Component
-//)
-
-// Export the componen back for use in other files
 export default Login;

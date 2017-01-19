@@ -9,7 +9,9 @@ class Home extends React.Component {
     }
 
     render() {
-    	return <h1>Time Trax</h1>
+
+    	return ( <h3> Welcome Time Trax!! </h3>);
+
   	}
 }
 

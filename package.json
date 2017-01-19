@@ -10,6 +10,7 @@
     "url": "https://github.com/gudiaz/timetrax/issues"
   },
   "scripts": {
+    "build": "webpack --devtool source-map ./app/app.js ./public/bundle.js",
     "start": "node server.js",
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },

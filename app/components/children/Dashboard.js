@@ -26,8 +26,7 @@ class Dashboard extends React.Component {
 
       return (
           <div>
-            <h1>Dashboard</h1>
-            <p>Hello!</p>
+          <p>Hello!</p>
             <p>{userData.firstName} {userData.lastName}</p>
 
             {this.state.clockInId == 0 ? (
