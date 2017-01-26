@@ -36,6 +36,7 @@ class TodaySchedule extends React.Component {
     		disableClock:true,
     		distanceBetween:0,
     		cardId:0,
+    		clockIn:Date.now(),
     		tCard:"" //this Id is the Id of the timesheet database
 		}
 		this.handleClockIn = this.handleClockIn.bind(this);
@@ -45,10 +46,18 @@ class TodaySchedule extends React.Component {
   	};
 
 	componentWillMount() {
-	  Helpers._getTodaySchedule()
-	  	.then(function(userData,err){
-	        this.setState({scheduleList: userData.data});
-	    }.bind(this));
+		if(localStorage.cardId){
+			this.setState({cardId : localStorage.cardId});
+			this.setState({disableClock : false});
+			this.setState({clockedRow : localStorage.clockedRow});
+			this.setState({tCard : localStorage.tCard});
+			this.setState({distanceBetween : localStorage.distanceBetween});
+			this.setState({clockIn : localStorage.clockIn});
+		}
+	  	Helpers._getTodaySchedule()
+	  		.then(function(userData,err){
+	        	this.setState({scheduleList: userData.data});
+	    	}.bind(this));
 	}
 
  	handleClockIn(index, event){ 
@@ -60,16 +69,12 @@ class TodaySchedule extends React.Component {
 
 				//tCard holds all the information needed to create a time card.
 				this.setState({tCard : newSchedule.data});
-				//GeoLocation._getDistance(this.state.tCard.joblng, this.state.tCard.joblat)
-				//this.setState({distanceBetween : GeoLocation._getDistance(this.state.tCard.joblng, this.state.tCard.joblat) })
-			 	//console.log(this.state.distanceBetween)
 
 			 	var newTimeSheet = {};
 			 	newTimeSheet.JobId= newSchedule.data.JobId;
 			 	newTimeSheet.UserId= newSchedule.data.UserId;
 				newTimeSheet.clockIn = Date.now();
-
-				//code to check the geoLocation 
+    			localStorage.setItem("clockIn", newTimeSheet.clockIn);
 
 				Helpers._createTimecard(newTimeSheet)
 					.then(function(newdata){
@@ -85,9 +90,13 @@ class TodaySchedule extends React.Component {
       	}.bind(this));
   	}
 
-  	shouldComponentUpdate(){
-  		console.log("shouldComponentUpdate  distance " + this.state.distanceBetween)
-  		return true;
+  	componentWillUnmount() {
+    	console.log("componentWillUnmount");
+    	localStorage.setItem("cardId" , this.state.cardId);
+    	//localStorage.setItem("disableClock",false);
+    	localStorage.setItem("clockedRow", this.state.clockedRow);
+    	localStorage.setItem("tCard",this.state.tCard);
+    	localStorage.setItem("distanceBetween", this.state.distanceBetween);
   	}
 
   	setDistanceBetween(dist){
@@ -111,6 +120,7 @@ class TodaySchedule extends React.Component {
 					var tempClock = this.state.disableClock;
 					this.setState({ disableClock : !tempClock });
 		}.bind(this));
+		delete localStorage.cardId;
 
   	}
   	
@@ -151,7 +161,7 @@ class TodaySchedule extends React.Component {
 												<IconButton onClick={that.handleClockOut.bind(that, row.id)} 
 						          						iconClassName="material-icons" tooltip="Clock Out" 
 						          						tooltipPosition="top-center" disabled={that.state.disableClock}>alarm_off</IconButton>
-					                			<Stopwatch />
+					                			<Stopwatch clockIn = {that.state.clockIn} />
 					                			<Distance longitude = {that.state.tCard.joblng}
 					                			  	  latitude = {that.state.tCard.joblat} 
 					                			  	  setDistanceBetween = {that.setDistanceBetween} />
@@ -166,9 +176,6 @@ class TodaySchedule extends React.Component {
 						          			<IconButton onClick={that.handleClockOut.bind(that, row.id)} 
 						          						iconClassName="material-icons" tooltip="Clock Out" 
 						          						tooltipPosition="top-center" disabled={true}>alarm_off</IconButton>
-						          			{/* <Link to="timecard" onClick={e => e.preventDefault()}>
-						                		<FontIcon className="material-icons md-48">alarm_on</FontIcon>
-						                	</Link> */}
 					                	</span>
 					                	
 					          			)}	

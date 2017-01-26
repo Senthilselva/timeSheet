@@ -75552,6 +75552,7 @@
 				disableClock: true,
 				distanceBetween: 0,
 				cardId: 0,
+				clockIn: Date.now(),
 				tCard: "" //this Id is the Id of the timesheet database
 			};
 			_this.handleClockIn = _this.handleClockIn.bind(_this);
@@ -75564,6 +75565,14 @@
 		_createClass(TodaySchedule, [{
 			key: "componentWillMount",
 			value: function componentWillMount() {
+				if (localStorage.cardId) {
+					this.setState({ cardId: localStorage.cardId });
+					this.setState({ disableClock: false });
+					this.setState({ clockedRow: localStorage.clockedRow });
+					this.setState({ tCard: localStorage.tCard });
+					this.setState({ distanceBetween: localStorage.distanceBetween });
+					this.setState({ clockIn: localStorage.clockIn });
+				}
 				_Helpers2.default._getTodaySchedule().then(function (userData, err) {
 					this.setState({ scheduleList: userData.data });
 				}.bind(this));
@@ -75578,16 +75587,12 @@
 	
 					//tCard holds all the information needed to create a time card.
 					this.setState({ tCard: newSchedule.data });
-					//GeoLocation._getDistance(this.state.tCard.joblng, this.state.tCard.joblat)
-					//this.setState({distanceBetween : GeoLocation._getDistance(this.state.tCard.joblng, this.state.tCard.joblat) })
-					//console.log(this.state.distanceBetween)
 	
 					var newTimeSheet = {};
 					newTimeSheet.JobId = newSchedule.data.JobId;
 					newTimeSheet.UserId = newSchedule.data.UserId;
 					newTimeSheet.clockIn = Date.now();
-	
-					//code to check the geoLocation 
+					localStorage.setItem("clockIn", newTimeSheet.clockIn);
 	
 					_Helpers2.default._createTimecard(newTimeSheet).then(function (newdata) {
 						//this Id is the Id of the timesheet database
@@ -75600,10 +75605,14 @@
 				}.bind(this));
 			}
 		}, {
-			key: "shouldComponentUpdate",
-			value: function shouldComponentUpdate() {
-				console.log("shouldComponentUpdate  distance " + this.state.distanceBetween);
-				return true;
+			key: "componentWillUnmount",
+			value: function componentWillUnmount() {
+				console.log("componentWillUnmount");
+				localStorage.setItem("cardId", this.state.cardId);
+				//localStorage.setItem("disableClock",false);
+				localStorage.setItem("clockedRow", this.state.clockedRow);
+				localStorage.setItem("tCard", this.state.tCard);
+				localStorage.setItem("distanceBetween", this.state.distanceBetween);
 			}
 		}, {
 			key: "setDistanceBetween",
@@ -75626,6 +75635,7 @@
 					var tempClock = this.state.disableClock;
 					this.setState({ disableClock: !tempClock });
 				}.bind(this));
+				delete localStorage.cardId;
 			}
 		}, {
 			key: "render",
@@ -75703,7 +75713,7 @@
 																tooltipPosition: "top-center", disabled: that.state.disableClock },
 															"alarm_off"
 														),
-														_react2.default.createElement(_Stopwatch2.default, null),
+														_react2.default.createElement(_Stopwatch2.default, { clockIn: that.state.clockIn }),
 														_react2.default.createElement(_Distance2.default, { longitude: that.state.tCard.joblng,
 															latitude: that.state.tCard.joblat,
 															setDistanceBetween: that.setDistanceBetween })
@@ -75828,7 +75838,7 @@
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      console.log("umount...............");
+	      //console.log("umount...............");
 	      this.reset();
 	    }
 	  }, {
@@ -75849,7 +75859,7 @@
 	  }, {
 	    key: 'startTimer',
 	    value: function startTimer() {
-	      this.startTime = Date.now();
+	      this.startTime = Date.now() - this.props.clockIn;
 	      this.timer = setInterval(this.update, 10);
 	    }
 	  }, {

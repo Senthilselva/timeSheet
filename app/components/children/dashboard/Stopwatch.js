@@ -41,7 +41,7 @@ class Stopwatch extends React.Component {
   }
   
   componentWillUnmount () {
-    console.log("umount...............");
+    //console.log("umount...............");
     this.reset();
   }
   lap() {
@@ -53,7 +53,7 @@ class Stopwatch extends React.Component {
     this.setState(this.initialState);
   }
   startTimer() {
-    this.startTime = Date.now();
+    this.startTime = Date.now() - this.props.clockIn;
     this.timer = setInterval(this.update, 10);
   }
   update() {
