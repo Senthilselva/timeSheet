@@ -3,41 +3,42 @@ import Helpers from "../utils/Helpers";
 module.exports = {
 	
 	_login(email, password, cb) {
-  	cb = arguments[arguments.length - 1]
-
+  	cb = arguments[arguments.length - 1];
+    var that = this;
     if (localStorage.token) {
+      console.log("localStorage token")
     	if (cb) cb(true)
-      	this._onChange(true)
+      	this._onChange(true);
       return
     }
     Helpers._checkLogin(email,password)
       .then(function(userData,err){
-        if(!err){
-        	console.log("handle submit"+userData)
+        if(!err || err !="undefined"){
+          //if the user exists set the token
         	this._setToken(userData,password)
           if (cb) cb(true)
-        	  this._onChange(true)
+        	  this._onChange(true);
       	} else {
-          console.log("error"+ err)
+          console.log("error: "+ err)
           if (cb) cb(false)
-            this._onChange(false)
+            this._onChange(false);
       	}
-    }.bind(this));
+    }.bind(this)).catch(function(err){
+          if (cb) cb(false)
+            that._onChange(false);
+    });
 	},
 
 	_loggedIn() {
-    console.log(localStorage.token)
     return !!localStorage.token
   },
 
+  //sets the local token
 	_setToken(userData){
-		console.log("_setToken"+ JSON.stringify(userData));
 		localStorage.token = Math.random().toString(36).substring(7);
     localStorage.setItem("userName",userData.data.username);
-    localStorage.setItem("firstName",userData.data.firstname);
-		localStorage.setItem("lastName",userData.data.lastname);
-		console.log("userName"+userData.data.username);
-		console.log(localStorage);
+    localStorage.setItem("firstName",userData.data.firstName);
+		localStorage.setItem("lastName",userData.data.lastName);
 	},
 
 	_logout(cb) {

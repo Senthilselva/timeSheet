@@ -27,20 +27,28 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactname: {
+    contactName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactphone: {
+    contactPhone: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactemail: {
+    contactEmail: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
         isEmail: true,
       }
+    },
+    lat: {
+      type: DataTypes.DECIMAL(10, 8),
+      allowNull: true,
+    },
+    lng: {
+      type: DataTypes.DECIMAL(11, 8),
+      allowNull: true,
     },
   },
   {

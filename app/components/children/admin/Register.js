@@ -1,5 +1,6 @@
 //import react 
 import React from "react";
+import Router from "react-router";
 import {Col, Card, Row, Input, Button} from "react-materialize";
 
 // Helper Functicon
@@ -11,8 +12,8 @@ class Register extends React.Component {
 	    super(props);
 
 	    this.state = {
-	    	firstname:"",
-	    	lastname:"",
+	    	firstName:"",
+	    	lastName:"",
 	    	address:"",
 	    	city:"",
 	    	state:"",
@@ -29,17 +30,15 @@ class Register extends React.Component {
 
     _handleSubmit(event) {
         event.preventDefault();
-        console.log("CLICK");
-        console.log(this.state.email + "  "+this.state.password);
         helpers._createUser(this.state);
+        //send user to login page
+        this.props.router.replace('/login');
     }
 
     _handleChange(event) {
         var newState = {};
-        console.log(event.target.id +"   "+event.target.value);
         newState[event.target.id] = event.target.value;
         this.setState(newState);
-        
     }
 
 
@@ -49,15 +48,15 @@ class Register extends React.Component {
     	<Row>
     		<Col m={4}></Col>	    	
   			<Col m={4}>
-    			<Card className='white' textClassName='black-text' title='Create User' actions={[<a href='/register'>Change Password</a>]}>
+    			<Card className='white' textClassName='black-text' title='Create User'>
     				<form onSubmit={this._handleSubmit}>
     					<Row>
     						<Input type="text" 
                             label="First Name" 
                             s={12} 
-                            id="firstname"
+                            id="firstName"
                             name="firstName"
-                            value={this.state.firstname}
+                            value={this.state.firstName}
                             onChange={this._handleChange}
                             required 
                             />
@@ -65,9 +64,9 @@ class Register extends React.Component {
                             <Input type="text" 
                             label="Last Name" 
                             s={12} 
-                            id="lastname"
-                            name="lasstName"
-                            value={this.state.lastname}
+                            id="lastName"
+                            name="lastName"
+                            value={this.state.lastName}
                             onChange={this._handleChange}
                             required 
                             />
@@ -115,7 +114,7 @@ class Register extends React.Component {
                             label="Email" 
                             s={12} 
                             id="username"
-                            name="username"
+                            name="usermame"
                             value={this.state.username}
                             onChange={this._handleChange}
                             required 
@@ -140,7 +139,7 @@ class Register extends React.Component {
                             onChange={this._handleChange}
                             required
                             />
-    						<Button type = "submit"> Login </Button>
+    						<Button type = "submit"> Register </Button>
 						</Row>
     				</form>
 				</Card> 

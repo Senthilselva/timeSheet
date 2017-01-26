@@ -22065,27 +22065,31 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _Login = __webpack_require__(/*! ../components/children/Login */ 633);
+	var _Login = __webpack_require__(/*! ../components/children/Login */ 632);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Logout = __webpack_require__(/*! ../components/children/Logout */ 677);
+	var _Logout = __webpack_require__(/*! ../components/children/Logout */ 678);
 	
 	var _Logout2 = _interopRequireDefault(_Logout);
 	
-	var _Register = __webpack_require__(/*! ../components/children/admin/Register */ 678);
+	var _Register = __webpack_require__(/*! ../components/children/admin/Register */ 679);
 	
 	var _Register2 = _interopRequireDefault(_Register);
 	
-	var _Home = __webpack_require__(/*! ../components/children/Home */ 679);
+	var _Home = __webpack_require__(/*! ../components/children/Home */ 680);
 	
 	var _Home2 = _interopRequireDefault(_Home);
 	
-	var _Dashboard = __webpack_require__(/*! ../components/children/Dashboard */ 681);
+	var _Dashboard = __webpack_require__(/*! ../components/children/Dashboard */ 682);
 	
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 	
-	var _Timesheet = __webpack_require__(/*! ../components/children/Timesheet */ 684);
+	var _Schedule = __webpack_require__(/*! ../components/children/Schedule */ 688);
+	
+	var _Schedule2 = _interopRequireDefault(_Schedule);
+	
+	var _Timesheet = __webpack_require__(/*! ../components/children/Timesheet */ 691);
 	
 	var _Timesheet2 = _interopRequireDefault(_Timesheet);
 	
@@ -22096,7 +22100,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function requireAuth(nextState, replace) {
-	  console.log("requireAuth " + nextState.location.pathname);
 	  if (!_Auth2.default._loggedIn()) {
 	    replace({
 	      pathname: '/login',
@@ -22123,6 +22126,7 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/home', component: _Home2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/dashboard', component: _Dashboard2.default, onEnter: requireAuth }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/schedule', component: _Schedule2.default, onEnter: requireAuth }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/timesheet', component: _Timesheet2.default, onEnter: requireAuth }),
 	      _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
 	    )
@@ -35271,10 +35275,6 @@
 	
 	var _Auth2 = _interopRequireDefault(_Auth);
 	
-	var _Header = __webpack_require__(/*! ./children/Header */ 632);
-	
-	var _Header2 = _interopRequireDefault(_Header);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35285,19 +35285,19 @@
 	
 	(0, _reactTapEventPlugin2.default)();
 	
-	var Login = function (_Component) {
-	  _inherits(Login, _Component);
+	var LoginLink = function (_Component) {
+	  _inherits(LoginLink, _Component);
 	
-	  function Login(props) {
-	    _classCallCheck(this, Login);
+	  function LoginLink(props) {
+	    _classCallCheck(this, LoginLink);
 	
-	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (LoginLink.__proto__ || Object.getPrototypeOf(LoginLink)).call(this, props));
 	
 	    _this.muiName = 'FlatButton';
 	    return _this;
 	  }
 	
-	  _createClass(Login, [{
+	  _createClass(LoginLink, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -35308,70 +35308,52 @@
 	    }
 	  }]);
 	
-	  return Login;
+	  return LoginLink;
 	}(_react.Component);
 	
-	var Logged = function (_Component2) {
-	  _inherits(Logged, _Component2);
+	var PulldownMenu = function PulldownMenu(props) {
+	  return _react2.default.createElement(
+	    _materialUi.IconMenu,
+	    _extends({}, props, {
+	      iconButtonElement: _react2.default.createElement(
+	        _materialUi.IconButton,
+	        null,
+	        _react2.default.createElement(_moreVert2.default, null)
+	      ),
+	      targetOrigin: { horizontal: 'right', vertical: 'top' },
+	      anchorOrigin: { horizontal: 'right', vertical: 'top' }
+	    }),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '#' },
+	      _react2.default.createElement(_materialUi.MenuItem, { primaryText: 'My Profile' })
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { to: '/logout' },
+	      _react2.default.createElement(_materialUi.MenuItem, { primaryText: 'Sign out' })
+	    )
+	  );
+	};
 	
-	  function Logged(props) {
-	    _classCallCheck(this, Logged);
-	
-	    return _possibleConstructorReturn(this, (Logged.__proto__ || Object.getPrototypeOf(Logged)).call(this, props));
-	  }
-	
-	  _createClass(Logged, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _materialUi.IconMenu,
-	        _extends({}, props, {
-	          iconButtonElement: _react2.default.createElement(
-	            _materialUi.IconButton,
-	            null,
-	            _react2.default.createElement(_moreVert2.default, null)
-	          ),
-	          targetOrigin: { horizontal: 'right', vertical: 'top' },
-	          anchorOrigin: { horizontal: 'right', vertical: 'top' }
-	        }),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/profile' },
-	          _react2.default.createElement(_materialUi.MenuItem, { primaryText: 'Profile' })
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/logout' },
-	          _react2.default.createElement(_materialUi.MenuItem, { primaryText: 'Logout' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Logged;
-	}(_react.Component);
-	
-	;
-	
-	Logged.muiName = 'IconMenu';
+	PulldownMenu.muiName = 'IconMenu';
 	
 	//define class
 	
-	var Main = function (_Component3) {
-	  _inherits(Main, _Component3);
+	var Main = function (_Component2) {
+	  _inherits(Main, _Component2);
 	
 	  function Main(props) {
 	    _classCallCheck(this, Main);
 	
-	    var _this3 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	    var _this2 = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 	
-	    _this3.state = { open: false, loggedIn: _Auth2.default._loggedIn() };
-	    _this3.handleClose = _this3.handleClose.bind(_this3);
-	    _this3.handleToggle = _this3.handleToggle.bind(_this3);
-	    _this3._handleClick = _this3._handleClick.bind(_this3);
-	    _this3._setLogin = _this3._setLogin.bind(_this3);
-	    _this3._updateAuth = _this3._updateAuth.bind(_this3);
-	    return _this3;
+	    _this2.state = { open: false, loggedIn: _Auth2.default._loggedIn() };
+	    _this2.handleClose = _this2.handleClose.bind(_this2);
+	    _this2.handleToggle = _this2.handleToggle.bind(_this2);
+	    _this2._handleClick = _this2._handleClick.bind(_this2);
+	    _this2._updateAuth = _this2._updateAuth.bind(_this2);
+	    return _this2;
 	  }
 	
 	  _createClass(Main, [{
@@ -35385,16 +35367,12 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      _Auth2.default._onChange = this._updateAuth;
-	      _Auth2.default._login();
-	      console.log("In Main.js: Augh._loggedIn=" + _Auth2.default._loggedIn());
 	    }
 	  }, {
 	    key: '_handleClick',
 	    value: function _handleClick(event) {
-	      console.log(this.state.loggedIn);
 	      event.preventDefault();
 	      _Auth2.default._logOut();
-	      //this.setState(loggedIn,false);
 	    }
 	  }, {
 	    key: 'handleToggle',
@@ -35407,19 +35385,14 @@
 	      this.setState({ open: false });
 	    }
 	  }, {
-	    key: '_setLogin',
-	    value: function _setLogin(newLog) {
-	      console.log(newLog);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this3 = this;
 	
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'mainContainer' },
-	        _react2.default.createElement(_materialUi.AppBar, { title: 'TimeTrax', onLeftIconButtonTouchTap: this.handleToggle, iconElementRight: _react2.default.createElement(Login, null) }),
+	        _react2.default.createElement(_materialUi.AppBar, { title: 'TimeTrax', onLeftIconButtonTouchTap: this.handleToggle, iconElementRight: this.state.loggedIn ? _react2.default.createElement(PulldownMenu, null) : _react2.default.createElement(LoginLink, null) }),
 	        _react2.default.createElement(
 	          _materialUi.Drawer,
 	          { containerStyle: { height: 'calc(100% - 64px)', top: 64 },
@@ -35438,26 +35411,9 @@
 	            width: 200,
 	            open: this.state.open,
 	            onRequestChange: function onRequestChange(open) {
-	              return _this4.setState({ open: open });
+	              return _this3.setState({ open: open });
 	            }
 	          },
-	          this.state.loggedIn ? _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'logout' },
-	            _react2.default.createElement(
-	              _materialUi.MenuItem,
-	              { onTouchTap: this.handleClose },
-	              'SignOut'
-	            )
-	          ) : _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: 'login' },
-	            _react2.default.createElement(
-	              _materialUi.MenuItem,
-	              { onTouchTap: this.handleClose },
-	              'SignIn'
-	            )
-	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: 'dashboard' },
@@ -35482,7 +35438,7 @@
 	            _react2.default.createElement(
 	              _materialUi.MenuItem,
 	              { onTouchTap: this.handleClose },
-	              'Time Sheets'
+	              'Timesheets'
 	            )
 	          )
 	        ),
@@ -35493,7 +35449,6 @@
 	
 	  return Main;
 	}(_react.Component);
-	
 	// Export the componen back for use in other files
 	
 	
@@ -68834,37 +68789,40 @@
 	module.exports = {
 	  _login: function _login(email, password, cb) {
 	    cb = arguments[arguments.length - 1];
-	
+	    var that = this;
 	    if (localStorage.token) {
+	      console.log("localStorage token");
 	      if (cb) cb(true);
 	      this._onChange(true);
 	      return;
 	    }
 	    _Helpers2.default._checkLogin(email, password).then(function (userData, err) {
-	      if (!err) {
-	        console.log("handle submit" + userData);
+	      if (!err || err != "undefined") {
+	        //if the user exists set the token
 	        this._setToken(userData, password);
 	        if (cb) cb(true);
 	        this._onChange(true);
 	      } else {
-	        console.log("error" + err);
+	        console.log("error: " + err);
 	        if (cb) cb(false);
 	        this._onChange(false);
 	      }
-	    }.bind(this));
+	    }.bind(this)).catch(function (err) {
+	      if (cb) cb(false);
+	      that._onChange(false);
+	    });
 	  },
 	  _loggedIn: function _loggedIn() {
-	    console.log(localStorage.token);
 	    return !!localStorage.token;
 	  },
+	
+	
+	  //sets the local token
 	  _setToken: function _setToken(userData) {
-	    console.log("_setToken" + JSON.stringify(userData));
 	    localStorage.token = Math.random().toString(36).substring(7);
 	    localStorage.setItem("userName", userData.data.username);
-	    localStorage.setItem("firstName", userData.data.firstname);
-	    localStorage.setItem("lastName", userData.data.lastname);
-	    console.log("userName" + userData.data.username);
-	    console.log(localStorage);
+	    localStorage.setItem("firstName", userData.data.firstName);
+	    localStorage.setItem("lastName", userData.data.lastName);
 	  },
 	  _logout: function _logout(cb) {
 	    delete localStorage.token;
@@ -68893,7 +68851,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var _arguments = arguments; // Include the axios package for performing HTTP requests ( based alternative to request)
 	
 	var _axios = __webpack_require__(/*! axios */ 613);
 	
@@ -68905,55 +68862,68 @@
 	var helpers = {
 	
 		_checkLogin: function _checkLogin(email, password) {
-			console.log(_arguments.length + "  " + JSON.stringify(_arguments[0]) + " " + JSON.stringify(_arguments[1]));
-			console.log("checklogin" + email + "  " + password);
-	
 			return _axios2.default.post("/user/login", { username: email,
 				password: password });
 		},
 	
 		_createUser: function _createUser(userInfo) {
-			console.log("create user" + JSON.stringify(userInfo));
-	
 			return _axios2.default.post("/user/create", userInfo);
 		},
 	
-		//gets all the schedule for the user the user is got from localStorage
+		//gets all the schedule for the user. the user is stored in localStorage
 		_getSchedule: function _getSchedule() {
 			var vEmail = localStorage.getItem('userName');
-			console.log("get Schedule" + vEmail);
 			return _axios2.default.get("/schedule/user/" + vEmail);
 		},
 	
+		//gets all the schedule for the user. the user is stored in localStorage
+		_getTodaySchedule: function _getTodaySchedule() {
+			var vEmail = localStorage.getItem('userName');
+			return _axios2.default.get("/schedule/user/today/" + vEmail);
+		},
+	
 		_getOneSchedule: function _getOneSchedule(id) {
-			console.log("_getOneSchedule  " + id);
 			return _axios2.default.get("/schedule/schedule/" + id);
+		},
+	
+		_getScheduleDays: function _getScheduleDays() {
+			var userName = localStorage.getItem('userName');
+	
+			return _axios2.default.get("/schedule/days/user/" + userName);
+		},
+	
+		_getScheduleForTheDay: function _getScheduleForTheDay(date) {
+			var userName = localStorage.getItem('userName');
+	
+			return _axios2.default.get("/schedule/userforday/" + userName + "/" + date);
 		},
 	
 		//to enter the data into the timesheet table
 		//calls timesheet controller
 		_createTimecard: function _createTimecard(newTimeSheet) {
-			console.log("_createTimecard" + JSON.stringify(newTimeSheet));
 			return _axios2.default.post("/timesheet/create", newTimeSheet);
 		},
 	
+		//update the timesheet from endtime
 		_updateTimecard: function _updateTimecard(cardId, time) {
-			console.log("_updateTimecard " + cardId + " " + time);
 			return _axios2.default.post("/timesheet/update", { cardId: cardId,
 				clockOut: time });
+		},
+	
+		_updateInvalidTimecard: function _updateInvalidTimecard(cardId, dis) {
+			var _reason = "Clocked in from " + dis + "Km away.";
+			return _axios2.default.post("/timesheet/invalid", { cardId: cardId,
+				reason: _reason });
 		},
 	
 		//gets all the finished jobs for the user the user is got from localStorage
 		_getTimeSheets: function _getTimeSheets() {
 			var vEmail = localStorage.getItem('userName');
-			console.log("get Schedule" + vEmail);
 	
 			//calling the controller and returing the value
 			return _axios2.default.get("/timesheet/user/" + vEmail);
 		}
-	
-	};
-	
+	}; // Include the axios package for performing HTTP requests ( based alternative to request)
 	exports.default = helpers;
 
 /***/ },
@@ -70227,213 +70197,6 @@
 
 /***/ },
 /* 632 */
-/*!*******************************************!*\
-  !*** ./app/components/children/Header.js ***!
-  \*******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(/*! react-router */ 179);
-	
-	var _reactRouter2 = _interopRequireDefault(_reactRouter);
-	
-	var _materialUi = __webpack_require__(/*! material-ui */ 384);
-	
-	var _moreVert = __webpack_require__(/*! material-ui/svg-icons/navigation/more-vert */ 603);
-	
-	var _moreVert2 = _interopRequireDefault(_moreVert);
-	
-	var _close = __webpack_require__(/*! material-ui/svg-icons/navigation/close */ 604);
-	
-	var _close2 = _interopRequireDefault(_close);
-	
-	var _reactTapEventPlugin = __webpack_require__(/*! react-tap-event-plugin */ 605);
-	
-	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
-	
-	var _Auth = __webpack_require__(/*! ./Auth */ 611);
-	
-	var _Auth2 = _interopRequireDefault(_Auth);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	//injectTapEventPlugin();
-	
-	var Login = function (_Component) {
-	  _inherits(Login, _Component);
-	
-	  function Login(props) {
-	    _classCallCheck(this, Login);
-	
-	    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
-	
-	    _this.muiName = 'FlatButton';
-	    return _this;
-	  }
-	
-	  _createClass(Login, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/login' },
-	        _react2.default.createElement(_materialUi.FlatButton, { label: 'Login' })
-	      );
-	    }
-	  }]);
-	
-	  return Login;
-	}(_react.Component);
-	
-	var Logged = function Logged(props) {
-	  _react2.default.createElement(
-	    _materialUi.IconMenu,
-	    _extends({}, props, {
-	      iconButtonElement: _react2.default.createElement(
-	        _materialUi.IconButton,
-	        null,
-	        _react2.default.createElement(_moreVert2.default, null)
-	      ),
-	      targetOrigin: { horizontal: 'right', vertical: 'top' },
-	      anchorOrigin: { horizontal: 'right', vertical: 'top' }
-	    }),
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: '/profile' },
-	      _react2.default.createElement(_materialUi.MenuItem, { primaryText: 'Profile' })
-	    ),
-	    _react2.default.createElement(
-	      _reactRouter.Link,
-	      { to: '/logout' },
-	      _react2.default.createElement(_materialUi.MenuItem, { primaryText: 'Logout' })
-	    )
-	  );
-	};
-	
-	Logged.muiName = 'IconMenu';
-	
-	var Header = function (_Component2) {
-	  _inherits(Header, _Component2);
-	
-	  function Header(props) {
-	    _classCallCheck(this, Header);
-	
-	    var _this2 = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
-	
-	    _this2.state = { open: false, loggedIn: _Auth2.default._loggedIn() };
-	    _this2.handleToggle = _this2.handleToggle.bind(_this2);
-	    return _this2;
-	  }
-	
-	  _createClass(Header, [{
-	    key: 'handleToggle',
-	    value: function handleToggle() {
-	      this.setState({ open: !this.state.open });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this3 = this;
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/home' },
-	          _react2.default.createElement(_materialUi.AppBar, { title: 'TimeTrax', onLeftIconButtonTouchTap: this.handleToggle,
-	            iconElementRight: this.state.loggedIn ? _react2.default.createElement(Logged, null) : _react2.default.createElement(Login, null)
-	          })
-	        ),
-	        _react2.default.createElement(
-	          _materialUi.Drawer,
-	          { containerStyle: { height: 'calc(100% - 64px)', top: 64 },
-	            docked: true,
-	            tapToClose: true,
-	            openDrawerOffset: 0.2 // 20% gap on the right side of drawer
-	            , panCloseMask: 0.2,
-	            closedDrawerOffset: -3,
-	            styles: {
-	              main: { paddingLeft: 3 }
-	            },
-	            tweenHandler: function tweenHandler(ratio) {
-	              return {
-	                main: { opacity: (2 - ratio) / 2 }
-	              };
-	            },
-	            width: 200,
-	            open: this.state.open,
-	            onRequestChange: function onRequestChange(open) {
-	              return _this3.setState({ open: open });
-	            }
-	          },
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/dashboard' },
-	            _react2.default.createElement(
-	              _materialUi.MenuItem,
-	              null,
-	              'Dashboard'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/timesheets' },
-	            _react2.default.createElement(
-	              _materialUi.MenuItem,
-	              null,
-	              'Time Sheets'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/schedule' },
-	            _react2.default.createElement(
-	              _materialUi.MenuItem,
-	              null,
-	              'Schedule'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/login' },
-	            _react2.default.createElement(
-	              _materialUi.MenuItem,
-	              null,
-	              'Login'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Header;
-	}(_react.Component);
-	
-	exports.default = Header;
-
-/***/ },
-/* 633 */
 /*!******************************************!*\
   !*** ./app/components/children/Login.js ***!
   \******************************************/
@@ -70451,7 +70214,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactMaterialize = __webpack_require__(/*! react-materialize */ 634);
+	var _reactMaterialize = __webpack_require__(/*! react-materialize */ 633);
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 179);
 	
@@ -70474,11 +70237,8 @@
 	
 	//auth function
 	
-	
 	// Helper Functicon
 	
-	
-	//const Login = withRouter(
 	
 	var Login = function (_React$Component) {
 	    _inherits(Login, _React$Component);
@@ -70505,19 +70265,31 @@
 	
 	            event.preventDefault();
 	            _Auth2.default._login(this.state.email, this.state.password, function (loggedIn) {
-	                console.log("logedIn " + loggedIn);
-	                console.log("props_route" + _this2.props.route);
 	
-	                if (!loggedIn) return _this2.setState({ error: true });else {
-	                    _this2.props.router.replace('/dashboard');
+	                //check logged in   
+	                if (!loggedIn) {
+	                    _this2.setState({ error: true });
+	                    _this2.props.router.replace('/login');
+	                    // return 
+	                    //   this.setState({ error: true })
+	                } else {
+	                    //redirect to the dashboard
+	                    //Zeynep
+	                    var userData = _Auth2.default._getData();
+	                    if (userData.firstName != "undefined") _this2.props.router.replace('/dashboard');else {
+	                        _this2.setState({ error: true });
+	                        _this2.props.router.replace('/login');
+	                    }
 	                }
 	            });
 	        }
+	
+	        //catches the entry into text box
+	
 	    }, {
 	        key: "_handleChange",
 	        value: function _handleChange(event) {
 	            var newState = {};
-	            console.log(event.target.id + "   " + event.target.value);
 	            newState[event.target.id] = event.target.value;
 	            this.setState(newState);
 	        }
@@ -70527,7 +70299,6 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            console.log("in Login");
 	            return _react2.default.createElement(
 	                _reactMaterialize.Row,
 	                null,
@@ -70537,11 +70308,7 @@
 	                    { m: 4 },
 	                    _react2.default.createElement(
 	                        _reactMaterialize.Card,
-	                        { className: "white", textClassName: "black-text", title: "Login", actions: [_react2.default.createElement(
-	                                "a",
-	                                { href: "/register" },
-	                                "Change Password"
-	                            )] },
+	                        { className: "white", textClassName: "black-text", title: "Login" },
 	                        _react2.default.createElement(
 	                            "form",
 	                            { onSubmit: this._handleSubmit },
@@ -70571,9 +70338,31 @@
 	                                    " Login "
 	                                ),
 	                                this.state.error && _react2.default.createElement(
+	                                    "row",
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        "p",
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            "strong",
+	                                            { style: { color: 'red' } },
+	                                            "Incorrect credentials"
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                _reactMaterialize.Row,
+	                                null,
+	                                _react2.default.createElement(
 	                                    "p",
 	                                    null,
-	                                    "Bad login information"
+	                                    "Not registered? ",
+	                                    _react2.default.createElement(
+	                                        _reactRouter.Link,
+	                                        { to: "/register" },
+	                                        "Register Here"
+	                                    )
 	                                )
 	                            )
 	                        )
@@ -70594,7 +70383,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 634 */
+/* 633 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/index.js ***!
   \******************************************/
@@ -70605,157 +70394,161 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Toast = exports.Tag = exports.Table = exports.Tabs = exports.Tab = exports.Slider = exports.Slide = exports.SideNav = exports.SearchForm = exports.Row = exports.ProgressBar = exports.Preloader = exports.PaginationButton = exports.Pagination = exports.Parallax = exports.OverlayTrigger = exports.Overlay = exports.NavItem = exports.Navbar = exports.Modal = exports.MenuItem = exports.MediaBox = exports.Input = exports.Icon = exports.Footer = exports.Dropdown = exports.CollectionItem = exports.Collection = exports.CollapsibleItem = exports.Collapsible = exports.Col = exports.Chip = exports.CardTitle = exports.CardPanel = exports.Card = exports.Button = exports.Breadcrumb = exports.Badge = undefined;
+	exports.Toast = exports.Tag = exports.Table = exports.Tabs = exports.Tab = exports.Slider = exports.Slide = exports.SideNavItem = exports.SideNav = exports.SearchForm = exports.Row = exports.ProgressBar = exports.Preloader = exports.PaginationButton = exports.Pagination = exports.Parallax = exports.OverlayTrigger = exports.Overlay = exports.NavItem = exports.Navbar = exports.Modal = exports.MenuItem = exports.MediaBox = exports.Input = exports.Icon = exports.Footer = exports.Dropdown = exports.CollectionItem = exports.Collection = exports.CollapsibleItem = exports.Collapsible = exports.Col = exports.Chip = exports.CardTitle = exports.CardPanel = exports.Card = exports.Button = exports.Breadcrumb = exports.Badge = undefined;
 	
-	var _Badge = __webpack_require__(/*! ./Badge */ 635);
+	var _Badge = __webpack_require__(/*! ./Badge */ 634);
 	
 	var _Badge2 = _interopRequireDefault(_Badge);
 	
-	var _Breadcrumb = __webpack_require__(/*! ./Breadcrumb */ 637);
+	var _Breadcrumb = __webpack_require__(/*! ./Breadcrumb */ 636);
 	
 	var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
 	
-	var _Button = __webpack_require__(/*! ./Button */ 640);
+	var _Button = __webpack_require__(/*! ./Button */ 639);
 	
 	var _Button2 = _interopRequireDefault(_Button);
 	
-	var _Card = __webpack_require__(/*! ./Card */ 643);
+	var _Card = __webpack_require__(/*! ./Card */ 642);
 	
 	var _Card2 = _interopRequireDefault(_Card);
 	
-	var _CardPanel = __webpack_require__(/*! ./CardPanel */ 644);
+	var _CardPanel = __webpack_require__(/*! ./CardPanel */ 643);
 	
 	var _CardPanel2 = _interopRequireDefault(_CardPanel);
 	
-	var _CardTitle = __webpack_require__(/*! ./CardTitle */ 645);
+	var _CardTitle = __webpack_require__(/*! ./CardTitle */ 644);
 	
 	var _CardTitle2 = _interopRequireDefault(_CardTitle);
 	
-	var _Chip = __webpack_require__(/*! ./Chip */ 646);
+	var _Chip = __webpack_require__(/*! ./Chip */ 645);
 	
 	var _Chip2 = _interopRequireDefault(_Chip);
 	
-	var _Col = __webpack_require__(/*! ./Col */ 638);
+	var _Col = __webpack_require__(/*! ./Col */ 637);
 	
 	var _Col2 = _interopRequireDefault(_Col);
 	
-	var _Collapsible = __webpack_require__(/*! ./Collapsible */ 647);
+	var _Collapsible = __webpack_require__(/*! ./Collapsible */ 646);
 	
 	var _Collapsible2 = _interopRequireDefault(_Collapsible);
 	
-	var _CollapsibleItem = __webpack_require__(/*! ./CollapsibleItem */ 648);
+	var _CollapsibleItem = __webpack_require__(/*! ./CollapsibleItem */ 647);
 	
 	var _CollapsibleItem2 = _interopRequireDefault(_CollapsibleItem);
 	
-	var _Collection = __webpack_require__(/*! ./Collection */ 649);
+	var _Collection = __webpack_require__(/*! ./Collection */ 648);
 	
 	var _Collection2 = _interopRequireDefault(_Collection);
 	
-	var _CollectionItem = __webpack_require__(/*! ./CollectionItem */ 650);
+	var _CollectionItem = __webpack_require__(/*! ./CollectionItem */ 649);
 	
 	var _CollectionItem2 = _interopRequireDefault(_CollectionItem);
 	
-	var _Dropdown = __webpack_require__(/*! ./Dropdown */ 651);
+	var _Dropdown = __webpack_require__(/*! ./Dropdown */ 650);
 	
 	var _Dropdown2 = _interopRequireDefault(_Dropdown);
 	
-	var _Parallax = __webpack_require__(/*! ./Parallax */ 652);
+	var _Parallax = __webpack_require__(/*! ./Parallax */ 651);
 	
 	var _Parallax2 = _interopRequireDefault(_Parallax);
 	
-	var _Footer = __webpack_require__(/*! ./Footer */ 653);
+	var _Footer = __webpack_require__(/*! ./Footer */ 652);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
-	var _Input = __webpack_require__(/*! ./Input */ 655);
+	var _Input = __webpack_require__(/*! ./Input */ 654);
 	
 	var _Input2 = _interopRequireDefault(_Input);
 	
-	var _MediaBox = __webpack_require__(/*! ./MediaBox */ 656);
+	var _MediaBox = __webpack_require__(/*! ./MediaBox */ 655);
 	
 	var _MediaBox2 = _interopRequireDefault(_MediaBox);
 	
-	var _MenuItem = __webpack_require__(/*! ./MenuItem */ 657);
+	var _MenuItem = __webpack_require__(/*! ./MenuItem */ 656);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _Modal = __webpack_require__(/*! ./Modal */ 658);
+	var _Modal = __webpack_require__(/*! ./Modal */ 657);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
-	var _Navbar = __webpack_require__(/*! ./Navbar */ 661);
+	var _Navbar = __webpack_require__(/*! ./Navbar */ 660);
 	
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
-	var _NavItem = __webpack_require__(/*! ./NavItem */ 662);
+	var _NavItem = __webpack_require__(/*! ./NavItem */ 661);
 	
 	var _NavItem2 = _interopRequireDefault(_NavItem);
 	
-	var _Overlay = __webpack_require__(/*! ./Overlay */ 660);
+	var _Overlay = __webpack_require__(/*! ./Overlay */ 659);
 	
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 	
-	var _OverlayTrigger = __webpack_require__(/*! ./OverlayTrigger */ 659);
+	var _OverlayTrigger = __webpack_require__(/*! ./OverlayTrigger */ 658);
 	
 	var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 	
-	var _Pagination = __webpack_require__(/*! ./Pagination */ 663);
+	var _Pagination = __webpack_require__(/*! ./Pagination */ 662);
 	
 	var _Pagination2 = _interopRequireDefault(_Pagination);
 	
-	var _PaginationButton = __webpack_require__(/*! ./PaginationButton */ 664);
+	var _PaginationButton = __webpack_require__(/*! ./PaginationButton */ 663);
 	
 	var _PaginationButton2 = _interopRequireDefault(_PaginationButton);
 	
-	var _Preloader = __webpack_require__(/*! ./Preloader */ 665);
+	var _Preloader = __webpack_require__(/*! ./Preloader */ 664);
 	
 	var _Preloader2 = _interopRequireDefault(_Preloader);
 	
-	var _ProgressBar = __webpack_require__(/*! ./ProgressBar */ 667);
+	var _ProgressBar = __webpack_require__(/*! ./ProgressBar */ 666);
 	
 	var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
 	
-	var _Row = __webpack_require__(/*! ./Row */ 654);
+	var _Row = __webpack_require__(/*! ./Row */ 653);
 	
 	var _Row2 = _interopRequireDefault(_Row);
 	
-	var _SearchForm = __webpack_require__(/*! ./SearchForm */ 668);
+	var _SearchForm = __webpack_require__(/*! ./SearchForm */ 667);
 	
 	var _SearchForm2 = _interopRequireDefault(_SearchForm);
 	
-	var _SideNav = __webpack_require__(/*! ./SideNav */ 669);
+	var _SideNav = __webpack_require__(/*! ./SideNav */ 668);
 	
 	var _SideNav2 = _interopRequireDefault(_SideNav);
 	
-	var _Slide = __webpack_require__(/*! ./Slide */ 670);
+	var _SideNavItem = __webpack_require__(/*! ./SideNavItem */ 669);
+	
+	var _SideNavItem2 = _interopRequireDefault(_SideNavItem);
+	
+	var _Slide = __webpack_require__(/*! ./Slide */ 671);
 	
 	var _Slide2 = _interopRequireDefault(_Slide);
 	
-	var _Slider = __webpack_require__(/*! ./Slider */ 671);
+	var _Slider = __webpack_require__(/*! ./Slider */ 672);
 	
 	var _Slider2 = _interopRequireDefault(_Slider);
 	
-	var _Tab = __webpack_require__(/*! ./Tab */ 672);
+	var _Tab = __webpack_require__(/*! ./Tab */ 673);
 	
 	var _Tab2 = _interopRequireDefault(_Tab);
 	
-	var _Tabs = __webpack_require__(/*! ./Tabs */ 673);
+	var _Tabs = __webpack_require__(/*! ./Tabs */ 674);
 	
 	var _Tabs2 = _interopRequireDefault(_Tabs);
 	
-	var _Table = __webpack_require__(/*! ./Table */ 674);
+	var _Table = __webpack_require__(/*! ./Table */ 675);
 	
 	var _Table2 = _interopRequireDefault(_Table);
 	
-	var _Tag = __webpack_require__(/*! ./Tag */ 675);
+	var _Tag = __webpack_require__(/*! ./Tag */ 676);
 	
 	var _Tag2 = _interopRequireDefault(_Tag);
 	
-	var _Toast = __webpack_require__(/*! ./Toast */ 676);
+	var _Toast = __webpack_require__(/*! ./Toast */ 677);
 	
 	var _Toast2 = _interopRequireDefault(_Toast);
 	
@@ -70792,6 +70585,7 @@
 	exports.Row = _Row2.default;
 	exports.SearchForm = _SearchForm2.default;
 	exports.SideNav = _SideNav2.default;
+	exports.SideNavItem = _SideNavItem2.default;
 	exports.Slide = _Slide2.default;
 	exports.Slider = _Slider2.default;
 	exports.Tab = _Tab2.default;
@@ -70801,7 +70595,7 @@
 	exports.Toast = _Toast2.default;
 
 /***/ },
-/* 635 */
+/* 634 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/Badge.js ***!
   \******************************************/
@@ -70819,7 +70613,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -70856,7 +70650,7 @@
 	exports.default = Badge;
 
 /***/ },
-/* 636 */
+/* 635 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -70913,7 +70707,7 @@
 
 
 /***/ },
-/* 637 */
+/* 636 */
 /*!***********************************************!*\
   !*** ./~/react-materialize/lib/Breadcrumb.js ***!
   \***********************************************/
@@ -70929,7 +70723,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Col = __webpack_require__(/*! ./Col */ 638);
+	var _Col = __webpack_require__(/*! ./Col */ 637);
 	
 	var _Col2 = _interopRequireDefault(_Col);
 	
@@ -70966,7 +70760,7 @@
 	exports.default = Breadcrumb;
 
 /***/ },
-/* 638 */
+/* 637 */
 /*!****************************************!*\
   !*** ./~/react-materialize/lib/Col.js ***!
   \****************************************/
@@ -70984,11 +70778,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _constants = __webpack_require__(/*! ./constants */ 639);
+	var _constants = __webpack_require__(/*! ./constants */ 638);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -71057,7 +70851,7 @@
 	exports.default = Col;
 
 /***/ },
-/* 639 */
+/* 638 */
 /*!**********************************************!*\
   !*** ./~/react-materialize/lib/constants.js ***!
   \**********************************************/
@@ -71078,7 +70872,7 @@
 	};
 
 /***/ },
-/* 640 */
+/* 639 */
 /*!*******************************************!*\
   !*** ./~/react-materialize/lib/Button.js ***!
   \*******************************************/
@@ -71098,19 +70892,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _constants = __webpack_require__(/*! ./constants */ 639);
+	var _constants = __webpack_require__(/*! ./constants */ 638);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
-	var _idgen = __webpack_require__(/*! ./idgen */ 642);
+	var _idgen = __webpack_require__(/*! ./idgen */ 641);
 	
 	var _idgen2 = _interopRequireDefault(_idgen);
 	
@@ -71266,7 +71060,7 @@
 	exports.default = Button;
 
 /***/ },
-/* 641 */
+/* 640 */
 /*!*****************************************!*\
   !*** ./~/react-materialize/lib/Icon.js ***!
   \*****************************************/
@@ -71284,11 +71078,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _constants = __webpack_require__(/*! ./constants */ 639);
+	var _constants = __webpack_require__(/*! ./constants */ 638);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -71348,7 +71142,7 @@
 	exports.default = Icon;
 
 /***/ },
-/* 642 */
+/* 641 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/idgen.js ***!
   \******************************************/
@@ -71374,7 +71168,7 @@
 	}
 
 /***/ },
-/* 643 */
+/* 642 */
 /*!*****************************************!*\
   !*** ./~/react-materialize/lib/Card.js ***!
   \*****************************************/
@@ -71394,11 +71188,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -71528,7 +71322,7 @@
 	exports.default = Card;
 
 /***/ },
-/* 644 */
+/* 643 */
 /*!**********************************************!*\
   !*** ./~/react-materialize/lib/CardPanel.js ***!
   \**********************************************/
@@ -71546,7 +71340,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -71578,7 +71372,7 @@
 	exports.default = CardPanel;
 
 /***/ },
-/* 645 */
+/* 644 */
 /*!**********************************************!*\
   !*** ./~/react-materialize/lib/CardTitle.js ***!
   \**********************************************/
@@ -71598,11 +71392,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _constants = __webpack_require__(/*! ./constants */ 639);
+	var _constants = __webpack_require__(/*! ./constants */ 638);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -71676,7 +71470,7 @@
 	exports.default = CardTitle;
 
 /***/ },
-/* 646 */
+/* 645 */
 /*!*****************************************!*\
   !*** ./~/react-materialize/lib/Chip.js ***!
   \*****************************************/
@@ -71722,7 +71516,7 @@
 	exports.default = Chip;
 
 /***/ },
-/* 647 */
+/* 646 */
 /*!************************************************!*\
   !*** ./~/react-materialize/lib/Collapsible.js ***!
   \************************************************/
@@ -71742,7 +71536,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -71858,7 +71652,7 @@
 	exports.default = Collapsible;
 
 /***/ },
-/* 648 */
+/* 647 */
 /*!****************************************************!*\
   !*** ./~/react-materialize/lib/CollapsibleItem.js ***!
   \****************************************************/
@@ -71882,11 +71676,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -72040,7 +71834,7 @@
 	exports.default = CollapsibleItem;
 
 /***/ },
-/* 649 */
+/* 648 */
 /*!***********************************************!*\
   !*** ./~/react-materialize/lib/Collection.js ***!
   \***********************************************/
@@ -72058,7 +71852,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -72141,7 +71935,7 @@
 	exports.default = Collection;
 
 /***/ },
-/* 650 */
+/* 649 */
 /*!***************************************************!*\
   !*** ./~/react-materialize/lib/CollectionItem.js ***!
   \***************************************************/
@@ -72161,7 +71955,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -72221,7 +72015,7 @@
 	exports.default = CollectionItem;
 
 /***/ },
-/* 651 */
+/* 650 */
 /*!*********************************************!*\
   !*** ./~/react-materialize/lib/Dropdown.js ***!
   \*********************************************/
@@ -72241,11 +72035,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _idgen = __webpack_require__(/*! ./idgen */ 642);
+	var _idgen = __webpack_require__(/*! ./idgen */ 641);
 	
 	var _idgen2 = _interopRequireDefault(_idgen);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -72356,7 +72150,7 @@
 	exports.default = Dropdown;
 
 /***/ },
-/* 652 */
+/* 651 */
 /*!*********************************************!*\
   !*** ./~/react-materialize/lib/Parallax.js ***!
   \*********************************************/
@@ -72374,7 +72168,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -72432,7 +72226,7 @@
 	exports.default = Parallax;
 
 /***/ },
-/* 653 */
+/* 652 */
 /*!*******************************************!*\
   !*** ./~/react-materialize/lib/Footer.js ***!
   \*******************************************/
@@ -72452,15 +72246,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Row = __webpack_require__(/*! ./Row */ 654);
+	var _Row = __webpack_require__(/*! ./Row */ 653);
 	
 	var _Row2 = _interopRequireDefault(_Row);
 	
-	var _Col = __webpack_require__(/*! ./Col */ 638);
+	var _Col = __webpack_require__(/*! ./Col */ 637);
 	
 	var _Col2 = _interopRequireDefault(_Col);
 	
@@ -72547,7 +72341,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 654 */
+/* 653 */
 /*!****************************************!*\
   !*** ./~/react-materialize/lib/Row.js ***!
   \****************************************/
@@ -72563,7 +72357,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -72590,7 +72384,7 @@
 	exports.default = Row;
 
 /***/ },
-/* 655 */
+/* 654 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/Input.js ***!
   \******************************************/
@@ -72610,19 +72404,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _idgen = __webpack_require__(/*! ./idgen */ 642);
+	var _idgen = __webpack_require__(/*! ./idgen */ 641);
 	
 	var _idgen2 = _interopRequireDefault(_idgen);
 	
-	var _constants = __webpack_require__(/*! ./constants */ 639);
+	var _constants = __webpack_require__(/*! ./constants */ 638);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -72921,7 +72715,7 @@
 	exports.default = Input;
 
 /***/ },
-/* 656 */
+/* 655 */
 /*!*********************************************!*\
   !*** ./~/react-materialize/lib/MediaBox.js ***!
   \*********************************************/
@@ -72939,7 +72733,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -72971,7 +72765,7 @@
 	exports.default = MediaBox;
 
 /***/ },
-/* 657 */
+/* 656 */
 /*!*********************************************!*\
   !*** ./~/react-materialize/lib/MenuItem.js ***!
   \*********************************************/
@@ -72991,7 +72785,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -73053,7 +72847,7 @@
 	exports.default = MenuItem;
 
 /***/ },
-/* 658 */
+/* 657 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/Modal.js ***!
   \******************************************/
@@ -73073,15 +72867,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Button = __webpack_require__(/*! ./Button */ 640);
+	var _Button = __webpack_require__(/*! ./Button */ 639);
 	
 	var _Button2 = _interopRequireDefault(_Button);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _OverlayTrigger = __webpack_require__(/*! ./OverlayTrigger */ 659);
+	var _OverlayTrigger = __webpack_require__(/*! ./OverlayTrigger */ 658);
 	
 	var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 	
@@ -73209,7 +73003,7 @@
 	exports.default = Modal;
 
 /***/ },
-/* 659 */
+/* 658 */
 /*!***************************************************!*\
   !*** ./~/react-materialize/lib/OverlayTrigger.js ***!
   \***************************************************/
@@ -73227,11 +73021,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Overlay2 = __webpack_require__(/*! ./Overlay */ 660);
+	var _Overlay2 = __webpack_require__(/*! ./Overlay */ 659);
 	
 	var _Overlay3 = _interopRequireDefault(_Overlay2);
 	
-	var _idgen = __webpack_require__(/*! ./idgen */ 642);
+	var _idgen = __webpack_require__(/*! ./idgen */ 641);
 	
 	var _idgen2 = _interopRequireDefault(_idgen);
 	
@@ -73292,7 +73086,7 @@
 	exports.default = OverlayTrigger;
 
 /***/ },
-/* 660 */
+/* 659 */
 /*!********************************************!*\
   !*** ./~/react-materialize/lib/Overlay.js ***!
   \********************************************/
@@ -73415,7 +73209,7 @@
 	exports.default = Overlay;
 
 /***/ },
-/* 661 */
+/* 660 */
 /*!*******************************************!*\
   !*** ./~/react-materialize/lib/Navbar.js ***!
   \*******************************************/
@@ -73435,15 +73229,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Col = __webpack_require__(/*! ./Col */ 638);
+	var _Col = __webpack_require__(/*! ./Col */ 637);
 	
 	var _Col2 = _interopRequireDefault(_Col);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -73560,7 +73354,7 @@
 	exports.default = Navbar;
 
 /***/ },
-/* 662 */
+/* 661 */
 /*!********************************************!*\
   !*** ./~/react-materialize/lib/NavItem.js ***!
   \********************************************/
@@ -73634,7 +73428,7 @@
 	exports.default = NavItem;
 
 /***/ },
-/* 663 */
+/* 662 */
 /*!***********************************************!*\
   !*** ./~/react-materialize/lib/Pagination.js ***!
   \***********************************************/
@@ -73652,15 +73446,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
-	var _PaginationButton = __webpack_require__(/*! ./PaginationButton */ 664);
+	var _PaginationButton = __webpack_require__(/*! ./PaginationButton */ 663);
 	
 	var _PaginationButton2 = _interopRequireDefault(_PaginationButton);
 	
@@ -73817,7 +73611,7 @@
 	exports.default = Pagination;
 
 /***/ },
-/* 664 */
+/* 663 */
 /*!*****************************************************!*\
   !*** ./~/react-materialize/lib/PaginationButton.js ***!
   \*****************************************************/
@@ -73833,7 +73627,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -73879,7 +73673,7 @@
 	exports.default = PaginationButton;
 
 /***/ },
-/* 665 */
+/* 664 */
 /*!**********************************************!*\
   !*** ./~/react-materialize/lib/Preloader.js ***!
   \**********************************************/
@@ -73897,11 +73691,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Spinner = __webpack_require__(/*! ./Spinner */ 666);
+	var _Spinner = __webpack_require__(/*! ./Spinner */ 665);
 	
 	var _Spinner2 = _interopRequireDefault(_Spinner);
 	
@@ -73989,7 +73783,7 @@
 	exports.default = Preloader;
 
 /***/ },
-/* 666 */
+/* 665 */
 /*!********************************************!*\
   !*** ./~/react-materialize/lib/Spinner.js ***!
   \********************************************/
@@ -74005,7 +73799,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -74056,7 +73850,7 @@
 	exports.default = Spinner;
 
 /***/ },
-/* 667 */
+/* 666 */
 /*!************************************************!*\
   !*** ./~/react-materialize/lib/ProgressBar.js ***!
   \************************************************/
@@ -74072,7 +73866,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -74113,7 +73907,7 @@
 	exports.default = ProgressBar;
 
 /***/ },
-/* 668 */
+/* 667 */
 /*!***********************************************!*\
   !*** ./~/react-materialize/lib/SearchForm.js ***!
   \***********************************************/
@@ -74129,7 +73923,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
+	var _Icon = __webpack_require__(/*! ./Icon */ 640);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -74164,7 +73958,7 @@
 	exports.default = SearchForm;
 
 /***/ },
-/* 669 */
+/* 668 */
 /*!********************************************!*\
   !*** ./~/react-materialize/lib/SideNav.js ***!
   \********************************************/
@@ -74176,60 +73970,315 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Icon = __webpack_require__(/*! ./Icon */ 641);
-	
-	var _Icon2 = _interopRequireDefault(_Icon);
-	
-	var _idgen = __webpack_require__(/*! ./idgen */ 642);
+	var _idgen = __webpack_require__(/*! ./idgen */ 641);
 	
 	var _idgen2 = _interopRequireDefault(_idgen);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var SideNav = function SideNav(_ref) {
-	  var children = _ref.children,
-	      _ref$id = _ref.id,
-	      id = _ref$id === undefined ? ['sidenav_' + (0, _idgen2.default)()] : _ref$id;
-	  return _react2.default.createElement(
-	    'nav',
-	    null,
-	    _react2.default.createElement(
-	      'ul',
-	      { className: 'right hide-on-med-and-down' },
-	      children
-	    ),
-	    _react2.default.createElement(
-	      'ul',
-	      { id: id, className: 'side-nav' },
-	      children
-	    ),
-	    _react2.default.createElement(
-	      'a',
-	      { href: '#', 'data-activates': id, className: 'button-collapse' },
-	      _react2.default.createElement(
-	        _Icon2.default,
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SideNav = function (_Component) {
+	  _inherits(SideNav, _Component);
+	
+	  function SideNav(props) {
+	    _classCallCheck(this, SideNav);
+	
+	    var _this = _possibleConstructorReturn(this, (SideNav.__proto__ || Object.getPrototypeOf(SideNav)).call(this, props));
+	
+	    _this.id = props.id || 'sidenav_' + (0, _idgen2.default)();
+	    return _this;
+	  }
+	
+	  _createClass(SideNav, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _props$options = this.props.options,
+	          options = _props$options === undefined ? {} : _props$options;
+	
+	      $(this._trigger).sideNav(options);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          children = _props.children,
+	          props = _objectWithoutProperties(_props, ['children']);
+	
+	      delete props.id;
+	      delete props.trigger;
+	      delete props.options;
+	      return _react2.default.createElement(
+	        'span',
 	        null,
-	        'view_headline'
-	      )
-	    )
-	  );
-	};
+	        this.renderTrigger(),
+	        _react2.default.createElement(
+	          'ul',
+	          _extends({ id: this.id, className: 'side-nav' }, props),
+	          children
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderTrigger',
+	    value: function renderTrigger() {
+	      var _this2 = this;
+	
+	      var trigger = this.props.trigger;
+	
+	      return _react2.default.cloneElement(trigger, {
+	        ref: function ref(t) {
+	          return _this2._trigger = '[data-activates=' + _this2.id + ']';
+	        },
+	        'data-activates': this.id
+	      });
+	    }
+	  }]);
+	
+	  return SideNav;
+	}(_react.Component);
 	
 	SideNav.propTypes = {
-	  children: _react.PropTypes.node,
+	  /**
+	   * sidenav id. If none is passed, an id will be generated.
+	   */
 	  id: _react.PropTypes.string,
-	  right: _react.PropTypes.bool,
-	  left: _react.PropTypes.bool
+	  /**
+	   * Component that is rendered to trigger the sidenav
+	   */
+	  trigger: _react.PropTypes.node.isRequired,
+	  /**
+	   * Options hash for the sidenav.
+	   * More info: http://materializecss.com/side-nav.html#options
+	   */
+	  options: _react.PropTypes.shape({
+	    menuWidth: _react.PropTypes.number,
+	    edge: _react.PropTypes.oneOf(['left', 'right']),
+	    closeOnClick: _react.PropTypes.bool,
+	    draggable: _react.PropTypes.bool
+	  }),
+	  children: _react.PropTypes.node
 	};
 	
 	exports.default = SideNav;
 
 /***/ },
+/* 669 */
+/*!************************************************!*\
+  !*** ./~/react-materialize/lib/SideNavItem.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 635);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _UserView = __webpack_require__(/*! ./UserView */ 670);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SideNavItem = function (_Component) {
+	  _inherits(SideNavItem, _Component);
+	
+	  function SideNavItem() {
+	    _classCallCheck(this, SideNavItem);
+	
+	    return _possibleConstructorReturn(this, (SideNavItem.__proto__ || Object.getPrototypeOf(SideNavItem)).apply(this, arguments));
+	  }
+	
+	  _createClass(SideNavItem, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          divider = _props.divider,
+	          subheader = _props.subheader,
+	          userView = _props.userView,
+	          icon = _props.icon,
+	          _props$href = _props.href,
+	          href = _props$href === undefined ? '#!' : _props$href,
+	          waves = _props.waves,
+	          _props$user = _props.user,
+	          user = _props$user === undefined ? {} : _props$user,
+	          children = _props.children,
+	          props = _objectWithoutProperties(_props, ['divider', 'subheader', 'userView', 'icon', 'href', 'waves', 'user', 'children']);
+	
+	      var itemClasses = {
+	        'divider': divider
+	      };
+	      var linkClasses = {
+	        'subheader': subheader,
+	        'waves-effect': waves
+	      };
+	
+	      return _react2.default.createElement(
+	        'li',
+	        _extends({ className: (0, _classnames2.default)(itemClasses) }, props),
+	        userView && user && _react2.default.createElement(_UserView.UserView, user),
+	        !userView && _react2.default.createElement(
+	          'a',
+	          { className: (0, _classnames2.default)(linkClasses), href: href },
+	          icon && _react2.default.createElement(
+	            'i',
+	            { className: 'material-icons' },
+	            icon
+	          ),
+	          children
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return SideNavItem;
+	}(_react.Component);
+	
+	SideNavItem.propTypes = {
+	  children: _react.PropTypes.node,
+	  divider: _react.PropTypes.bool,
+	  subheader: _react.PropTypes.bool,
+	  userView: _react.PropTypes.bool,
+	  waves: _react.PropTypes.bool,
+	  href: _react.PropTypes.string,
+	  icon: _react.PropTypes.string,
+	  user: _react.PropTypes.shape(_UserView.UserShape)
+	};
+	
+	exports.default = SideNavItem;
+
+/***/ },
 /* 670 */
+/*!*********************************************!*\
+  !*** ./~/react-materialize/lib/UserView.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.UserView = exports.UserShape = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var UserShape = exports.UserShape = {
+	  background: _react.PropTypes.string,
+	  image: _react.PropTypes.string,
+	  name: _react.PropTypes.string,
+	  email: _react.PropTypes.string
+	};
+	
+	var UserView = exports.UserView = function (_Component) {
+	  _inherits(UserView, _Component);
+	
+	  function UserView() {
+	    _classCallCheck(this, UserView);
+	
+	    return _possibleConstructorReturn(this, (UserView.__proto__ || Object.getPrototypeOf(UserView)).apply(this, arguments));
+	  }
+	
+	  _createClass(UserView, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          background = _props.background,
+	          image = _props.image,
+	          name = _props.name,
+	          email = _props.email;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'userView' },
+	        background && _react2.default.createElement(
+	          'div',
+	          { className: 'background' },
+	          _react2.default.createElement('img', { src: background })
+	        ),
+	        image && _react2.default.createElement(
+	          'a',
+	          { href: '#!user' },
+	          _react2.default.createElement('img', { className: 'circle', src: image })
+	        ),
+	        name && _react2.default.createElement(
+	          'a',
+	          { href: '#!name' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'white-text name' },
+	            name
+	          )
+	        ),
+	        email && _react2.default.createElement(
+	          'a',
+	          { href: '#!email' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'white-text email' },
+	            email
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return UserView;
+	}(_react.Component);
+	
+	;
+	
+	UserView.propTypes = UserShape;
+	
+	exports.default = UserView;
+
+/***/ },
+/* 671 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/Slide.js ***!
   \******************************************/
@@ -74249,11 +74298,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _constants = __webpack_require__(/*! ./constants */ 639);
+	var _constants = __webpack_require__(/*! ./constants */ 638);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -74354,7 +74403,7 @@
 	exports.default = Slide;
 
 /***/ },
-/* 671 */
+/* 672 */
 /*!*******************************************!*\
   !*** ./~/react-materialize/lib/Slider.js ***!
   \*******************************************/
@@ -74372,7 +74421,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -74468,7 +74517,7 @@
 	exports.default = Slider;
 
 /***/ },
-/* 672 */
+/* 673 */
 /*!****************************************!*\
   !*** ./~/react-materialize/lib/Tab.js ***!
   \****************************************/
@@ -74544,7 +74593,7 @@
 	exports.default = Tab;
 
 /***/ },
-/* 673 */
+/* 674 */
 /*!*****************************************!*\
   !*** ./~/react-materialize/lib/Tabs.js ***!
   \*****************************************/
@@ -74564,15 +74613,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Row = __webpack_require__(/*! ./Row */ 654);
+	var _Row = __webpack_require__(/*! ./Row */ 653);
 	
 	var _Row2 = _interopRequireDefault(_Row);
 	
-	var _Col = __webpack_require__(/*! ./Col */ 638);
+	var _Col = __webpack_require__(/*! ./Col */ 637);
 	
 	var _Col2 = _interopRequireDefault(_Col);
 	
@@ -74661,7 +74710,8 @@
 	        _react2.default.Children.map(children, function (child, idx) {
 	          return _react2.default.createElement(
 	            _Col2.default,
-	            { id: 'tab_' + idx, s: 12, key: 'tab' + idx },
+	            { id: 'tab_' + idx, s: 12, key: 'tab' + idx,
+	              style: { 'display': child.props.active || defaultValue === idx ? 'block' : 'none' } },
 	            child.props.children
 	          );
 	        })
@@ -74682,7 +74732,7 @@
 	exports.default = Tabs;
 
 /***/ },
-/* 674 */
+/* 675 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/Table.js ***!
   \******************************************/
@@ -74702,7 +74752,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -74790,7 +74840,7 @@
 	exports.default = Table;
 
 /***/ },
-/* 675 */
+/* 676 */
 /*!****************************************!*\
   !*** ./~/react-materialize/lib/Tag.js ***!
   \****************************************/
@@ -74806,7 +74856,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Chip = __webpack_require__(/*! ./Chip */ 646);
+	var _Chip = __webpack_require__(/*! ./Chip */ 645);
 	
 	var _Chip2 = _interopRequireDefault(_Chip);
 	
@@ -74828,7 +74878,7 @@
 	exports.default = Tag;
 
 /***/ },
-/* 676 */
+/* 677 */
 /*!******************************************!*\
   !*** ./~/react-materialize/lib/Toast.js ***!
   \******************************************/
@@ -74846,11 +74896,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 636);
+	var _classnames = __webpack_require__(/*! classnames */ 635);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Button = __webpack_require__(/*! ./Button */ 640);
+	var _Button = __webpack_require__(/*! ./Button */ 639);
 	
 	var _Button2 = _interopRequireDefault(_Button);
 	
@@ -74908,7 +74958,7 @@
 	exports.default = Toast;
 
 /***/ },
-/* 677 */
+/* 678 */
 /*!*******************************************!*\
   !*** ./app/components/children/Logout.js ***!
   \*******************************************/
@@ -74974,7 +75024,7 @@
 	exports.default = Logout;
 
 /***/ },
-/* 678 */
+/* 679 */
 /*!***************************************************!*\
   !*** ./app/components/children/admin/Register.js ***!
   \***************************************************/
@@ -74992,7 +75042,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactMaterialize = __webpack_require__(/*! react-materialize */ 634);
+	var _reactRouter = __webpack_require__(/*! react-router */ 179);
+	
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+	
+	var _reactMaterialize = __webpack_require__(/*! react-materialize */ 633);
 	
 	var _Helpers = __webpack_require__(/*! ../../utils/Helpers */ 612);
 	
@@ -75019,8 +75073,8 @@
 	                                                        var _this = _possibleConstructorReturn(this, (Register.__proto__ || Object.getPrototypeOf(Register)).call(this, props));
 	
 	                                                        _this.state = {
-	                                                                                    firstname: "",
-	                                                                                    lastname: "",
+	                                                                                    firstName: "",
+	                                                                                    lastName: "",
 	                                                                                    address: "",
 	                                                                                    city: "",
 	                                                                                    state: "",
@@ -75040,15 +75094,14 @@
 	                                                        key: "_handleSubmit",
 	                                                        value: function _handleSubmit(event) {
 	                                                                                    event.preventDefault();
-	                                                                                    console.log("CLICK");
-	                                                                                    console.log(this.state.email + "  " + this.state.password);
 	                                                                                    _Helpers2.default._createUser(this.state);
+	                                                                                    //send user to login page
+	                                                                                    this.props.router.replace('/login');
 	                                                        }
 	                            }, {
 	                                                        key: "_handleChange",
 	                                                        value: function _handleChange(event) {
 	                                                                                    var newState = {};
-	                                                                                    console.log(event.target.id + "   " + event.target.value);
 	                                                                                    newState[event.target.id] = event.target.value;
 	                                                                                    this.setState(newState);
 	                                                        }
@@ -75067,11 +75120,7 @@
 	                                                                                                                                            { m: 4 },
 	                                                                                                                                            _react2.default.createElement(
 	                                                                                                                                                                        _reactMaterialize.Card,
-	                                                                                                                                                                        { className: "white", textClassName: "black-text", title: "Create User", actions: [_react2.default.createElement(
-	                                                                                                                                                                                                                                "a",
-	                                                                                                                                                                                                                                { href: "/register" },
-	                                                                                                                                                                                                                                "Change Password"
-	                                                                                                                                                                                                    )] },
+	                                                                                                                                                                        { className: "white", textClassName: "black-text", title: "Create User" },
 	                                                                                                                                                                        _react2.default.createElement(
 	                                                                                                                                                                                                    "form",
 	                                                                                                                                                                                                    { onSubmit: this._handleSubmit },
@@ -75081,18 +75130,18 @@
 	                                                                                                                                                                                                                                _react2.default.createElement(_reactMaterialize.Input, { type: "text",
 	                                                                                                                                                                                                                                                            label: "First Name",
 	                                                                                                                                                                                                                                                            s: 12,
-	                                                                                                                                                                                                                                                            id: "firstname",
+	                                                                                                                                                                                                                                                            id: "firstName",
 	                                                                                                                                                                                                                                                            name: "firstName",
-	                                                                                                                                                                                                                                                            value: this.state.firstname,
+	                                                                                                                                                                                                                                                            value: this.state.firstName,
 	                                                                                                                                                                                                                                                            onChange: this._handleChange,
 	                                                                                                                                                                                                                                                            required: true
 	                                                                                                                                                                                                                                }),
 	                                                                                                                                                                                                                                _react2.default.createElement(_reactMaterialize.Input, { type: "text",
 	                                                                                                                                                                                                                                                            label: "Last Name",
 	                                                                                                                                                                                                                                                            s: 12,
-	                                                                                                                                                                                                                                                            id: "lastname",
-	                                                                                                                                                                                                                                                            name: "lasstName",
-	                                                                                                                                                                                                                                                            value: this.state.lastname,
+	                                                                                                                                                                                                                                                            id: "lastName",
+	                                                                                                                                                                                                                                                            name: "lastName",
+	                                                                                                                                                                                                                                                            value: this.state.lastName,
 	                                                                                                                                                                                                                                                            onChange: this._handleChange,
 	                                                                                                                                                                                                                                                            required: true
 	                                                                                                                                                                                                                                }),
@@ -75135,7 +75184,7 @@
 	                                                                                                                                                                                                                                                            label: "Email",
 	                                                                                                                                                                                                                                                            s: 12,
 	                                                                                                                                                                                                                                                            id: "username",
-	                                                                                                                                                                                                                                                            name: "username",
+	                                                                                                                                                                                                                                                            name: "usermame",
 	                                                                                                                                                                                                                                                            value: this.state.username,
 	                                                                                                                                                                                                                                                            onChange: this._handleChange,
 	                                                                                                                                                                                                                                                            required: true
@@ -75161,7 +75210,7 @@
 	                                                                                                                                                                                                                                _react2.default.createElement(
 	                                                                                                                                                                                                                                                            _reactMaterialize.Button,
 	                                                                                                                                                                                                                                                            { type: "submit" },
-	                                                                                                                                                                                                                                                            " Login "
+	                                                                                                                                                                                                                                                            " Register "
 	                                                                                                                                                                                                                                )
 	                                                                                                                                                                                                    )
 	                                                                                                                                                                        )
@@ -75182,7 +75231,7 @@
 	exports.default = Register;
 
 /***/ },
-/* 679 */
+/* 680 */
 /*!*****************************************!*\
   !*** ./app/components/children/Home.js ***!
   \*****************************************/
@@ -75200,7 +75249,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Homecard = __webpack_require__(/*! ./home/Homecard */ 680);
+	var _Homecard = __webpack_require__(/*! ./home/Homecard */ 681);
 	
 	var _Homecard2 = _interopRequireDefault(_Homecard);
 	
@@ -75211,7 +75260,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	//auth function
 	
 	var Home = function (_React$Component) {
 	    _inherits(Home, _React$Component);
@@ -75225,17 +75273,7 @@
 	    _createClass(Home, [{
 	        key: "render",
 	        value: function render() {
-	
-	            return _react2.default.createElement(
-	                "div",
-	                null,
-	                _react2.default.createElement(
-	                    "h3",
-	                    null,
-	                    " Welcome Time Trax!! "
-	                ),
-	                _react2.default.createElement(_Homecard2.default, null)
-	            );
+	            return _react2.default.createElement(_Homecard2.default, null);
 	        }
 	    }]);
 	
@@ -75248,7 +75286,7 @@
 	exports.default = Home;
 
 /***/ },
-/* 680 */
+/* 681 */
 /*!**************************************************!*\
   !*** ./app/components/children/home/Homecard.js ***!
   \**************************************************/
@@ -75277,21 +75315,12 @@
 	    _Card.Card,
 	    null,
 	    _react2.default.createElement(_Card.CardHeader, {
-	      title: 'Time Trax',
-	      subtitle: 'Time sheet management system'
+	      subtitle: 'GPS Enabled Time Tracking System'
 	    }),
 	    _react2.default.createElement(
 	      _Card.CardMedia,
-	      {
-	        overlay: _react2.default.createElement(_Card.CardTitle, { title: 'Overlay title', subtitle: 'Overlay subtitle' })
-	      },
-	      _react2.default.createElement('img', { src: '/assects/images/poolpic.jpg' })
-	    ),
-	    _react2.default.createElement(_Card.CardTitle, { title: 'Card title', subtitle: 'Card subtitle' }),
-	    _react2.default.createElement(
-	      _Card.CardText,
 	      null,
-	      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.'
+	      _react2.default.createElement('img', { src: '/assets/images/poolpic.jpg' })
 	    )
 	  );
 	};
@@ -75299,108 +75328,10 @@
 	exports.default = HomeCard;
 
 /***/ },
-/* 681 */
+/* 682 */
 /*!**********************************************!*\
   !*** ./app/components/children/Dashboard.js ***!
   \**********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Scheduletable = __webpack_require__(/*! ./dashboard/Scheduletable.js */ 682);
-	
-	var _Scheduletable2 = _interopRequireDefault(_Scheduletable);
-	
-	var _Timecard = __webpack_require__(/*! ./dashboard/Timecard.js */ 683);
-	
-	var _Timecard2 = _interopRequireDefault(_Timecard);
-	
-	var _Auth = __webpack_require__(/*! ./Auth */ 611);
-	
-	var _Auth2 = _interopRequireDefault(_Auth);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	//auth function
-	
-	
-	var Dashboard = function (_React$Component) {
-	  _inherits(Dashboard, _React$Component);
-	
-	  function Dashboard(props) {
-	    _classCallCheck(this, Dashboard);
-	
-	    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
-	
-	    _this.state = {
-	      clockInId: 0,
-	      isClockOut: false
-	    };
-	
-	    _this._getScheduleClockInId = _this._getScheduleClockInId.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(Dashboard, [{
-	    key: "_getScheduleClockInId",
-	    value: function _getScheduleClockInId(id) {
-	      console.log("_getScheduleClockInId " + id);
-	      this.setState({ clockInId: id });
-	      console.log("_getScheduleClockInId " + this.state.clockInId);
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var userData = _Auth2.default._getData();
-	
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Hello!"
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          userData.firstName,
-	          " ",
-	          userData.lastName
-	        ),
-	        this.state.clockInId == 0 ? _react2.default.createElement(_Scheduletable2.default, { _getScheduleClockInId: this._getScheduleClockInId }) : _react2.default.createElement(_Timecard2.default, { clockInId: this.state.clockInId })
-	      );
-	    }
-	  }]);
-	
-	  return Dashboard;
-	}(_react2.default.Component);
-	
-	// Export the component back for use in other files
-	
-	
-	exports.default = Dashboard;
-
-/***/ },
-/* 682 */
-/*!************************************************************!*\
-  !*** ./app/components/children/dashboard/Scheduletable.js ***!
-  \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -75415,13 +75346,21 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RaisedButton = __webpack_require__(/*! material-ui/RaisedButton */ 544);
+	var _reactRouter = __webpack_require__(/*! react-router */ 179);
 	
-	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+	var _Overview = __webpack_require__(/*! ./dashboard/Overview.js */ 683);
 	
-	var _Helpers = __webpack_require__(/*! ../../utils/Helpers.js */ 612);
+	var _Overview2 = _interopRequireDefault(_Overview);
 	
-	var _Helpers2 = _interopRequireDefault(_Helpers);
+	var _TodaySchedule = __webpack_require__(/*! ./dashboard/TodaySchedule.js */ 684);
+	
+	var _TodaySchedule2 = _interopRequireDefault(_TodaySchedule);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
+	
+	var _Auth = __webpack_require__(/*! ./Auth */ 611);
+	
+	var _Auth2 = _interopRequireDefault(_Auth);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -75431,156 +75370,47 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	//import helper file
+	var Dashboard = function (_React$Component) {
+	  _inherits(Dashboard, _React$Component);
 	
+	  function Dashboard(props) {
+	    _classCallCheck(this, Dashboard);
 	
-	var style = {
-	  margin: 12
-	};
+	    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+	  }
 	
-	var ScheduleTable = function (_React$Component) {
-	  _inherits(ScheduleTable, _React$Component);
-	
-	  function ScheduleTable(props) {
-	    _classCallCheck(this, ScheduleTable);
-	
-	    var _this = _possibleConstructorReturn(this, (ScheduleTable.__proto__ || Object.getPrototypeOf(ScheduleTable)).call(this, props));
-	
-	    _this.state = {
-	      scheduleTables: []
-	    };
-	
-	    _this._onClockIn = _this._onClockIn.bind(_this);
-	    return _this;
-	  } //Constructor
-	
-	  _createClass(ScheduleTable, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      console.log(_Helpers2.default);
-	      _Helpers2.default._getSchedule().then(function (userData, err) {
-	        this.setState({ scheduleTables: userData.data });
-	      }.bind(this));
-	    } //componentWillMount
-	
-	  }, {
-	    key: '_onClockIn',
-	    value: function _onClockIn(event) {
-	      console.log("on Clock In   " + JSON.stringify(event.target.value));
-	      this.props._getScheduleClockInId(event.target.value);
-	    }
-	  }, {
+	  _createClass(Dashboard, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.state.scheduleTables);
-	      var that = this;
 	
 	      return _react2.default.createElement(
-	        'table',
+	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'tr',
-	          null,
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Client'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Date'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Start Time'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'End Time'
-	          ),
-	          _react2.default.createElement(
-	            'th',
-	            null,
-	            'Address'
-	          ),
-	          _react2.default.createElement('th', null)
-	        ),
-	        this.state.scheduleTables.map(function (id, i) {
-	          return _react2.default.createElement(
-	            'tr',
-	            { key: i },
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              id.jobName
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              id.startDate
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              id.startTime
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              id.endTime
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              id.jobAdd,
-	              ', ',
-	              id.jobCity,
-	              ', ',
-	              id.jobState,
-	              ', ',
-	              id.jobZip,
-	              ' '
-	            ),
-	            _react2.default.createElement(
-	              'td',
-	              null,
-	              _react2.default.createElement(
-	                'button',
-	                { type: 'button', value: id.id, onClick: that._onClockIn,
-	                  style: style },
-	                '"Clock-in"'
-	              ),
-	              ' '
-	            )
-	          );
-	        })
+	        _react2.default.createElement(_Overview2.default, null),
+	        _react2.default.createElement(_TodaySchedule2.default, null)
 	      );
 	    }
 	  }]);
 	
-	  return ScheduleTable;
-	}(_react2.default.Component); //class defination
+	  return Dashboard;
+	}(_react2.default.Component);
+	
+	// Export the component back for use in other files
 	
 	
-	// Export the componen back for use in other files
-	
-	
-	exports.default = ScheduleTable;
+	exports.default = Dashboard;
 
 /***/ },
 /* 683 */
 /*!*******************************************************!*\
-  !*** ./app/components/children/dashboard/Timecard.js ***!
+  !*** ./app/components/children/dashboard/Overview.js ***!
   \*******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	   value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75589,9 +75419,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Helpers = __webpack_require__(/*! ../../utils/Helpers.js */ 612);
+	var _Auth = __webpack_require__(/*! ../Auth */ 611);
 	
-	var _Helpers2 = _interopRequireDefault(_Helpers);
+	var _Auth2 = _interopRequireDefault(_Auth);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -75601,149 +75433,48 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	//import helper file
+	var Overview = function (_React$Component) {
+	   _inherits(Overview, _React$Component);
 	
+	   function Overview(props) {
+	      _classCallCheck(this, Overview);
 	
-	var Timecard = function (_React$Component) {
-		_inherits(Timecard, _React$Component);
+	      var _this = _possibleConstructorReturn(this, (Overview.__proto__ || Object.getPrototypeOf(Overview)).call(this, props));
 	
-		function Timecard(props) {
-			_classCallCheck(this, Timecard);
+	      var userData = _Auth2.default._getData();
+	      _this.state = { name: userData.firstName };
+	      return _this;
+	   }
 	
-			var _this = _possibleConstructorReturn(this, (Timecard.__proto__ || Object.getPrototypeOf(Timecard)).call(this, props));
+	   _createClass(Overview, [{
+	      key: "render",
+	      value: function render() {
+	         return _react2.default.createElement(
+	            _materialUi.Card,
+	            null,
+	            _react2.default.createElement(_materialUi.CardHeader, { title: this.state.name + "'s Overview", subtitle: "", avatar: "assets/images/ic_account_circle_black_24dp_2x.png" }),
+	            _react2.default.createElement(
+	               _materialUi.CardText,
+	               null,
+	               "This section will display an overview of total hours worked for the current week. Needs to be worked on."
+	            )
+	         );
+	      }
+	   }]);
 	
-			_this.state = {
-				timeCard: {},
-				cardId: 0,
-				yourEndTime: null,
-				yourStartTime: Date.now()
-			};
-			_this._onClockOut = _this._onClockOut.bind(_this);
-			return _this;
-		}
-	
-		_createClass(Timecard, [{
-			key: "_onClockOut",
-			value: function _onClockOut() {
-				console.log("_onClockOut");
-				console.log("Card Id " + this.state.cardId);
-				this.setState({ yourEndTime: Date.now() });
-				console.log("endTime " + this.state.yourEndTime);
-				//update database
-			}
-	
-			//wrote to see if clocked out then try to reomve the button 
-	
-		}, {
-			key: "componentDidUpdate",
-			value: function componentDidUpdate() {
-				console.log("componentDidUpdate  " + this.state.yourEndTime);
-				//If end date is updated then update database
-				if (this.state.yourEndTime != null) {
-					_Helpers2.default._updateTimecard(this.state.cardId, this.state.yourEndTime).then(function (data, err) {
-						console.log(JSON.stringify(data));
-					});
-				}
-			}
-		}, {
-			key: "componentWillMount",
-			value: function componentWillMount() {
-				console.log("componentWillMount");
-				//var vTimecard = Helpers._getOneSchedule(this.props.clockInId);
-				_Helpers2.default._getOneSchedule(this.props.clockInId).then(function (newSchedule) {
-					//console.log("llllllllllllllllllllllllll" + JSON.stringify(newSchedule));
-					var newTimeSheet = {};
-					newTimeSheet.JobId = newSchedule.data.JobId;
-					newTimeSheet.UserId = newSchedule.data.UserId;
-	
-					newTimeSheet.clockIn = Date.now();
-					_Helpers2.default._createTimecard(newTimeSheet).then(function (newdata) {
-						//console.log("newSchedule :"+ JSON.stringify(newSchedule));
-						console.log("New Data :" + JSON.stringify(newdata));
-	
-						//console.log("back from helper in componentWillMount "
-						//	+ JSON.stringify(this.state.timeCard));
-						this.setState({ timeCard: newSchedule.data });
-						this.setState({ cardId: newdata.data.id });
-						this.setState({ yourStartTime: Date.now() });
-	
-						console.log("Card Id " + this.state.cardId);
-	
-						//console.log("after set state in componentWillMount "+ JSON.stringify(vTimecard))
-					}.bind(this));
-				}.bind(this));
-			} //componentWillMount	
-	
-		}, {
-			key: "render",
-			value: function render() {
-	
-				return _react2.default.createElement(
-					"div",
-					null,
-					_react2.default.createElement(
-						"h1",
-						null,
-						" Timsheets "
-					),
-					_react2.default.createElement(
-						"p",
-						null,
-						" ",
-						this.props.clockInId,
-						" "
-					),
-					_react2.default.createElement(
-						"p",
-						null,
-						" Name: ",
-						this.state.timeCard.firstname,
-						" "
-					),
-					_react2.default.createElement(
-						"p",
-						null,
-						" Job: ",
-						this.state.timeCard.jobname,
-						" "
-					),
-					_react2.default.createElement(
-						"p",
-						null,
-						" Started On: ",
-						moment(this.state.yourStartTime).format('L')
-					),
-					_react2.default.createElement(
-						"p",
-						null,
-						" Started On: ",
-						moment(this.state.yourStartTime).format('LT')
-					),
-					this.state.yourEndTime == null ? _react2.default.createElement(
-						"button",
-						{ type: "button", onClick: this._onClockOut },
-						"Clock-out"
-					) : _react2.default.createElement(
-						"p",
-						null,
-						" logged out at ",
-						this.state.yourEndTime,
-						" "
-					)
-				);
-			}
-		}]);
-	
-		return Timecard;
+	   return Overview;
 	}(_react2.default.Component);
 	
-	exports.default = Timecard;
+	// Export the component back for use in other files
+	
+	
+	exports.default = Overview;
 
 /***/ },
 /* 684 */
-/*!**********************************************!*\
-  !*** ./app/components/children/Timesheet.js ***!
-  \**********************************************/
+/*!************************************************************!*\
+  !*** ./app/components/children/dashboard/TodaySchedule.js ***!
+  \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -75757,6 +75488,1168 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _Auth = __webpack_require__(/*! ../Auth */ 611);
+	
+	var _Auth2 = _interopRequireDefault(_Auth);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 179);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
+	
+	var _Paper = __webpack_require__(/*! material-ui/Paper */ 432);
+	
+	var _Paper2 = _interopRequireDefault(_Paper);
+	
+	var _Stopwatch = __webpack_require__(/*! ./Stopwatch.js */ 685);
+	
+	var _Stopwatch2 = _interopRequireDefault(_Stopwatch);
+	
+	var _Distance = __webpack_require__(/*! ./Distance.js */ 686);
+	
+	var _Distance2 = _interopRequireDefault(_Distance);
+	
+	var _Helpers = __webpack_require__(/*! ../../utils/Helpers.js */ 612);
+	
+	var _Helpers2 = _interopRequireDefault(_Helpers);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var dateFormat = __webpack_require__(/*! dateformat */ 687);
+	var today = new Date();
+	
+	//alarm, alarm on, alarm off
+	var iconStyle = { margin: 12 };
+	
+	var style = {
+		height: 25,
+		width: 200,
+		margin: 20,
+		textAlign: 'center',
+		display: 'inline-block'
+	};
+	
+	var TodaySchedule = function (_React$Component) {
+		_inherits(TodaySchedule, _React$Component);
+	
+		function TodaySchedule(props) {
+			_classCallCheck(this, TodaySchedule);
+	
+			var _this = _possibleConstructorReturn(this, (TodaySchedule.__proto__ || Object.getPrototypeOf(TodaySchedule)).call(this, props));
+	
+			var userData = _Auth2.default._getData();
+			_this.state = {
+				name: userData.firstName,
+				today: today,
+				scheduleList: [],
+				clockedRow: 0,
+				disableClock: true,
+				distanceBetween: 0,
+				cardId: 0,
+				tCard: "" //this Id is the Id of the timesheet database
+			};
+			_this.handleClockIn = _this.handleClockIn.bind(_this);
+			_this.handleClockOut = _this.handleClockOut.bind(_this);
+			_this.setDistanceBetween = _this.setDistanceBetween.bind(_this);
+	
+			return _this;
+		}
+	
+		_createClass(TodaySchedule, [{
+			key: "componentWillMount",
+			value: function componentWillMount() {
+				_Helpers2.default._getTodaySchedule().then(function (userData, err) {
+					this.setState({ scheduleList: userData.data });
+				}.bind(this));
+			}
+		}, {
+			key: "handleClockIn",
+			value: function handleClockIn(index, event) {
+				event.preventDefault();
+	
+				_Helpers2.default._getOneSchedule(index).then(function (newSchedule) {
+					console.log(newSchedule.database);
+	
+					//tCard holds all the information needed to create a time card.
+					this.setState({ tCard: newSchedule.data });
+					//GeoLocation._getDistance(this.state.tCard.joblng, this.state.tCard.joblat)
+					//this.setState({distanceBetween : GeoLocation._getDistance(this.state.tCard.joblng, this.state.tCard.joblat) })
+					//console.log(this.state.distanceBetween)
+	
+					var newTimeSheet = {};
+					newTimeSheet.JobId = newSchedule.data.JobId;
+					newTimeSheet.UserId = newSchedule.data.UserId;
+					newTimeSheet.clockIn = Date.now();
+	
+					//code to check the geoLocation 
+	
+					_Helpers2.default._createTimecard(newTimeSheet).then(function (newdata) {
+						//this Id is the Id of the timesheet database
+						this.setState({ cardId: newdata.data.id });
+						//Clock is used to disable the clockIn buttons once logged in
+						var tempClock = this.state.disableClock;
+						this.setState({ disableClock: !tempClock });
+						this.setState({ clockedRow: index });
+					}.bind(this));
+				}.bind(this));
+			}
+		}, {
+			key: "shouldComponentUpdate",
+			value: function shouldComponentUpdate() {
+				console.log("shouldComponentUpdate  distance " + this.state.distanceBetween);
+				return true;
+			}
+		}, {
+			key: "setDistanceBetween",
+			value: function setDistanceBetween(dist) {
+				dist = Math.floor(dist);
+				this.setState({ distanceBetween: dist });
+				_Helpers2.default._updateInvalidTimecard(this.state.cardId, dist).then(function (data, err) {
+					//need to add a set time out 
+				}.bind(this));
+			}
+		}, {
+			key: "handleClockOut",
+			value: function handleClockOut(index, event) {
+				event.preventDefault();
+				console.log("Clock In event : " + event);
+				console.log("Clock In Id  : " + index);
+				var clockOutTime = Date.now();
+				_Helpers2.default._updateTimecard(this.state.cardId, clockOutTime).then(function (data, err) {
+					this.setState({ clockedRow: 0 });
+					var tempClock = this.state.disableClock;
+					this.setState({ disableClock: !tempClock });
+				}.bind(this));
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				console.log("Today's Schedule:", this.state.scheduleList);
+				var that = this;
+	
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						_materialUi.Card,
+						null,
+						_react2.default.createElement(_materialUi.CardHeader, { title: "Today's Schedule", subtitle: "Below is your schedule for today", avatar: "assets/images/ic_schedule_black_24dp_2x.png" }),
+						this.state.scheduleList.length == 0 ? _react2.default.createElement(
+							_materialUi.CardText,
+							null,
+							"No jobs scheduled for today, ",
+							dateFormat(this.state.today, "dddd, mmm dd, yyyy"),
+							_react2.default.createElement(
+								"p",
+								null,
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: "/schedule" },
+									"View Full Schedule"
+								)
+							)
+						) : _react2.default.createElement(
+							_materialUi.CardText,
+							null,
+							_react2.default.createElement(
+								_materialUi.Table,
+								{ selectable: true },
+								_react2.default.createElement(
+									_materialUi.TableBody,
+									{ displayRowCheckbox: false, showRowHover: true, stripedRows: false },
+									this.state.scheduleList.map(function (row, i) {
+	
+										return _react2.default.createElement(
+											_materialUi.TableRow,
+											{ key: i },
+											_react2.default.createElement(
+												_materialUi.TableRowColumn,
+												null,
+												row.jobName
+											),
+											_react2.default.createElement(
+												_materialUi.TableRowColumn,
+												null,
+												row.startTime,
+												" to ",
+												row.endTime
+											),
+											_react2.default.createElement(
+												_materialUi.TableRowColumn,
+												null,
+												_react2.default.createElement(
+													_materialUi.IconButton,
+													{ onClick: that.handleClockIn.bind(that, row.id),
+														iconClassName: "material-icons", tooltip: "Clock In",
+														tooltipPosition: "top-center", disabled: !that.state.disableClock },
+													"alarm"
+												),
+												that.state.clockedRow == row.id ? _react2.default.createElement(
+													"span",
+													null,
+													that.state.distanceBetween < 2 ? _react2.default.createElement(
+														"span",
+														null,
+														_react2.default.createElement(
+															_materialUi.IconButton,
+															{ onClick: that.handleClockOut.bind(that, row.id),
+																iconClassName: "material-icons", tooltip: "Clock Out",
+																tooltipPosition: "top-center", disabled: that.state.disableClock },
+															"alarm_off"
+														),
+														_react2.default.createElement(_Stopwatch2.default, null),
+														_react2.default.createElement(_Distance2.default, { longitude: that.state.tCard.joblng,
+															latitude: that.state.tCard.joblat,
+															setDistanceBetween: that.setDistanceBetween })
+													) : _react2.default.createElement(
+														_Paper2.default,
+														{ style: style, zDepth: 1 },
+														"You are ",
+														Math.floor(that.state.distanceBetween),
+														" Kilometers away "
+													)
+												) : _react2.default.createElement(
+													"span",
+													null,
+													_react2.default.createElement(
+														_materialUi.IconButton,
+														{ onClick: that.handleClockOut.bind(that, row.id),
+															iconClassName: "material-icons", tooltip: "Clock Out",
+															tooltipPosition: "top-center", disabled: true },
+														"alarm_off"
+													)
+												)
+											)
+										);
+									})
+								)
+							),
+							_react2.default.createElement(
+								"p",
+								null,
+								_react2.default.createElement(
+									_reactRouter.Link,
+									{ to: "/schedule" },
+									"View Full Schedule"
+								)
+							)
+						)
+					)
+				);
+			}
+		}]);
+	
+		return TodaySchedule;
+	}(_react2.default.Component);
+	
+	// Export the component back for use in other files
+	
+	
+	exports.default = TodaySchedule;
+
+/***/ },
+/* 685 */
+/*!********************************************************!*\
+  !*** ./app/components/children/dashboard/Stopwatch.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _Chip = __webpack_require__(/*! material-ui/Chip */ 490);
+	
+	var _Chip2 = _interopRequireDefault(_Chip);
+	
+	var _colors = __webpack_require__(/*! material-ui/styles/colors */ 235);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(/*! react */ 1);
+	
+	
+	var leftPad = function leftPad(width, n) {
+	  if ((n + '').length > width) {
+	    return n;
+	  }
+	  var padding = new Array(width).join('0');
+	  return (padding + n).slice(-width);
+	};
+	
+	var styles = {
+	  chip: {
+	    margin: 4
+	  },
+	  paper: {
+	    display: 'inline-block',
+	    float: 'left',
+	    margin: '16px 32px 16px 0'
+	  }
+	};
+	
+	var Stopwatch = function (_React$Component) {
+	  _inherits(Stopwatch, _React$Component);
+	
+	  function Stopwatch(props) {
+	    _classCallCheck(this, Stopwatch);
+	
+	    var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this, props));
+	
+	    ["lap", "update", "reset"].forEach(function (method) {
+	      _this[method] = _this[method].bind(_this);
+	    });
+	
+	    _this.state = _this.initialState = {
+	      isRunning: true,
+	      lapTimes: [],
+	      timeElapsed: 0
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Stopwatch, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.state.isRunning ? this.startTimer() : this.reset();
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      console.log("umount...............");
+	      this.reset();
+	    }
+	  }, {
+	    key: 'lap',
+	    value: function lap() {
+	      var _state = this.state,
+	          lapTimes = _state.lapTimes,
+	          timeElapsed = _state.timeElapsed;
+	
+	      this.setState({ lapTimes: lapTimes.concat(timeElapsed) });
+	    }
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      clearInterval(this.timer);
+	      this.setState(this.initialState);
+	    }
+	  }, {
+	    key: 'startTimer',
+	    value: function startTimer() {
+	      this.startTime = Date.now();
+	      this.timer = setInterval(this.update, 10);
+	    }
+	  }, {
+	    key: 'update',
+	    value: function update() {
+	      var delta = Date.now() - this.startTime;
+	      this.setState({ timeElapsed: this.state.timeElapsed + delta });
+	      this.startTime = Date.now();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _state2 = this.state,
+	          isRunning = _state2.isRunning,
+	          lapTimes = _state2.lapTimes,
+	          timeElapsed = _state2.timeElapsed;
+	
+	      return React.createElement(
+	        _Chip2.default,
+	        {
+	          style: styles.chip,
+	          backgroundColor: _colors.blue200 },
+	        React.createElement(TimeElapsed, { id: 'timer', timeElapsed: timeElapsed })
+	      );
+	    }
+	  }]);
+	
+	  return Stopwatch;
+	}(React.Component);
+	
+	var TimeElapsed = function (_React$Component2) {
+	  _inherits(TimeElapsed, _React$Component2);
+	
+	  function TimeElapsed() {
+	    _classCallCheck(this, TimeElapsed);
+	
+	    return _possibleConstructorReturn(this, (TimeElapsed.__proto__ || Object.getPrototypeOf(TimeElapsed)).apply(this, arguments));
+	  }
+	
+	  _createClass(TimeElapsed, [{
+	    key: 'getUnits',
+	    value: function getUnits() {
+	      var seconds = this.props.timeElapsed / 1000;
+	      return {
+	        hr: Math.floor(seconds / 3600).toString(),
+	        min: Math.floor(seconds / 60).toString(),
+	        sec: Math.floor(seconds % 60).toString()
+	      };
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var units = this.getUnits();
+	      return React.createElement(
+	        'div',
+	        { id: this.props.id },
+	        React.createElement(
+	          'span',
+	          null,
+	          leftPad(2, units.hr),
+	          ':'
+	        ),
+	        React.createElement(
+	          'span',
+	          null,
+	          leftPad(2, units.min),
+	          ':'
+	        ),
+	        React.createElement(
+	          'span',
+	          null,
+	          leftPad(2, units.sec)
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return TimeElapsed;
+	}(React.Component);
+	
+	module.exports = Stopwatch;
+
+/***/ },
+/* 686 */
+/*!*******************************************************!*\
+  !*** ./app/components/children/dashboard/Distance.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Paper = __webpack_require__(/*! material-ui/Paper */ 432);
+	
+	var _Paper2 = _interopRequireDefault(_Paper);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	/** Converts numeric degrees to radians */
+	if (typeof Number.prototype.toRad === "undefined") {
+	  Number.prototype.toRad = function () {
+	    return this * Math.PI / 180;
+	  };
+	}
+	
+	var style = {
+	  height: 25,
+	  width: 200,
+	  margin: 20,
+	  textAlign: 'center',
+	  display: 'inline-block'
+	};
+	
+	var Distance = function (_React$Component) {
+	  _inherits(Distance, _React$Component);
+	
+	  function Distance(props) {
+	    _classCallCheck(this, Distance);
+	
+	    var _this = _possibleConstructorReturn(this, (Distance.__proto__ || Object.getPrototypeOf(Distance)).call(this, props));
+	
+	    _this.state = {
+	      dist: 0
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Distance, [{
+	    key: "componentWillMount",
+	    value: function componentWillMount() {
+	      console.log(this.props.longitude);
+	      var lon2 = this.props.longitude;
+	      var lat2 = this.props.latitude;
+	      //console.log("hbfkaejwewngewnjn")
+	      console.log(lon2 + lat2);
+	      var geo = navigator.geolocation;
+	
+	      if (!geo) {
+	        alert("Geolocation is not supported by this browser.");
+	      } else {
+	        geo.getCurrentPosition(function (position) {
+	          var lon1 = position.coords.longitude;
+	          var lat1 = position.coords.latitude;
+	
+	          // ---------------to find the distance between-----------------------
+	
+	          var R = 6371; // Radius of the earth in km
+	
+	          var dLat = (lat2 - lat1).toRad(); // Javascript functions in radians
+	          var dLon = (lon2 - lon1).toRad();
+	          var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+	
+	          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	          var d = R * c; // Distance in km
+	          console.log(d);
+	          this.props.setDistanceBetween(d);
+	          this.setState({ dis: d });
+	        }.bind(this));
+	      }
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _Paper2.default,
+	        { style: style, zDepth: 1 },
+	        "You are ",
+	        Math.floor(this.state.dis),
+	        " Kilometers away "
+	      );
+	    }
+	  }]);
+	
+	  return Distance;
+	}(_react2.default.Component);
+	
+	// Export the component back for use in other files
+	
+	
+	exports.default = Distance;
+
+/***/ },
+/* 687 */
+/*!****************************************!*\
+  !*** ./~/dateformat/lib/dateformat.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*
+	 * Date Format 1.2.3
+	 * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+	 * MIT license
+	 *
+	 * Includes enhancements by Scott Trenda <scott.trenda.net>
+	 * and Kris Kowal <cixar.com/~kris.kowal/>
+	 *
+	 * Accepts a date, a mask, or a date and a mask.
+	 * Returns a formatted version of the given date.
+	 * The date defaults to the current date/time.
+	 * The mask defaults to dateFormat.masks.default.
+	 */
+	
+	(function(global) {
+	  'use strict';
+	
+	  var dateFormat = (function() {
+	      var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|'[^']*'|'[^']*'/g;
+	      var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
+	      var timezoneClip = /[^-+\dA-Z]/g;
+	  
+	      // Regexes and supporting functions are cached through closure
+	      return function (date, mask, utc, gmt) {
+	  
+	        // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
+	        if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
+	          mask = date;
+	          date = undefined;
+	        }
+	  
+	        date = date || new Date;
+	  
+	        if(!(date instanceof Date)) {
+	          date = new Date(date);
+	        }
+	  
+	        if (isNaN(date)) {
+	          throw TypeError('Invalid date');
+	        }
+	  
+	        mask = String(dateFormat.masks[mask] || mask || dateFormat.masks['default']);
+	  
+	        // Allow setting the utc/gmt argument via the mask
+	        var maskSlice = mask.slice(0, 4);
+	        if (maskSlice === 'UTC:' || maskSlice === 'GMT:') {
+	          mask = mask.slice(4);
+	          utc = true;
+	          if (maskSlice === 'GMT:') {
+	            gmt = true;
+	          }
+	        }
+	  
+	        var _ = utc ? 'getUTC' : 'get';
+	        var d = date[_ + 'Date']();
+	        var D = date[_ + 'Day']();
+	        var m = date[_ + 'Month']();
+	        var y = date[_ + 'FullYear']();
+	        var H = date[_ + 'Hours']();
+	        var M = date[_ + 'Minutes']();
+	        var s = date[_ + 'Seconds']();
+	        var L = date[_ + 'Milliseconds']();
+	        var o = utc ? 0 : date.getTimezoneOffset();
+	        var W = getWeek(date);
+	        var N = getDayOfWeek(date);
+	        var flags = {
+	          d:    d,
+	          dd:   pad(d),
+	          ddd:  dateFormat.i18n.dayNames[D],
+	          dddd: dateFormat.i18n.dayNames[D + 7],
+	          m:    m + 1,
+	          mm:   pad(m + 1),
+	          mmm:  dateFormat.i18n.monthNames[m],
+	          mmmm: dateFormat.i18n.monthNames[m + 12],
+	          yy:   String(y).slice(2),
+	          yyyy: y,
+	          h:    H % 12 || 12,
+	          hh:   pad(H % 12 || 12),
+	          H:    H,
+	          HH:   pad(H),
+	          M:    M,
+	          MM:   pad(M),
+	          s:    s,
+	          ss:   pad(s),
+	          l:    pad(L, 3),
+	          L:    pad(Math.round(L / 10)),
+	          t:    H < 12 ? 'a'  : 'p',
+	          tt:   H < 12 ? 'am' : 'pm',
+	          T:    H < 12 ? 'A'  : 'P',
+	          TT:   H < 12 ? 'AM' : 'PM',
+	          Z:    gmt ? 'GMT' : utc ? 'UTC' : (String(date).match(timezone) || ['']).pop().replace(timezoneClip, ''),
+	          o:    (o > 0 ? '-' : '+') + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+	          S:    ['th', 'st', 'nd', 'rd'][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10],
+	          W:    W,
+	          N:    N
+	        };
+	  
+	        return mask.replace(token, function (match) {
+	          if (match in flags) {
+	            return flags[match];
+	          }
+	          return match.slice(1, match.length - 1);
+	        });
+	      };
+	    })();
+	
+	  dateFormat.masks = {
+	    'default':               'ddd mmm dd yyyy HH:MM:ss',
+	    'shortDate':             'm/d/yy',
+	    'mediumDate':            'mmm d, yyyy',
+	    'longDate':              'mmmm d, yyyy',
+	    'fullDate':              'dddd, mmmm d, yyyy',
+	    'shortTime':             'h:MM TT',
+	    'mediumTime':            'h:MM:ss TT',
+	    'longTime':              'h:MM:ss TT Z',
+	    'isoDate':               'yyyy-mm-dd',
+	    'isoTime':               'HH:MM:ss',
+	    'isoDateTime':           'yyyy-mm-dd\'T\'HH:MM:sso',
+	    'isoUtcDateTime':        'UTC:yyyy-mm-dd\'T\'HH:MM:ss\'Z\'',
+	    'expiresHeaderFormat':   'ddd, dd mmm yyyy HH:MM:ss Z'
+	  };
+	
+	  // Internationalization strings
+	  dateFormat.i18n = {
+	    dayNames: [
+	      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',
+	      'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+	    ],
+	    monthNames: [
+	      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+	      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+	    ]
+	  };
+	
+	function pad(val, len) {
+	  val = String(val);
+	  len = len || 2;
+	  while (val.length < len) {
+	    val = '0' + val;
+	  }
+	  return val;
+	}
+	
+	/**
+	 * Get the ISO 8601 week number
+	 * Based on comments from
+	 * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
+	 *
+	 * @param  {Object} `date`
+	 * @return {Number}
+	 */
+	function getWeek(date) {
+	  // Remove time components of date
+	  var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	
+	  // Change date to Thursday same week
+	  targetThursday.setDate(targetThursday.getDate() - ((targetThursday.getDay() + 6) % 7) + 3);
+	
+	  // Take January 4th as it is always in week 1 (see ISO 8601)
+	  var firstThursday = new Date(targetThursday.getFullYear(), 0, 4);
+	
+	  // Change date to Thursday same week
+	  firstThursday.setDate(firstThursday.getDate() - ((firstThursday.getDay() + 6) % 7) + 3);
+	
+	  // Check if daylight-saving-time-switch occured and correct for it
+	  var ds = targetThursday.getTimezoneOffset() - firstThursday.getTimezoneOffset();
+	  targetThursday.setHours(targetThursday.getHours() - ds);
+	
+	  // Number of weeks between target Thursday and first Thursday
+	  var weekDiff = (targetThursday - firstThursday) / (86400000*7);
+	  return 1 + Math.floor(weekDiff);
+	}
+	
+	/**
+	 * Get ISO-8601 numeric representation of the day of the week
+	 * 1 (for Monday) through 7 (for Sunday)
+	 * 
+	 * @param  {Object} `date`
+	 * @return {Number}
+	 */
+	function getDayOfWeek(date) {
+	  var dow = date.getDay();
+	  if(dow === 0) {
+	    dow = 7;
+	  }
+	  return dow;
+	}
+	
+	/**
+	 * kind-of shortcut
+	 * @param  {*} val
+	 * @return {String}
+	 */
+	function kindOf(val) {
+	  if (val === null) {
+	    return 'null';
+	  }
+	
+	  if (val === undefined) {
+	    return 'undefined';
+	  }
+	
+	  if (typeof val !== 'object') {
+	    return typeof val;
+	  }
+	
+	  if (Array.isArray(val)) {
+	    return 'array';
+	  }
+	
+	  return {}.toString.call(val)
+	    .slice(8, -1).toLowerCase();
+	};
+	
+	
+	
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+	      return dateFormat;
+	    }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports === 'object') {
+	    module.exports = dateFormat;
+	  } else {
+	    global.dateFormat = dateFormat;
+	  }
+	})(this);
+
+
+/***/ },
+/* 688 */
+/*!*********************************************!*\
+  !*** ./app/components/children/Schedule.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Auth = __webpack_require__(/*! ./Auth */ 611);
+	
+	var _Auth2 = _interopRequireDefault(_Auth);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 179);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
+	
+	var _Helpers = __webpack_require__(/*! ../utils/Helpers.js */ 612);
+	
+	var _Helpers2 = _interopRequireDefault(_Helpers);
+	
+	var _SchedulebyDay = __webpack_require__(/*! ./schedule/SchedulebyDay.js */ 689);
+	
+	var _SchedulebyDay2 = _interopRequireDefault(_SchedulebyDay);
+	
+	var _Header = __webpack_require__(/*! ./schedule/Header.js */ 690);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _dateformat = __webpack_require__(/*! dateformat */ 687);
+	
+	var _dateformat2 = _interopRequireDefault(_dateformat);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	//var dateFormat = require('dateformat');
+	var today = new Date();
+	
+	//alarm, alarm on, alarm off
+	var iconStyle = { margin: 12 };
+	
+	var Schedule = function (_React$Component) {
+		_inherits(Schedule, _React$Component);
+	
+		function Schedule(props) {
+			_classCallCheck(this, Schedule);
+	
+			var _this = _possibleConstructorReturn(this, (Schedule.__proto__ || Object.getPrototypeOf(Schedule)).call(this, props));
+	
+			var userData = _Auth2.default._getData();
+			_this.state = {
+				name: userData.firstName,
+				today: today,
+				scheduleDays: []
+			};
+			return _this;
+		}
+	
+		_createClass(Schedule, [{
+			key: "componentWillMount",
+			value: function componentWillMount() {
+				_Helpers2.default._getScheduleDays().then(function (userData, err) {
+					this.setState({ scheduleDays: userData.data });
+				}.bind(this));
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var that = this;
+	
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(_Header2.default, null),
+					this.state.scheduleDays.length <= 0 ? _react2.default.createElement(
+						_materialUi.Card,
+						null,
+						_react2.default.createElement(
+							_materialUi.CardText,
+							null,
+							"No jobs are scheduled for you at this time"
+						)
+					) : _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(
+							_materialUi.Card,
+							null,
+							this.state.scheduleDays.map(function (row, i) {
+								return _react2.default.createElement(
+									_materialUi.Card,
+									{ key: i },
+									_react2.default.createElement(_materialUi.CardHeader, { title: (0, _dateformat2.default)(row.startDate, "mm/dd/yyyy"), subtitle: "You have x jobs scheduled for this day", actAsExpander: true, showExpandableButton: true }),
+									_react2.default.createElement(
+										_materialUi.CardText,
+										{ expandable: true },
+										_react2.default.createElement(_SchedulebyDay2.default, { day: row.startDate })
+									)
+								);
+							})
+						),
+						_react2.default.createElement("br", null)
+					)
+				);
+			}
+		}]);
+	
+		return Schedule;
+	}(_react2.default.Component);
+	
+	// Export the component back for use in other files
+	
+	
+	exports.default = Schedule;
+
+/***/ },
+/* 689 */
+/*!***********************************************************!*\
+  !*** ./app/components/children/schedule/SchedulebyDay.js ***!
+  \***********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Auth = __webpack_require__(/*! ../Auth */ 611);
+	
+	var _Auth2 = _interopRequireDefault(_Auth);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 179);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
+	
+	var _Helpers = __webpack_require__(/*! ../../utils/Helpers.js */ 612);
+	
+	var _Helpers2 = _interopRequireDefault(_Helpers);
+	
+	var _dateformat = __webpack_require__(/*! dateformat */ 687);
+	
+	var _dateformat2 = _interopRequireDefault(_dateformat);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ScheduleByDay = function (_React$Component) {
+			_inherits(ScheduleByDay, _React$Component);
+	
+			function ScheduleByDay(props) {
+					_classCallCheck(this, ScheduleByDay);
+	
+					var _this = _possibleConstructorReturn(this, (ScheduleByDay.__proto__ || Object.getPrototypeOf(ScheduleByDay)).call(this, props));
+	
+					var userData = _Auth2.default._getData();
+					_this.state = {
+							scheduleListOfDay: []
+					};
+					return _this;
+			}
+	
+			_createClass(ScheduleByDay, [{
+					key: "componentWillMount",
+					value: function componentWillMount() {
+							console.log("hihihih " + this.props.day);
+	
+							_Helpers2.default._getScheduleForTheDay(this.props.day).then(function (userData, err) {
+									this.setState({ scheduleListOfDay: userData.data });
+							}.bind(this));
+					}
+			}, {
+					key: "render",
+					value: function render() {
+							return _react2.default.createElement(
+									_materialUi.Table,
+									{ selectable: true },
+									_react2.default.createElement(
+											_materialUi.TableBody,
+											{ displayRowCheckbox: false, showRowHover: true, stripedRows: false },
+											this.state.scheduleListOfDay.map(function (row, j) {
+													return _react2.default.createElement(
+															_materialUi.TableRow,
+															{ key: j },
+															_react2.default.createElement(
+																	_materialUi.TableRowColumn,
+																	null,
+																	row.jobName
+															),
+															_react2.default.createElement(
+																	_materialUi.TableRowColumn,
+																	null,
+																	(0, _dateformat2.default)(row.startDate, "mm/dd/yyyy")
+															),
+															_react2.default.createElement(
+																	_materialUi.TableRowColumn,
+																	null,
+																	row.startTime
+															),
+															_react2.default.createElement(
+																	_materialUi.TableRowColumn,
+																	null,
+																	row.endTime
+															)
+													);
+											})
+									)
+							);
+					}
+			}]);
+	
+			return ScheduleByDay;
+	}(_react2.default.Component);
+	
+	// Export the component back for use in other files
+	
+	
+	exports.default = ScheduleByDay;
+	
+	/*
+	<Table>
+					   				<TableBody displayRowCheckbox={false} showRowHover={true} stripedRows={false}>
+					   				 <TableRow>
+					   				 	Hello
+					   				 </TableRow>
+										{/* {that.state.scheduleList.map(function(rowTable, j){
+					          				{ row.startDate == that.state.scheduleList.startDate ? (
+					            				<div> 
+					            					return(
+					              						<TableRow key={j}> 
+					                						<TableRowColumn>{row.jobName}</TableRowColumn>
+					                						<TableRowColumn>{dateFormat(row.startDate, "mm/dd/yyyy")}</TableRowColumn>
+					                						<TableRowColumn>{row.startTime}</TableRowColumn>
+					                						<TableRowColumn>{row.endTime}</TableRowColumn>
+					              						</TableRow>
+					            					);
+					            				</div>
+					          				) : (<span> </span>
+					          				)
+					          					
+					          				}
+					          			})}
+										
+
+					    			</TableBody>
+									</Table>
+									*/
+
+/***/ },
+/* 690 */
+/*!****************************************************!*\
+  !*** ./app/components/children/schedule/Header.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	   value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Auth = __webpack_require__(/*! ../Auth */ 611);
+	
+	var _Auth2 = _interopRequireDefault(_Auth);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Header = function (_React$Component) {
+	   _inherits(Header, _React$Component);
+	
+	   function Header(props) {
+	      _classCallCheck(this, Header);
+	
+	      var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
+	
+	      var userData = _Auth2.default._getData();
+	      _this.state = { name: userData.firstName };
+	      return _this;
+	   }
+	
+	   _createClass(Header, [{
+	      key: "render",
+	      value: function render() {
+	         return _react2.default.createElement(
+	            _materialUi.Card,
+	            null,
+	            _react2.default.createElement(_materialUi.CardHeader, { title: this.state.name + "'s Full Schedule", subtitle: "Below is your full schedule from today onwards", avatar: "assets/images/ic_event_note_black_24dp_2x.png" }),
+	            _react2.default.createElement(
+	               _materialUi.CardText,
+	               null,
+	               "If you are scheduled to work, select a date below to view the job sites and times you are assigned for that day. To view the list, click the down arrow to the right of the date."
+	            )
+	         );
+	      }
+	   }]);
+	
+	   return Header;
+	}(_react2.default.Component);
+	
+	// Export the component back for use in other files
+	
+	
+	exports.default = Header;
+
+/***/ },
+/* 691 */
+/*!**********************************************!*\
+  !*** ./app/components/children/Timesheet.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _materialUi = __webpack_require__(/*! material-ui */ 384);
+	
+	var _Overview = __webpack_require__(/*! ./dashboard/Overview.js */ 683);
+	
+	var _Overview2 = _interopRequireDefault(_Overview);
 	
 	var _Helpers = __webpack_require__(/*! ../utils/Helpers.js */ 612);
 	
@@ -75774,8 +76667,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	//import helper file
+	var dateFormat = __webpack_require__(/*! dateformat */ 687);
 	
+	//import helper file  
+	
+	
+	//alarm, alarm on, alarm off
+	var iconStyle = { margin: 12 };
 	
 	var Timesheet = function (_React$Component) {
 		_inherits(Timesheet, _React$Component);
@@ -75793,88 +76691,65 @@
 		}
 	
 		_createClass(Timesheet, [{
-			key: "componentWillMount",
+			key: 'componentWillMount',
 			value: function componentWillMount() {
-				console.log("componentWillMount");
+	
 				_Helpers2.default._getTimeSheets().then(function (userData, err) {
 					this.setState({ timeSheets: userData.data });
+					//console.log(timeSheets)
 				}.bind(this));
 			} //componentWillMount
 	
-	
 		}, {
-			key: "render",
+			key: 'render',
 			value: function render() {
-				console.log(this.state.timeSheets);
-				var that = this;
+	
 				return _react2.default.createElement(
-					"div",
+					'div',
 					null,
 					_react2.default.createElement(
-						"p",
+						_materialUi.Card,
 						null,
-						" Timseheets "
-					),
-					_react2.default.createElement(
-						"p",
-						null,
-						this.state.userData.firstName,
-						" ",
-						this.state.userData.lastName
-					),
-					_react2.default.createElement(
-						"table",
-						null,
+						_react2.default.createElement(_materialUi.CardHeader, { title: 'Time Sheets', subtitle: 'Below are your timecards, by date', avatar: 'assets/images/ic_assignment_black_24dp_2x.png' }),
 						_react2.default.createElement(
-							"tr",
-							null,
+							_materialUi.Table,
+							{ selectable: true },
 							_react2.default.createElement(
-								"th",
-								null,
-								"Client"
-							),
-							_react2.default.createElement(
-								"th",
-								null,
-								"Date"
-							),
-							_react2.default.createElement(
-								"th",
-								null,
-								"Start Time"
-							),
-							_react2.default.createElement(
-								"th",
-								null,
-								"End Time"
+								_materialUi.TableBody,
+								{ displayRowCheckbox: false, showRowHover: true, stripedRows: false },
+								this.state.timeSheets.map(function (row, i) {
+									return _react2.default.createElement(
+										_materialUi.TableRow,
+										{ key: i },
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.jobName
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											dateFormat(row.startDate, "mm/dd/yyyy")
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.clockIn
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.clockOut
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.reason
+										)
+									);
+								})
 							)
-						),
-						this.state.timeSheets.map(function (id, i) {
-							return _react2.default.createElement(
-								"tr",
-								{ key: i },
-								_react2.default.createElement(
-									"td",
-									null,
-									id.jobName
-								),
-								_react2.default.createElement(
-									"td",
-									null,
-									id.clockedInDate
-								),
-								_react2.default.createElement(
-									"td",
-									null,
-									id.clockIn
-								),
-								_react2.default.createElement(
-									"td",
-									null,
-									id.clockOut
-								)
-							);
-						})
+						)
 					)
 				);
 			}

@@ -26,15 +26,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactname: {
+    contactName: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactphone: {
+    contactPhone: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    contactemail: {
+    contactEmail: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {

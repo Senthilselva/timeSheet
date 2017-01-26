@@ -14,7 +14,9 @@
 }
 
 
-a.active{
+a.active {
     color: #000000 !important;
     text-decoration: underline !important;
 }
+
+img { height:100%; width:auto; }

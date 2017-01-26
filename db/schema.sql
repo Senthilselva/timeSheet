@@ -59,8 +59,8 @@ CREATE TABLE Schedule
     jobID INTEGER NOT NULL,
     userID INTEGER NOT NULL,    
     startdate DATE,
-    starttime TIME,
-    endtime TIME,
+    starttime DATE,
+    endtime DATE,
     duration INTEGER,
     PRIMARY KEY (id)
     //FOREIGN KEY (userID) REFERENCES Users(id)

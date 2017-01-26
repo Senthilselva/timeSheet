@@ -3,34 +3,28 @@ var models  = require('../models');
 var router  = express.Router();
 var path = require('path');
 var moment =require('moment');
+var dateFormat = require('dateformat');
 
 //enter a new record into the timesheet table with out the end time
 router.post("/create", function(req,res){
-	console.log("inside time sheet");
-  // console.log(JSON.stringify(req.body));
   var newtimesheet = {};
   newtimesheet.JobId = req.body.JobId;
   newtimesheet.UserId = req.body.UserId;
   newtimesheet.clockedInDate = new Date(req.body.clockIn);
+
   newtimesheet.clockedIn = new Date(req.body.clockIn);
-
- // console.log(JSON.stringify(newtimesheet));
-
+  newtimesheet.clockedIn = dateFormat(newtimesheet.clockedIn, "hh:MM");
   models.Timesheet.create(newtimesheet).then(function(data){
-    console.log("created data ")
-  	//console.log(data)
-  	res.json(data)
+    // create a row in the database
+    res.json(data)
   });
-  //res.json(req.body);
+ 
 })
 
 router.post("/update", function(req,res){
-  console.log("inside time sheet update");
-  console.log(JSON.stringify(req.body));
-  
   var cardId = req.body.cardId;
   var clockOut = new Date(req.body.clockOut);
-
+  clockOut = dateFormat(clockOut, "hh:MM");
     models.Timesheet.update({
       clockedOut : clockOut
     }, {
@@ -38,20 +32,15 @@ router.post("/update", function(req,res){
        id : cardId
         }
     }).then(function(data,err){
-    console.log("updated")
-    console.log(JSON.stringify(data));
+    
       res.json(data)
   })
 
   });
 
 router.get('/user/:userName', function(req,res) {
-  console.log("inside user Timesheets");
-  console.log(JSON.stringify(req.params));
-  //console.log(req);
-
+    console.log("timesheet/userName  :"+req.params.userName )
     models.Timesheet.findAll(
-
       { include: [
         { 
           model : models.User,
@@ -62,28 +51,36 @@ router.get('/user/:userName', function(req,res) {
         }
       ]
     }).then(function(data){
-    var jobList = [];
-    // console.log(JSON.stringify(data[0]));
+      var jobList = [];
+      for(var i=0; i< data.length; i++){
+        var job = {};
+        job.id = data[i].id;
+        job.clockedInDate = data[i].clockedInDate;
+        job.clockIn = data[i].clockedIn;
+        job.clockOut = data[i].clockedOut;
+        job.reason = data[i].validEntry;
+        job.jobName = data[i].Job.name;
+        jobList.push(job)
+    }
+    res.json(jobList)
+  })
+});//get('/user/:userName')
 
-    for(var i=0; i< data.length; i++){
-    // console.log(data[i].startDate+" "+ 
-    //             data[i].startDate+" "+
-    //             data[i].Job.name);
-    var job = {};
-    job.id = data[i].id;
-    job.clockedInDate = moment(data[i].clockedInDate).format('L');
-    job.clockIn = data[i].clockedIn;
-    job.clockOut = data[i].clockedOut;
-    job.jobName = data[i].Job.name;
-    
-    console.log(job);
+router.post('/invalid/', function(req,res){
+  var cardId = req.body.cardId;
+  var newString = req.body.reason;
 
-    jobList.push(job)
-  }
-     res.json(jobList)
+  models.Timesheet.update({
+    validEntry: newString
+  }, {
+    where: {
+     id : cardId
+    }
+  }).then(function(data,err){
+    res.json(data)
   })
 
-});
+})//invalid
 
 
 module.exports = router;

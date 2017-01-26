@@ -1,4 +1,6 @@
 'use strict';
+var bcrypt = require('bcrypt-nodejs')
+
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     id: {
@@ -10,11 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    firstname: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    lastname: {
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -49,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
     password: DataTypes.STRING,
     SSN: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true
     },
     salt: {
@@ -57,7 +59,6 @@ module.exports = function(sequelize, DataTypes) {
     },
   },
   {
-    paranoid: true,
     classMethods: {
       associate: function(models) {
         // associations can be defined here
@@ -65,6 +66,11 @@ module.exports = function(sequelize, DataTypes) {
         //User.hasMany(models.Timesheet, {foreignKey: 'userId'});
        }
     }
-  });
-  return User;
-};
+  },
+  {
+    dialect: 'mysql'
+  }
+);
+  
+ return User  
+}
