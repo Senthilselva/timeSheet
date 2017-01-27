@@ -133,7 +133,7 @@ router.get('/user/today/:userName', function(req,res) {
 
 //Returns a User's Schedule for a given Date
 router.get('/userforday/:userName/:searchDate', function(req,res) {   
-  console.log("Returning a User's Schedule for a given Date", req.params);
+  console.log(" ZZZZZZ Returning a User's Schedule for a given Date", req.params.searchDate);
 
   models.Schedule.findAll(
     { include: [

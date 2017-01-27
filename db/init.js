@@ -226,6 +226,21 @@ conn.query('SET FOREIGN_KEY_CHECKS = 0')
 		lng: -74.5616890
 	});
 })
+.then(function(){
+	return db.Job.create(
+	{
+		name: "Pool @ Artium",
+		address: "300 Artium Dr",
+		city:"Somerset",
+		state:"NJ",
+		zip:"08873",
+		contactName: "Jhon",
+		contactPhone: "(908) 439-2123",
+		contactEmail: "Jhon@artium.com",
+		lat: 40.5354340,
+		lng: -74.5212870
+	});
+})
 // =======================================================================
 // ADD Schedule 
 // =======================================================================
@@ -521,6 +536,46 @@ conn.query('SET FOREIGN_KEY_CHECKS = 0')
 		startDate: today,
 		startTime: "15:00",
 		endTime: "18:00"
+	});
+})
+.then(function(){
+	return db.Schedule.create(
+	{
+		UserId: "1",
+		JobId: "8",
+		startDate: today,
+		startTime: "18:00",
+		endTime: "20:00"
+	});
+})
+.then(function(){
+	return db.Schedule.create(
+	{
+		UserId: "2",
+		JobId: "8",
+		startDate: today,
+		startTime: "18:00",
+		endTime: "20:00"
+	});
+})
+.then(function(){
+	return db.Schedule.create(
+	{
+		UserId: "3",
+		JobId: "8",
+		startDate: today,
+		startTime: "18:00",
+		endTime: "20:00"
+	});
+})
+.then(function(){
+	return db.Schedule.create(
+	{
+		UserId: "4",
+		JobId: "8",
+		startDate: today,
+		startTime: "18:00",
+		endTime: "20:00"
 	});
 })
 // =======================================================================

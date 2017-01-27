@@ -36,7 +36,7 @@ class Schedule extends React.Component {
 
     render() {
 	   	var that = this;
-
+	   	console.log(this.state.scheduleDays)
     	return ( 
     	<div>
     		<Header />

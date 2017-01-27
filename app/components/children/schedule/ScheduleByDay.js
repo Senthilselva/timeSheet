@@ -26,6 +26,7 @@ class ScheduleByDay extends React.Component {
 
   	}
 
+
   	render(){
   		return(
   			<Table selectable={true}>

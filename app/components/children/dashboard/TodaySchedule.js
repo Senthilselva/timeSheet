@@ -75,6 +75,7 @@ class TodaySchedule extends React.Component {
 			 	newTimeSheet.UserId= newSchedule.data.UserId;
 				newTimeSheet.clockIn = Date.now();
     			localStorage.setItem("clockIn", newTimeSheet.clockIn);
+    			this.setState({clockIn : newTimeSheet.clockIn});
 
 				Helpers._createTimecard(newTimeSheet)
 					.then(function(newdata){
@@ -165,10 +166,11 @@ class TodaySchedule extends React.Component {
 					                			<Distance longitude = {that.state.tCard.joblng}
 					                			  	  latitude = {that.state.tCard.joblat} 
 					                			  	  setDistanceBetween = {that.setDistanceBetween} />
+					                			
 					                		</span>
 					                		) : (
 					                		<Paper style={style} zDepth={1}>
-       												You are {Math.floor(that.state.distanceBetween)} Kilometers away </Paper>
+       												You are {Math.floor(that.state.distanceBetween)} Miles away </Paper>
 					                		)}
 					                	</span>
 					                	) : (

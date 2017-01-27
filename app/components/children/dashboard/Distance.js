@@ -51,6 +51,7 @@ class Distance extends React.Component {
   
   				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   				var d = R * c; // Distance in km
+          d = d*0.621; //miles
   				console.log (d)
   				this.props.setDistanceBetween(d)
   				this.setState({dis : d})
@@ -61,7 +62,7 @@ class Distance extends React.Component {
     render(){
       	return(
         	<Paper style={style} zDepth={1}>
-       		You are {Math.floor(this.state.dis)} Kilometers away </Paper>
+       		You are {Math.floor(this.state.dis)} Miles away </Paper>
    		)
     }
 }

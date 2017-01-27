@@ -13,7 +13,7 @@ const helpers = {
 	    return axios.post("/user/create", userInfo);
 	},
 
-	//gets all the schedule for the user. the user is stored in localStorage
+	//gets  all the schedule for the user. the user is stored in localStorage
 	_getSchedule: () => {
 		var vEmail = localStorage.getItem('userName');
 		return axios.get("/schedule/user/" + vEmail );
@@ -55,7 +55,7 @@ const helpers = {
 	},
 
 	_updateInvalidTimecard:(cardId, dis) => {
-		var _reason = "Clocked in from "+dis+"Km away."
+		var _reason = "Clocked in from "+dis+"Miles away."
 		return axios.post("/timesheet/invalid", 
 			{ cardId:cardId,
 			  reason:_reason });

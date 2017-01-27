@@ -1,6 +1,7 @@
 var React = require("react");
 import Chip from 'material-ui/Chip';
 import {blue200, indigo900} from 'material-ui/styles/colors';
+import Moment from "moment"
 
 const leftPad = (width, n) => {
   if ((n + '').length > width) {
@@ -53,7 +54,11 @@ class Stopwatch extends React.Component {
     this.setState(this.initialState);
   }
   startTimer() {
-    this.startTime = Date.now() - this.props.clockIn;
+
+    //this.startTime = Date.now();
+    console.log("this.props.clockIn" + this.props.clockIn)
+    this.startTime = this.props.clockIn;
+
     this.timer = setInterval(this.update, 10);
   }
   update() {
