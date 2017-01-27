@@ -229,14 +229,14 @@ conn.query('SET FOREIGN_KEY_CHECKS = 0')
 .then(function(){
 	return db.Job.create(
 	{
-		name: "Pool @ Artium",
+		name: "RBC Pools",
 		address: "300 Artium Dr",
 		city:"Somerset",
 		state:"NJ",
 		zip:"08873",
 		contactName: "Jhon",
 		contactPhone: "(908) 439-2123",
-		contactEmail: "Jhon@artium.com",
+		contactEmail: "Jhon@RBC.com",
 		lat: 40.5354340,
 		lng: -74.5212870
 	});

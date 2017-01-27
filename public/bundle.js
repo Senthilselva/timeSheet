@@ -91623,12 +91623,7 @@
 								return _react2.default.createElement(
 									_materialUi.Card,
 									{ key: i },
-									_react2.default.createElement(_materialUi.CardHeader, { title: (0, _dateformat2.default)(row.startDate, "mm/dd/yyyy"), subtitle: "You have x jobs scheduled for this day", actAsExpander: true, showExpandableButton: true }),
-									_react2.default.createElement(
-										_materialUi.CardText,
-										{ expandable: true },
-										_react2.default.createElement(_SchedulebyDay2.default, { day: row.startDate })
-									)
+									_react2.default.createElement(_SchedulebyDay2.default, { day: row.startDate })
 								);
 							})
 						),
@@ -91656,7 +91651,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -91690,105 +91685,88 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var ScheduleByDay = function (_React$Component) {
-			_inherits(ScheduleByDay, _React$Component);
+		_inherits(ScheduleByDay, _React$Component);
 	
-			function ScheduleByDay(props) {
-					_classCallCheck(this, ScheduleByDay);
+		function ScheduleByDay(props) {
+			_classCallCheck(this, ScheduleByDay);
 	
-					var _this = _possibleConstructorReturn(this, (ScheduleByDay.__proto__ || Object.getPrototypeOf(ScheduleByDay)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (ScheduleByDay.__proto__ || Object.getPrototypeOf(ScheduleByDay)).call(this, props));
 	
-					var userData = _Auth2.default._getData();
-					_this.state = {
-							scheduleListOfDay: []
-					};
-					return _this;
+			var userData = _Auth2.default._getData();
+			_this.state = {
+				scheduleListOfDay: [],
+				noOfJobs: 0
+			};
+			return _this;
+		}
+	
+		_createClass(ScheduleByDay, [{
+			key: "componentWillMount",
+			value: function componentWillMount() {
+				//console.log("hihihih "+ this.props.day)
+				_Helpers2.default._getScheduleForTheDay(this.props.day).then(function (userData, err) {
+					this.setState({ scheduleListOfDay: userData.data });
+					this.setState({ noOfJobs: userData.data.length });
+				}.bind(this));
 			}
+		}, {
+			key: "render",
+			value: function render() {
+				var subtitleString = "You have " + this.state.noOfJobs + " jobs scheduled for this day";
+				return _react2.default.createElement(
+					_materialUi.Card,
+					null,
+					_react2.default.createElement(_materialUi.CardHeader, { title: (0, _dateformat2.default)(this.props.day, "fullDate"),
+						subtitle: subtitleString, actAsExpander: true, showExpandableButton: true }),
+					_react2.default.createElement(
+						_materialUi.CardText,
+						{ expandable: true },
+						_react2.default.createElement(
+							_materialUi.Table,
+							{ selectable: true },
+							_react2.default.createElement(
+								_materialUi.TableBody,
+								{ displayRowCheckbox: false, showRowHover: true, stripedRows: false },
+								this.state.scheduleListOfDay.map(function (row, j) {
+									return _react2.default.createElement(
+										_materialUi.TableRow,
+										{ key: j },
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.jobName
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											(0, _dateformat2.default)(row.startDate, "mm/dd/yyyy")
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.startTime
+										),
+										_react2.default.createElement(
+											_materialUi.TableRowColumn,
+											null,
+											row.endTime
+										)
+									);
+								})
+							)
+						)
+					)
+				);
+			}
+		}]);
 	
-			_createClass(ScheduleByDay, [{
-					key: "componentWillMount",
-					value: function componentWillMount() {
-							console.log("hihihih " + this.props.day);
-	
-							_Helpers2.default._getScheduleForTheDay(this.props.day).then(function (userData, err) {
-									this.setState({ scheduleListOfDay: userData.data });
-							}.bind(this));
-					}
-			}, {
-					key: "render",
-					value: function render() {
-							return _react2.default.createElement(
-									_materialUi.Table,
-									{ selectable: true },
-									_react2.default.createElement(
-											_materialUi.TableBody,
-											{ displayRowCheckbox: false, showRowHover: true, stripedRows: false },
-											this.state.scheduleListOfDay.map(function (row, j) {
-													return _react2.default.createElement(
-															_materialUi.TableRow,
-															{ key: j },
-															_react2.default.createElement(
-																	_materialUi.TableRowColumn,
-																	null,
-																	row.jobName
-															),
-															_react2.default.createElement(
-																	_materialUi.TableRowColumn,
-																	null,
-																	(0, _dateformat2.default)(row.startDate, "mm/dd/yyyy")
-															),
-															_react2.default.createElement(
-																	_materialUi.TableRowColumn,
-																	null,
-																	row.startTime
-															),
-															_react2.default.createElement(
-																	_materialUi.TableRowColumn,
-																	null,
-																	row.endTime
-															)
-													);
-											})
-									)
-							);
-					}
-			}]);
-	
-			return ScheduleByDay;
+		return ScheduleByDay;
 	}(_react2.default.Component);
 	
 	// Export the component back for use in other files
 	
 	
 	exports.default = ScheduleByDay;
-	
-	/*
-	<Table>
-					   				<TableBody displayRowCheckbox={false} showRowHover={true} stripedRows={false}>
-					   				 <TableRow>
-					   				 	Hello
-					   				 </TableRow>
-										{/* {that.state.scheduleList.map(function(rowTable, j){
-					          				{ row.startDate == that.state.scheduleList.startDate ? (
-					            				<div> 
-					            					return(
-					              						<TableRow key={j}> 
-					                						<TableRowColumn>{row.jobName}</TableRowColumn>
-					                						<TableRowColumn>{dateFormat(row.startDate, "mm/dd/yyyy")}</TableRowColumn>
-					                						<TableRowColumn>{row.startTime}</TableRowColumn>
-					                						<TableRowColumn>{row.endTime}</TableRowColumn>
-					              						</TableRow>
-					            					);
-					            				</div>
-					          				) : (<span> </span>
-					          				)
-					          					
-					          				}
-					          			})}
-										
-
-					    			</TableBody>
-									</Table>
-									*/
 
 /***/ },
 /* 800 */

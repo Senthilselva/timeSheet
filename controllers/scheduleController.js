@@ -105,11 +105,9 @@ router.get('/user/today/:userName', function(req,res) {
       {
         model:  models.Job 
       }
-    ] 
-    //,
-    //where: 
-    //{ startDate: today }
-
+    ]  
+//was not able to capture date with dateFormat and whereclause used if statement in line 
+//line 126
   }).then(function(data){
 
   var jobList = [];

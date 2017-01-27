@@ -12,37 +12,45 @@ class ScheduleByDay extends React.Component {
         super(props);
 	    const userData = Auth._getData();
     	this.state = { 
-    		scheduleListOfDay:[]
+    		scheduleListOfDay : [],
+    		noOfJobs : 0
 		}
   	};
 
   	componentWillMount() {
-  		console.log("hihihih "+ this.props.day)
-
+  		//console.log("hihihih "+ this.props.day)
   		Helpers._getScheduleForTheDay(this.props.day)
 	  	.then(function(userData,err){
 	        this.setState({scheduleListOfDay: userData.data});
+	        this.setState({noOfJobs : userData.data.length})
 	    }.bind(this));
 
   	}
 
 
   	render(){
+  		var subtitleString = "You have "+this.state.noOfJobs+" jobs scheduled for this day"
   		return(
-  			<Table selectable={true}>
-				<TableBody displayRowCheckbox={false} showRowHover={true} stripedRows={false}>
-				{this.state.scheduleListOfDay.map(function(row, j){
-					return(
-				        <TableRow key={j}> 
-				         	<TableRowColumn>{row.jobName}</TableRowColumn>
-				            <TableRowColumn>{dateFormat(row.startDate, "mm/dd/yyyy")}</TableRowColumn>
-				            <TableRowColumn>{row.startTime}</TableRowColumn>
-				            <TableRowColumn>{row.endTime}</TableRowColumn>
-				        </TableRow>
-				    );
-				})}
-				</TableBody>
-			</Table>
+  			<Card>
+  				<CardHeader title={dateFormat(this.props.day,"fullDate")} 
+					subtitle={subtitleString} actAsExpander={true} showExpandableButton={true}/>
+				<CardText expandable={true}>
+  					<Table selectable={true}>
+						<TableBody displayRowCheckbox={false} showRowHover={true} stripedRows={false}>
+							{this.state.scheduleListOfDay.map(function(row, j){
+								return(
+				        			<TableRow key={j}> 
+				         				<TableRowColumn>{row.jobName}</TableRowColumn>
+				            			<TableRowColumn>{dateFormat(row.startDate, "mm/dd/yyyy")}</TableRowColumn>
+				            			<TableRowColumn>{row.startTime}</TableRowColumn>
+				            			<TableRowColumn>{row.endTime}</TableRowColumn>
+				        			</TableRow>
+				    			);
+							})}
+						</TableBody>
+					</Table>
+				</CardText>
+			</Card>
   		);
   	}
 
@@ -50,43 +58,3 @@ class ScheduleByDay extends React.Component {
 
 // Export the component back for use in other files
 export default ScheduleByDay;
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-<Table>
-				   				<TableBody displayRowCheckbox={false} showRowHover={true} stripedRows={false}>
-				   				 <TableRow>
-				   				 	Hello
-				   				 </TableRow>
-									{/* {that.state.scheduleList.map(function(rowTable, j){
-				          				{ row.startDate == that.state.scheduleList.startDate ? (
-				            				<div> 
-				            					return(
-				              						<TableRow key={j}> 
-				                						<TableRowColumn>{row.jobName}</TableRowColumn>
-				                						<TableRowColumn>{dateFormat(row.startDate, "mm/dd/yyyy")}</TableRowColumn>
-				                						<TableRowColumn>{row.startTime}</TableRowColumn>
-				                						<TableRowColumn>{row.endTime}</TableRowColumn>
-				              						</TableRow>
-				            					);
-				            				</div>
-				          				) : (<span> </span>
-				          				)
-				          					
-				          				}
-				          			})}
-									
-
-				    			</TableBody>
-								</Table>
-								*/

@@ -52,10 +52,11 @@ class Schedule extends React.Component {
 				{this.state.scheduleDays.map(function(row, i){
 					return (
 						<Card key = {i}>
-							<CardHeader title={dateFormat(row.startDate,"mm/dd/yyyy")} subtitle="You have x jobs scheduled for this day" actAsExpander={true} showExpandableButton={true}/>
-								<CardText expandable={true}>
+							{/*<CardHeader title={dateFormat(row.startDate,"mm/dd/yyyy")} 
+									subtitle="You have x jobs scheduled for this day" actAsExpander={true} showExpandableButton={true}/>
+								<CardText expandable={true}> */}
 									<SchedulebyDay day = {row.startDate}/>
-								</CardText>
+								{/*</CardText>*/}
 						</Card>
 					);
 				})}
