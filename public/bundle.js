@@ -75771,13 +75771,9 @@
 														_react2.default.createElement(_Distance2.default, { longitude: that.state.tCard.joblng,
 															latitude: that.state.tCard.joblat,
 															setDistanceBetween: that.setDistanceBetween })
-													) : _react2.default.createElement(
-														_Paper2.default,
-														{ style: style, zDepth: 1 },
-														"You are ",
-														Math.floor(that.state.distanceBetween),
-														" Miles away "
-													)
+													) : _react2.default.createElement(_Distance2.default, { longitude: that.state.tCard.joblng,
+														latitude: that.state.tCard.joblat,
+														setDistanceBetween: that.setDistanceBetween })
 												) : _react2.default.createElement(
 													"span",
 													null,

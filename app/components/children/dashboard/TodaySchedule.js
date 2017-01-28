@@ -197,8 +197,10 @@ class TodaySchedule extends React.Component {
 					                			
 					                		</span>
 					                		) : (
-					                		<Paper style={style} zDepth={1}>
-       												You are {Math.floor(that.state.distanceBetween)} Miles away </Paper>
+					                		<Distance longitude = {that.state.tCard.joblng}
+					                			  	  latitude = {that.state.tCard.joblat} 
+					                			  	  setDistanceBetween = {that.setDistanceBetween} />
+					                		
 					                		)}
 					                	</span>
 					                	) : (
