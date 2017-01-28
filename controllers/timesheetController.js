@@ -83,4 +83,31 @@ router.post('/invalid/', function(req,res){
 })//invalid
 
 
+//Get total number of hours worked
+router.get('/totalhours/:userName', function(req,res) {
+    console.log("timesheet/totalhours  :"+req.params.userName )
+    models.Timesheet.findAll(
+      { include: [
+        { 
+          model : models.User,
+          where: { username: req.params.userName} 
+        },
+        {
+          model:  models.Job 
+        }
+      ]
+    }).then(function(data){
+      var hoursworked = 0;
+      for(var i=0; i< data.length; i++){
+        //console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh clockOut" + data[i].clockedOut )
+        //console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh clockedIn" + data[i].clockedIn )
+        var clockedOut = data[i].clockedOut;
+        //console.log("dddddddddddddddddddddddddddddd"+ moment.duration(clockedOut.diff(data[i].clockedIn)))
+        hoursworked = hoursworked + (data[i].clockedOut-data[i].clockedIn)
+      }
+      //console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" + hoursworked )
+      res.json(hoursworked);
+    })
+});//get('/getTotalHoursWorked/:userName')
+
 module.exports = router;

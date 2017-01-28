@@ -68923,6 +68923,12 @@
 			//calling the controller and returing the value
 			return _axios2.default.get("/timesheet/user/" + vEmail);
 		}
+	
+		//set the total hours worked timesheet
+		// _getTotalHoursWorked: () =>{
+		// 	var vEmail =localStorage.getItem('userName');
+		// 	return axios.get("/timesheet/totalhours/" + vEmail );
+		// }
 	}; // Include the axios package for performing HTTP requests ( based alternative to request)
 	exports.default = helpers;
 
@@ -75425,6 +75431,10 @@
 	
 	var _materialUi = __webpack_require__(/*! material-ui */ 384);
 	
+	var _Helpers = __webpack_require__(/*! ../../utils/Helpers.js */ 612);
+	
+	var _Helpers2 = _interopRequireDefault(_Helpers);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -75432,6 +75442,9 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	//import helper file
+	
 	
 	var Overview = function (_React$Component) {
 	   _inherits(Overview, _React$Component);
@@ -75442,9 +75455,21 @@
 	      var _this = _possibleConstructorReturn(this, (Overview.__proto__ || Object.getPrototypeOf(Overview)).call(this, props));
 	
 	      var userData = _Auth2.default._getData();
-	      _this.state = { name: userData.firstName };
+	      _this.state = {
+	         name: userData.firstName
+	         // totalNumberHoursWorked : 0
+	      };
 	      return _this;
 	   }
+	
+	   // componentWillMount() {
+	   // 	Helpers._getTotalHoursWorked()
+	   // 	.then(function(userData,err){
+	   // 		console.log(userData);
+	   //      	this.setState({totalNumberHoursWorked: userData.data});
+	   //  }.bind(this));
+	   // }
+	
 	
 	   _createClass(Overview, [{
 	      key: "render",
@@ -75565,7 +75590,9 @@
 		_createClass(TodaySchedule, [{
 			key: "componentWillMount",
 			value: function componentWillMount() {
+				console.log(localStorage.cardId);
 				if (localStorage.cardId) {
+					console.log("inside------------localStorage.cardId---------componentWillMount  " + localStorage.cardId);
 					this.setState({ cardId: localStorage.cardId });
 					this.setState({ disableClock: false });
 					this.setState({ clockedRow: localStorage.clockedRow });
@@ -75602,24 +75629,41 @@
 						var tempClock = this.state.disableClock;
 						this.setState({ disableClock: !tempClock });
 						this.setState({ clockedRow: index });
+	
+						//setting all local storage
+						localStorage.setItem("cardId", this.state.cardId);
+						localStorage.setItem("clockedRow", this.state.clockedRow);
+						localStorage.setItem("tCard", this.state.tCard);
+						localStorage.setItem("distanceBetween", this.state.distanceBetween);
 					}.bind(this));
 				}.bind(this));
 			}
 		}, {
 			key: "componentWillUnmount",
 			value: function componentWillUnmount() {
-				console.log("componentWillUnmount");
-				localStorage.setItem("cardId", this.state.cardId);
-				//localStorage.setItem("disableClock",false);
-				localStorage.setItem("clockedRow", this.state.clockedRow);
-				localStorage.setItem("tCard", this.state.tCard);
-				localStorage.setItem("distanceBetween", this.state.distanceBetween);
+				if (this.state.cardId != 0) {
+					console.log("componentWillUnmount");
+	
+					localStorage.setItem("distanceBetween", this.state.distanceBetween);
+	
+					//***************************************
+					//Attempting to fix the bug 
+					//moved this code to clock in clock out
+					//****************************************
+					// localStorage.setItem("cardId" , this.state.cardId);
+					// //localStorage.setItem("disableClock",false);
+					// localStorage.setItem("clockedRow", this.state.clockedRow);
+					// localStorage.setItem("tCard",this.state.tCard);
+					// localStorage.setItem("distanceBetween", this.state.distanceBetween);
+				}
 			}
 		}, {
 			key: "setDistanceBetween",
 			value: function setDistanceBetween(dist) {
 				dist = Math.floor(dist);
 				this.setState({ distanceBetween: dist });
+				localStorage.setItem("distanceBetween", this.state.distanceBetween);
+	
 				_Helpers2.default._updateInvalidTimecard(this.state.cardId, dist).then(function (data, err) {
 					//need to add a set time out 
 				}.bind(this));
@@ -75635,8 +75679,17 @@
 					this.setState({ clockedRow: 0 });
 					var tempClock = this.state.disableClock;
 					this.setState({ disableClock: !tempClock });
+	
+					//setting all local storage
+					localStorage.setItem("cardId", 0);
+					localStorage.setItem("clockedRow", 0);
+					localStorage.setItem("tCard", 0);
+					localStorage.setItem("distanceBetween", 0);
+					delete localStorage.cardId;
+	
+					console.log("handleClockOut --------------localStorage.cardId---" + localStorage.cardId);
 				}.bind(this));
-				delete localStorage.cardId;
+				//delete localStorage.cardId;
 			}
 		}, {
 			key: "render",

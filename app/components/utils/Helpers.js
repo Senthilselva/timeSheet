@@ -68,6 +68,12 @@ const helpers = {
 		//calling the controller and returing the value
 		return axios.get("/timesheet/user/" + vEmail );
 	}
+
+	//set the total hours worked timesheet
+	// _getTotalHoursWorked: () =>{
+	// 	var vEmail =localStorage.getItem('userName');
+	// 	return axios.get("/timesheet/totalhours/" + vEmail );
+	// }
 }
 
 export default helpers;
